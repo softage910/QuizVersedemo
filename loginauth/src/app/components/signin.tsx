@@ -98,7 +98,7 @@ export default function SignInPage() {
       } else {
         setLoginMessage("Email Not Verified");
       }
-    } catch (err: any) {
+    } catch (err) {
       setLoginError("Invalid email or password. Please try again.");
       console.error("Login error:", err);
     }
@@ -131,8 +131,8 @@ export default function SignInPage() {
         }
 
       }
-    } catch (err: any) {
-      setSignUpError(err.message);
+    } catch (err) {
+      setSignUpError("error");
     }
   };
 
@@ -209,7 +209,7 @@ export default function SignInPage() {
           </button>
 
           <div className="togglebutton">
-            <p>Don't have an account?</p>
+            <p>Don&apost have an account?</p>
             <Link className="Link" href="" onClick={toggle}>Sign-up</Link>
           </div>
           {Loginmessage && <p className="mt-4 text-center text-green-500">{Loginmessage}</p>}
