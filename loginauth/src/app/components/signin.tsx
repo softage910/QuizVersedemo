@@ -131,8 +131,8 @@ export default function SignInPage() {
         }
 
       }
-    } catch (err) {
-      setSignUpError("error");
+    } catch {
+      setSignUpError("Error");
     }
   };
 
