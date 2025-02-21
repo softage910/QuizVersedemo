@@ -7,12 +7,10 @@ import { auth } from "../src/app/firebase/firebaseconfig";
 import Image from "next/image";
 import Logo from "../public/Logo.png";
 import ComingSoon from "./ComingSoon";
-import HomeDashboard from "./HomeDashboard";
 
 
 
 export default function Dashboard() {
-    const [isOpen, setIsOpen] = useState(false);
     const [userDetails, setUserDetails] = useState<{ name: string; uid: string } | null>(null);
     const router = useRouter();
     const [selectedSection, setSelectedSection] = useState<string | null>(null); // Track selected section

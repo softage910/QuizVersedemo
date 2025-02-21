@@ -14,7 +14,6 @@ const Dashboard = () => {
 
 
 
-    const [isOpen, setIsOpen] = useState(false);
     const [userDetails, setUserDetails] = useState<{ name: string; uid: string } | null>(null);
 
 
