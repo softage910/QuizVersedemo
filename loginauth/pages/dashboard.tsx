@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import "../src/app/components/UserDashboard.css";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 import { signOut } from "firebase/auth";
 import { auth } from "../src/app/firebase/firebaseconfig";
 import Image from "next/image";
@@ -12,7 +12,7 @@ import ComingSoon from "./ComingSoon";
 
 export default function Dashboard() {
     const [userDetails, setUserDetails] = useState<{ name: string; uid: string } | null>(null);
-    const router = useRouter();
+    // const router = useRouter();
     const [selectedSection, setSelectedSection] = useState<string | null>(null); // Track selected section
 
 
@@ -71,20 +71,38 @@ export default function Dashboard() {
                     <h4>
                         <span>Main Menu</span>
                     </h4>
-                    <li>
+                    {/* <li>
                         <a href="#"><span className="material-symbols-outlined"> dashboard </span>Dashboard</a>
+                    </li> */}
+
+<li className={selectedSection === "Dashboard" ? "active" : ""}>
+                        <a href="#" onClick={() => setSelectedSection("Dashboard")}>
+                            <span className="material-symbols-outlined"> dashboard </span>Dashboard
+                        </a>
                     </li>
 
                     <h4>
                         <span>Training / Assessment</span>
                     </h4>
-                    {Array.from({ length: 7 }, (_, i) => (
+                    {/* {Array.from({ length: 7 }, (_, i) => (
                         <li key={i}>
                             <a href="#" onClick={() => setSelectedSection(`Day ${i + 1}`)}>
                                 <span className="material-symbols-outlined">overview</span>Day {i + 1}
                             </a>
                         </li>
-                    ))}
+                    ))} */}
+
+{Array.from({ length: 7 }, (_, i) => {
+        const day = `Day ${i + 1}`;
+        return (
+            <li key={i} className={selectedSection === day ? "active" : ""}>
+                <a href="#" onClick={() => setSelectedSection(day)}>
+                    <span className="material-symbols-outlined"> overview </span>{day}
+                </a>
+            </li>
+        );
+    })}
+
                     {/* <li>
                         <a href="/ComingSoon"
                         ><span className="material-symbols-outlined"> overview </span>Day 1</a
