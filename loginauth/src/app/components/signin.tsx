@@ -25,6 +25,8 @@ export default function SignInPage() {
   const [FullName, setFullName] = useState("");
   const [UserEmail, setUserEmail] = useState("");
   const [UserPassword, setUserPassword] = useState("");
+  const [ConfirmPassword, setConfirmPassword] = useState("");
+
   const [EmpCode, setEmpCode] = useState("");
 
   const router = useRouter();
@@ -34,7 +36,7 @@ export default function SignInPage() {
     const enteredOtp = otp.join(""); // Convert array to string
 
     if (enteredOtp === generatedOtp) {
-      const sessionExpireTime = new Date().getTime() + 60 * 60 * 1000; // 1-minute session
+      const sessionExpireTime = new Date().getTime() + 60 * 60 * 1000;
       localStorage.setItem("sessionExpireTime", sessionExpireTime.toString());
 
       // Redirect to dashboard with user details
@@ -106,37 +108,88 @@ export default function SignInPage() {
 
 
 
+  // const handleSignUp = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setSignUpError(null);
+  //   setSignUpMessage(null);
+
+  //   try {
+  //     // Create user in Firebase Auth
+  //     const userCredential = await createUserWithEmailAndPassword(auth, UserEmail, UserPassword);
+  //     const user = userCredential.user;
+
+  //     if (user) {
+  //       // Store user details in Firebase Realtime Database
+  //       await set(ref(database, `users/${user.uid}`), {
+  //         uid: EmpCode,
+  //         name: FullName,
+  //         email: UserEmail,
+  //         password: UserPassword, // Storing password in database is NOT recommended for security reasons
+  //       });
+
+  //       if (!user.emailVerified) {
+  //         await sendEmailVerification(user);
+  //         setSignUpMessage("A verification email has been sent. Please verify your email before logging in.");
+  //       }
+
+  //     }
+  //   } catch {
+  //     setSignUpError("Error");
+  //   }
+  // };
+
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setSignUpError(null);
     setSignUpMessage(null);
-
+  
+    if (UserPassword !== ConfirmPassword) {
+      setSignUpError("Passwords do not match.");
+      return;
+    }
+  
+    if (!UserEmail.endsWith("@softage.ai")) {
+      setSignUpError("Email must end with @softage.ai.");
+      return;
+    }
+  
     try {
-      // Create user in Firebase Auth
+      // Create user in Firebase Authentication
       const userCredential = await createUserWithEmailAndPassword(auth, UserEmail, UserPassword);
       const user = userCredential.user;
-
+  
       if (user) {
+        // Get the current date and time
+        const signUpDate = new Date().toLocaleString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true, // Ensures AM/PM format
+        });  
         // Store user details in Firebase Realtime Database
         await set(ref(database, `users/${user.uid}`), {
           uid: EmpCode,
           name: FullName,
           email: UserEmail,
-          password: UserPassword, // Storing password in database is NOT recommended for security reasons
+          role: "user", // Default role, change if needed
+          signUpDate: signUpDate, // Store signup timestamp
         });
-
+  
         if (!user.emailVerified) {
           await sendEmailVerification(user);
           setSignUpMessage("A verification email has been sent. Please verify your email before logging in.");
         }
-
       }
-    } catch {
-      setSignUpError("Error");
+    } catch (error) {
+      console.error("Signup error:", error);
+      setSignUpError("Error signing up. Please try again.");
     }
   };
-
-
+  
+  
 
   const [otp, setOtp] = useState<string[]>(Array(6).fill(""));
 
@@ -169,6 +222,30 @@ export default function SignInPage() {
   };
 
 
+  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const confirmPassword = e.target.value;
+    setConfirmPassword(confirmPassword);
+
+    // Check if confirm password matches the original password
+    if (UserPassword && confirmPassword !== UserPassword) {
+        setSignUpError("Passwords do not match");
+    } else {
+      setSignUpError(""); // Clear error if passwords match
+    }
+};
+
+
+const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const email = e.target.value;
+  setUserEmail(email);
+
+  // Validate if email ends with @softage.ai
+  if (email && !email.endsWith("@softage.ai")) {
+    setSignUpError("Email must end with @softage.ai");
+  } else {
+    setSignUpError(""); // Clear error if valid
+  }
+};
 
 
   return (
@@ -209,7 +286,7 @@ export default function SignInPage() {
           </button>
 
           <div className="togglebutton">
-            <p>Don&apost have an account?</p>
+            <p>Don&apos;t have an account?</p>
             <Link className="Link" href="" onClick={toggle}>Sign-up</Link>
           </div>
           {Loginmessage && <p className="mt-4 text-center text-green-500">{Loginmessage}</p>}
@@ -242,7 +319,7 @@ export default function SignInPage() {
               placeholder="Enter your ID"
               className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               value={EmpCode}
-              onChange={(e) => setEmpCode(e.target.value)}
+              onChange={(e) => setEmpCode(e.target.value.toUpperCase())}
               required
             />
           </div>
@@ -253,7 +330,7 @@ export default function SignInPage() {
               placeholder="Enter your email"
               className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               value={UserEmail}
-              onChange={(e) => setUserEmail(e.target.value)}
+              onChange={handleEmailChange}
               required
             />
           </div>
@@ -274,7 +351,7 @@ export default function SignInPage() {
               type="password"
               placeholder="Confirm your password"
               className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleConfirmPasswordChange}
               required
             />
           </div>

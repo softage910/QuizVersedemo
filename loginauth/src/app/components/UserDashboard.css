@@ -53,7 +53,7 @@ body {
   display: flex;
   overflow-x: hidden;
   flex-direction: column;
-  background: #161a2d;
+  background:black;
   padding: 25px 20px;
   transition: all 0.4s ease;
 }
@@ -193,47 +193,69 @@ body {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.Inner-Dashboard {
-  display: flex; /* Aligns the buttons horizontally */
-  gap: 10px; /* Adds space between buttons */
-  justify-content: center; /* Centers buttons in the parent container */
+@media only screen and (max-width: 1460px) {
+  .sidebar{
+    width: 30%;
+  }
 }
 
-.Inner-Dashboard button {
-  background-color: grey; /* Grey background */
-  color: white; /* White text color */
-  border: none; /* Removes default border */
-  border-radius: 4px; /* Slightly rounded corners */
-  padding: 10px 20px; /* Adds padding for size */
-  cursor: pointer; /* Changes cursor to pointer on hover */
-  font-size: 25px; /* Increases text size */
+
+.sidebar-links li{
+  padding: 5px;
+}
+
+.sidebar-links li.active {
+  background-color: white; /* Change to your theme color */
+  color: black;
+}
+
+.sidebar-links li.active a {
+  color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .Inner-Dashboard {
+  display: flex; 
+  gap: 10px; 
+  justify-content: center; 
+} */
+
+/* .Inner-Dashboard button {
+  background-color: grey;
+  color: white; 
+  border: none; 
+  border-radius: 4px; 
+  padding: 10px 20px; 
+  cursor: pointer; 
+  font-size: 25px; 
   height: 10%;
   width: 10%;
   
-}
+} */
 
-.Inner-Dashboard button:hover {
-  background-color: darkgrey; /* Slightly darker grey on hover */
-}
+/* .Inner-Dashboard button:hover {
+  background-color: darkgrey; 
+} */
 
 
 
@@ -242,10 +264,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.InnerDashboard{
-  width: 85%;
 }
 
 

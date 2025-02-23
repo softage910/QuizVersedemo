@@ -1,17 +1,38 @@
-import Login from './components/index';
+// import Login from './components/index';
+// import Dashboard from '../../pages/dashboard';
+// import MobileScreen from '../../pages/MobileScreen';
 
+// // import './page.css';
 
-// import './page.css';
-
-export default function Home() {
+// export default function Home() {
 
   
-  return(
-    <>
-    <Login />
+//   return(
+//     <>
+//     {/* <Login /> */}
 
-    {/* <Dashboard/> */}
-    </>
+//     <Dashboard/>
+
+//     <MobileScreen/>
+//     </>
+//   );
+// }
+
+import Login from "./components/index";
+import Dashboard from "../../pages/dashboard";
+import MobileScreen from "../../pages/MobileScreen";
+import RoadMap from "../../pages/RoadMap";
+
+export default function Home() {
+  return (
+    <div>
+<div className="hidden max-[900px]:block">
+  <MobileScreen />
+</div>
+<div className="block max-[900px]:hidden">
+  <Login/>
+</div>
+
+    </div>
   );
 }
-
