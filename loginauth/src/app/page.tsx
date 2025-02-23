@@ -19,9 +19,7 @@
 // }
 
 import Login from "./components/index";
-import Dashboard from "../../pages/dashboard";
 import MobileScreen from "../../pages/MobileScreen";
-import RoadMap from "../../pages/RoadMap";
 
 export default function Home() {
   return (

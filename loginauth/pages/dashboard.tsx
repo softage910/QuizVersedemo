@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import "../src/app/components/UserDashboard.css";
-import router, { useRouter } from "next/router";
+import router from "next/router";
 import { signOut } from "firebase/auth";
 import { auth } from "../src/app/firebase/firebaseconfig";
 import Image from "next/image";
