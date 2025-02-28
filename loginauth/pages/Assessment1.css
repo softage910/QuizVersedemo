@@ -1,0 +1,56 @@
+.Assessment-Section{
+    font-family: Arial, sans-serif;
+    width: 100%;
+    color: black;
+    padding-top: 60px;
+}
+.quiz-container {
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    margin: auto;
+    border: black 0.5px solid;
+    height: 90vh;
+    overflow: scroll;
+}
+.quiz-container h2 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.question {
+    margin-bottom: 15px;
+}
+.options label {
+    display: block;
+    margin: 5px 0;
+    padding: 5px;
+    cursor: pointer;
+}
+
+
+
+.Day2Table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .Day2Table,
+  .Day2Table th,
+  .Day2Table td {
+border: 0.25px solid gray;
+  }
+  
+  .Day2Table th,
+  .Day2Table td {
+    padding: 10px;
+    text-align: center;
+  }
+
+
+  .AssessmentDetails{
+    width: 50%;
+    height: 60vh;
+  }
+
+
