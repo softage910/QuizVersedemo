@@ -138,6 +138,18 @@ export default function SignInPage() {
   //   }
   // };
 
+
+  const initializeUserProgress = {
+    "Day1": { "Module": true },
+    "Day2": { "Module": false, "Assessment": false },
+    "Day3": { "Module": false, "Assessment": false },
+    "Day4": { "Module": false, "Assessment 1": false, "Assessment 2": false, "Assessment 3": false },
+    "Day5": { "Module 1": false, "Module 2": false, "Module 3": false, "Assessment": false },
+    "Day6": { "Module": false },
+    "Day7": { "Assessment 1": false },
+    "Day8": { "Module": false },
+  };
+
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setSignUpError(null);
@@ -170,13 +182,26 @@ export default function SignInPage() {
           hour12: true, // Ensures AM/PM format
         });  
         // Store user details in Firebase Realtime Database
+        // await set(ref(database, `users/${user.uid}`), {
+        //   uid: EmpCode,
+        //   name: FullName,
+        //   email: UserEmail,
+        //   role: "user", // Default role, change if needed
+        //   signUpDate: signUpDate, // Store signup timestamp
+        //   progress: initializeUserProgress,
+        // });
+
+
         await set(ref(database, `users/${user.uid}`), {
           uid: EmpCode,
           name: FullName,
           email: UserEmail,
           role: "user", // Default role, change if needed
-          signUpDate: signUpDate, // Store signup timestamp
-        });
+          signUpDate: signUpDate,
+          progress: initializeUserProgress // Store signup timestamp
+      });
+    
+      
   
         if (!user.emailVerified) {
           await sendEmailVerification(user);
@@ -193,33 +218,76 @@ export default function SignInPage() {
 
   const [otp, setOtp] = useState<string[]>(Array(6).fill(""));
 
+  // const handleOtpChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  //   const value = e.target.value;
+
+  //   if (!/^\d$/.test(value)) return; // Ensure only digits are entered
+
+  //   const newOtp = [...otp];
+  //   newOtp[index] = value;
+  //   setOtp(newOtp);
+
+  //   // Move focus to the next input field if there's a value and it's not the last field
+  //   if (index < 5 && value) {
+  //     document.getElementById(`otp-input-${index + 1}`)?.focus();
+  //   }
+  // };
+
+  // const handleOtpKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+  //   if (e.key === "Backspace") {
+  //     const newOtp = [...otp];
+
+  //     if (!otp[index] && index > 0) {
+  //       document.getElementById(`otp-input-${index - 1}`)?.focus();
+  //     }
+
+  //     newOtp[index] = "";
+  //     setOtp(newOtp);
+  //   }
+  // };
+
+
   const handleOtpChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const value = e.target.value;
-
+  
     if (!/^\d$/.test(value)) return; // Ensure only digits are entered
-
+  
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-
+  
     // Move focus to the next input field if there's a value and it's not the last field
     if (index < 5 && value) {
       document.getElementById(`otp-input-${index + 1}`)?.focus();
     }
   };
-
+  
   const handleOtpKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
     if (e.key === "Backspace") {
       const newOtp = [...otp];
-
+  
       if (!otp[index] && index > 0) {
         document.getElementById(`otp-input-${index - 1}`)?.focus();
       }
-
+  
       newOtp[index] = "";
       setOtp(newOtp);
     }
   };
+  
+  const handleOtpPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const pasteData = e.clipboardData.getData("text").trim();
+    
+    if (/^\d{6}$/.test(pasteData)) { // Ensure it's exactly 6 digits
+      const newOtp = pasteData.split("");
+      setOtp(newOtp);
+  
+      // Move focus to the last OTP input field
+      document.getElementById(`otp-input-5`)?.focus();
+    }
+  };
+  
 
 
   const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -373,7 +441,7 @@ const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         {showOtpField && (
           <div className="mt-4 p-5">
             <label className="block text-gray-600">Enter OTP</label>
-            <div className="flex justify-center space-x-2 mt-2">
+            {/* <div className="flex justify-center space-x-2 mt-2">
               {otp.map((digit, index) => (
                 <input
                   key={index}
@@ -386,7 +454,23 @@ const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                   onKeyDown={(e) => handleOtpKeyDown(e, index)}
                 />
               ))}
-            </div>
+            </div> */}
+
+<div className="flex justify-center space-x-2 mt-2">
+  {otp.map((digit, index) => (
+    <input
+      key={index}
+      id={`otp-input-${index}`}
+      type="text"
+      maxLength={1}
+      className="w-12 h-12 text-center text-lg border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+      value={digit}
+      onChange={(e) => handleOtpChange(e, index)}
+      onKeyDown={(e) => handleOtpKeyDown(e, index)}
+      onPaste={handleOtpPaste} // Add paste handling here
+    />
+  ))}
+</div>
             <button
               onClick={verifyOtp}
               className="w-full mt-4 bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition"
@@ -394,6 +478,9 @@ const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               Verify OTP
             </button>
           </div>
+          
+          
+
         )}
       </div>
     </div>
