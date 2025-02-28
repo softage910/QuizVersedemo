@@ -550,7 +550,7 @@ export default function NinethTopic() {
                         <td>Split screen with any appsHidden Dock</td>
                         <td>System</td>
                         <td>Spotlight Open</td>
-                        <td>- cmd+space- finder- click on downloads - list view- sort by date added- click on the date added column's header- click on first file</td>
+                        <td>- cmd+space- finder- click on downloads - list view- sort by date added- click on the date added column&apos;s header- click on first file</td>
                         <td><a href="https://drive.google.com/file/d/1e_qYitEoXFKzizgIyK_D4hUTp0Gn-J7q/view?usp=share_link" target="_blank">                                <button className='Watch-Button'>
                                     Watch Here
                                 </button>

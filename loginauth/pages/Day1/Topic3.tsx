@@ -89,7 +89,7 @@ export default function ThirdTopic() {
                 <li>Manage monthly expenses with a budget of $4,000.</li>
                 <li>Plan a 5-day itinerary for Rome, focusing on historical sites and local cuisine.</li>
                 <li>Find family-friendly events scheduled this weekend within a 20-mile radius of my location.</li>
-                <li>Show all PDF files containing the phrase 'quarterly report' created in the last year.</li>
+                <li>Show all PDF files containing the phrase &apos;quarterly report&apos; created in the last year.</li>
                 <li>Set up iCloud Drive to sync my Desktop and Documents folders across all my Apple devices.</li>
             </ul>
         </>

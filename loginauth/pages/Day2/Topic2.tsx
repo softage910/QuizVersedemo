@@ -11,7 +11,7 @@ export default function SecondTopic() {
                 <li>
                     <strong>Familiarize Yourself with the Menu Bar:</strong>
                     <ul className="ul">
-                        <li>On a Mac, there’s a single menu bar at the top of the screen. As you switch apps, the menu items adapt to match the current application.</li>
+                        <li>On a Mac, there&apos;s a single menu bar at the top of the screen. As you switch apps, the menu items adapt to match the current application.</li>
                     </ul>
 
                     <figure>
