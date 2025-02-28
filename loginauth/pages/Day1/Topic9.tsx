@@ -23,7 +23,7 @@ export default function NinethTopic() {
                 <strong>Non-atomic task:</strong> A non-atomic task refers to a complex action that can be broken into smaller, more fundamental steps. This means it cannot be completed in a single, indivisible operation, unlike an atomic task. Non-atomic tasks are essentially workflows or scripts that orchestrate the execution of multiple atomic tasks. The ability to decompose non-atomic tasks into atomic ones is crucial for automation and AI-driven task completion.
             </p><br />
             <p>
-                <strong>Synthetic data:</strong> Synthetic data is artificially generated information that mimics real-world data. It's created using algorithms and statistical models that capture the patterns, characteristics, and relationships found in real data. Think of it as a digital twin of real data, but without any of the actual sensitive information.
+                <strong>Synthetic data:</strong> Synthetic data is artificially generated information that mimics real-world data. It&apos;s created using algorithms and statistical models that capture the patterns, characteristics, and relationships found in real data. Think of it as a digital twin of real data, but without any of the actual sensitive information.
             </p><br />
             <p>
                 <strong>Few-shot learning:</strong> Few-shot learning tackles the problem of training machine learning models when only a limited number of labeled examples are available for each class or task. It leverages prior knowledge from related tasks or categories.
