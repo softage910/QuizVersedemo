@@ -14,8 +14,8 @@ export default function SecondTopic() {
                         <li>On a Mac, there&apos;s a single menu bar at the top of the screen. As you switch apps, the menu items adapt to match the current application.</li>
                     </ul>
 
-                    <figure>
-                        <img src="../images/2.1.png" alt="Menu Bar Example" />
+                    <figure className='img-21'>
+                        <img src="../images/2.0.png" alt="Menu Bar Example" />
                     </figure>
                     <ul className="ul">
                         <li>One constant menu item is the <strong>Apple menu</strong>. Consider the <strong>Apple menu</strong> as your system control center. From there, you can shut down, restart, force quit apps, or quickly open System Settings.</li>
@@ -28,7 +28,7 @@ export default function SecondTopic() {
                         <li>Access quick settings—such as brightness, volume, headphone connections, or sound output—directly from the menu bar.</li>
                     </ul>
 
-                    <figure>
+                    <figure className='img-22'>
                         <img src="../images/2.2.png" alt="Control Center Example" />
                     </figure>
                     <ul className="ul">
@@ -41,7 +41,7 @@ export default function SecondTopic() {
                         <li>Use the Dock to pin frequently used apps, documents, and folders for quick access.</li>
                     </ul>
 
-                    <figure>
+                    <figure className='img-21'>
                         <img src="../images/2.3.png" alt="Dock Example" />
                     </figure>
                     <ul className="ul">

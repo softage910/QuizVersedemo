@@ -9,7 +9,7 @@ export default function EighthTopic() {
                 Before starting work on the macOS system, you will need to create an Apple ID. Please follow the instructions below to set up your Apple ID before you begin using your macOS device for work purposes.
             </p>
 
-            <figure>
+            <figure className='img-22'>
                 <img src="../images/2.6.jpeg" alt="Apple ID Setup Example" />
             </figure>
             <ol className="ol">

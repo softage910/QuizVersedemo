@@ -21,7 +21,7 @@ export default function FifthTopic() {
                         <li>Spotlight can also perform calculations, convert units, and initiate web searches.</li>
                     </ul>
 
-                    <figure>
+                    <figure className='img-21'>
                         <img src="../images/2.5.png" alt="Spotlight Search Example" />
                     </figure>
                     <blockquote>

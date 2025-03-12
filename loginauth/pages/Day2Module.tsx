@@ -69,8 +69,10 @@ export default function Day2Module() {
   const markTopicCompleted = async () => {
     if (!selectedTopicKey || !userId) return;
 
-    const userProgressRef = ref(database, `userProgress/${userId}/day2/module2`);
-    await update(userProgressRef, { [selectedTopicKey]: true });
+    const userProgressRef = ref(database, `users/${userId}/progress/Day2`);
+    await update(userProgressRef, { ["Module"]: true });
+    handleNextTopic();
+
 
     setCompletedTopics([...completedTopics, selectedTopicKey]);
   };
@@ -85,16 +87,16 @@ export default function Day2Module() {
         {selectedTopicContent}
 
         <div className="Toggle-Topic">
-          {selectedTopicIndex > 0 && (
-            <button className="Read-Button" onClick={handlePreviousTopic}>
+        {selectedTopicIndex > 0 && (
+            <button className="Read-Button-Previous" onClick={handlePreviousTopic}>
               ← Previous Topic
             </button>
           )}
 
           {selectedTopicIndex < topics.length - 1 ? (
-            <button className="Read-Button" onClick={handleNextTopic}>
-              Next Topic →
-            </button>
+            <button className="Read-Button-Next" onClick={handleNextTopic}>
+              {selectedTopicIndex === 0 ? "Let's Get Started →" : "Next Topic →"}
+              </button>
           ) : (
             <button className="Read-Button" onClick={markTopicCompleted}>
               ✅ Mark Completed
