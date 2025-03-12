@@ -1,150 +1,145 @@
-// import './Assessment1.css';
+"use client";
 
-// export default function FirstAssessment() {
-//     return (
-//         <div className="Assessment-Section">
-//             <div className="quiz-container">
-//                 <h2>MacOS Keyboard Shortcuts Quiz</h2>
-
-//                 <div className="question">
-//                     <p>Which keyboard shortcut copies selected text or items in macOS?</p>
-//                     <div className="options">
-//                         <label><input type="radio" name="q1" /> A. Command+C</label>
-//                         <label><input type="radio" name="q1" /> B. Command+V</label>
-//                         <label><input type="radio" name="q1" /> C. Command+X</label>
-//                         <label><input type="radio" name="q1" /> D. Command+Z</label>
-//                     </div>
-//                 </div>
-
-//                 <div className="question">
-//                     <p>Which shortcut pastes the content from the clipboard?</p>
-//                     <div className="options">
-//                         <label><input type="radio" name="q2" /> A. Command+X</label>
-//                         <label><input type="radio" name="q2" /> B. Command+V</label>
-//                         <label><input type="radio" name="q2" /> C. Command+N</label>
-//                         <label><input type="radio" name="q2" /> D. Command+Z</label>
-//                     </div>
-//                 </div>
-
-//                 <div className="question">
-//                     <p>Which shortcut cuts selected items so you can paste them elsewhere?</p>
-//                     <div className="options">
-//                         <label><input type="radio" name="q3" /> A. Command+C</label>
-//                         <label><input type="radio" name="q3" /> B. Command+V</label>
-//                         <label><input type="radio" name="q3" /> C. Command+X</label>
-//                         <label><input type="radio" name="q3" /> D. Command+S</label>
-//                     </div>
-//                 </div>
-
-//                 <div className="question">
-//                     <p>Which shortcut undoes the last action?</p>
-//                     <div className="options">
-//                         <label><input type="radio" name="q4" /> A. Command+Y</label>
-//                         <label><input type="radio" name="q4" /> B. Command+Shift+Z</label>
-//                         <label><input type="radio" name="q4" /> C. Command+Shift+Y</label>
-//                         <label><input type="radio" name="q4" /> D. Command+Z</label>
-//                     </div>
-//                 </div>
-
-//                 <div className="question">
-//                     <p>What is the shortcut to redo an action that was just undone?</p>
-//                     <div className="options">
-//                         <label><input type="radio" name="q5" /> A. Command+Shift+Z</label>
-//                         <label><input type="radio" name="q5" /> B. Command+Y</label>
-//                         <label><input type="radio" name="q5" /> C. Command+Z</label>
-//                         <label><input type="radio" name="q5" /> D. Command+R</label>
-//                     </div>
-//                 </div>
-
-//                 <div className="question">
-//                     <p>Which key combination selects all items in the current window or document?</p>
-//                     <div className="options">
-//                         <label><input type="radio" name="q6" /> B. Command+A</label>
-//                         <label><input type="radio" name="q6" /> A. Command+S</label>
-//                         <label><input type="radio" name="q6" /> C. Command+O</label>
-//                         <label><input type="radio" name="q6" /> D. Command+P</label>
-//                     </div>
-//                 </div>
-
-//                 <div className="question">
-//                     <p>What is the keyboard shortcut to save the current document?</p>
-//                     <div className="options">
-//                         <label><input type="radio" name="q7" /> B. Command+N</label>
-//                         <label><input type="radio" name="q7" /> A. Command+P</label>
-//                         <label><input type="radio" name="q7" /> C. Command+S</label>
-//                         <label><input type="radio" name="q7" /> D. Command+Q</label>
-//                     </div>
-//                 </div>
-
-//                 <div className="question">
-//                     <p>What is the shortcut to quit the active application?</p>
-//                     <div className="options">
-//                         <label><input type="radio" name="q8" /> A. Command+W</label>
-//                         <label><input type="radio" name="q8" /> B. Command+Q</label>
-//                         <label><input type="radio" name="q8" /> C. Command+E</label>
-//                         <label><input type="radio" name="q8" /> D. Command+Option+Q</label>
-//                     </div>
-//                 </div>
-//             </div>
-
-//         </div>
-//     );
-// }
-
-
-"use client"; // Ensures this runs only on the client side
-
-import { useRouter } from "next/navigation";
 import "./Assessment1.css";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { ref, get } from "firebase/database";
+import { auth, database } from "../src/app/firebase/firebaseconfig";
 
 export default function FirstAssessment() {
     const router = useRouter();
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [direction, setDirection] = useState("next"); // Track direction
+    const [quizAttempted, setQuizAttempted] = useState(false);
+
+
+    const slides = [
+        {
+            image: "/images/internet.png",
+            title: "Internet Connectivity",
+            description: "Ensure that you have a stable internet connection with a minimum speed of 512 kbps."
+        },
+        {
+            image: "/images/refresh.png",
+            title: "Don’t Refresh",
+            description: "\"Don’t refresh the webpage during the assessment. This will lead to immediate submission of your responses.\""
+        },
+        {
+            image: "/images/notabswitching.png",
+            title: "No Tab Switching",
+            description: "Do not switch tabs during the quiz. If you leave the tab, your attempt may be invalidated."
+        }
+    ];
+
+
+    useEffect(() => {
+        const fetchQuizStatus = async () => {
+            const user = auth.currentUser;
+            if (!user) return;
+
+            const userId = user.uid;
+            const statusRef = ref(database, `userProgress/${userId}/day2/quiz`);
+            const snapshot = await get(statusRef);
+
+            if (snapshot.exists()) {
+                setQuizAttempted(snapshot.val());
+            }
+        };
+
+        fetchQuizStatus();
+    }, []);
 
     const startQuiz = () => {
-        enterFullScreen();
-        router.push("/AssDemo"); // Redirects to assessment1.tsx page
+        if (!quizAttempted) {
+                enterFullScreen();
+                router.push("/AssDemo"); // Redirects to assessment1.tsx page
+        }
+            };
+
+        
+            const enterFullScreen = () => {
+                const elem = document.documentElement;
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen().catch(err => console.error("Error enabling fullscreen:", err));
+                }
+            };
+        
+
+    const nextSlide = () => {
+        setDirection("next");
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
     };
 
-    const enterFullScreen = () => {
-        const elem = document.documentElement;
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen().catch(err => console.error("Error enabling fullscreen:", err));
-        }
+    const prevSlide = () => {
+        setDirection("prev");
+        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
     };
+
+    useEffect(() => {
+        let interval: string | number | NodeJS.Timeout | undefined;
+        if (isPlaying) {
+            interval = setInterval(nextSlide, 3000);
+        }
+        return () => clearInterval(interval);
+    }, [isPlaying]);
 
     return (
+        <div className="Main-Assessment">
+            <div className="AssessmentDetails">
+                 <div>
+                     <p>Welcome to</p>
+                     <h2>MacOS Keyboard Shortcuts Quiz</h2>
+                 </div>
+                 <div>
+                     <table className="Assessment-Table">
+                         <thead>
+                             <tr>
+                                 <th>Number of Question</th>
+                                <th>Duration</th>
+                             </tr>
+                         </thead>
+                        <tbody>
+                             <tr>
+                                <td>100</td>
+                                 <td>60 Minutes</td>
+                             </tr>
+                         </tbody>
+                    </table>
+                 </div>
+                 <div className="start-container">
+                 <button
+                className={`start-button ${quizAttempted ? "disabled" : ""}`}
+                onClick={startQuiz}
+                disabled={quizAttempted}
+            >
+                {quizAttempted ? "Attempted" : "Start Quiz"}
+            </button>                 </div>
+              </div>
 
-        <>
-        <div className="AssessmentDetails">
-            <div className="Left-Section">
-                <p>Welcome to</p>
-                <h2>MacOS Keyboard Shortcuts Quiz</h2>
-                <hr/>
-            </div>
-            <div className="Right-Section">
-                <table className="Day2Table">
-                <thead>
-                    <tr>
-                        <th>Number of Question</th>
-                        <th>Duration</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>100</td>
-                        <td>60 Minutes</td>
-                    </tr>
-                </tbody>
-                </table>
+            <div className="Assessment-Section">
+                <div className="Slideshow">
+                    <button className="nav-button left" onClick={prevSlide}>❮</button>
+                    
+                    <div className={`Slide ${direction === "next" ? "slide-in-right" : "slide-in-left"}`}>
+                        <img src={slides[currentSlide].image} alt={slides[currentSlide].title} />
+                        <h3>{slides[currentSlide].title}</h3>
+                        <p>{slides[currentSlide].description}</p>
+                    </div>
+                    
+                    <button className="nav-button right" onClick={nextSlide}>❯</button>
+                    <div className="controls">
+                    {slides.map((_, index) => (
+                        <span 
+                            key={index} 
+                            className={`dot ${index === currentSlide ? "active" : ""}`} 
+                            onClick={() => setCurrentSlide(index)}
+                        ></span>
+                    ))}
+                </div>
+                </div>
+                
             </div>
         </div>
-
-        <div className="Assessment-Section">
-            <div className="start-container">
-                <button className="start-button" onClick={startQuiz}>Start Quiz</button>
-            </div>
-        </div>
-        </>
-
     );
 }

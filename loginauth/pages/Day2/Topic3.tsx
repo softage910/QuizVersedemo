@@ -10,7 +10,7 @@ export default function ThirdTopic() {
             <ol className="ol">
                 <li>
                     <strong>Understanding Window Controls:</strong>
-                    <figure>
+                    <figure className='img-22'>
 
                         <img src="../images/2.4.png" alt="Window Controls Example" />
                     </figure>

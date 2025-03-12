@@ -35,7 +35,7 @@
 
 body {
   min-height: 100vh;
-  background: #F0F4FF;
+  background: #212121;
 }
 
 
@@ -49,14 +49,18 @@ body {
   top: 0;
   left: 0;
   height: 100vh;
-  width: 15%;
+  width: 15vw;
   display: flex;
   overflow-x: hidden;
   flex-direction: column;
-  background: #171717;
+  background: rgba(23, 23, 23, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
   padding: 25px 20px;
   transition: all 0.4s ease;
-  /* border-radius: 1%; */
+  border-radius: 0px 40px 40px 0px;
+  border-right: solid rgba(255, 255, 255, 0.2) 1px; /* Subtle white border */
+  box-shadow: 20px 0px 10px rgba(0, 0, 0, 0.2); /* Soft shadow effect */
 }
 
 /* .sidebar:hover {
@@ -142,19 +146,25 @@ body {
 }
 
 
-.user-account {
-  background: #fff;
-  border-radius: 4px;
-  min-width: 20%;
+.user-account {  background: rgba(23, 23, 23, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+
+  border: solid rgba(255, 255, 255, 0.2) 1px; /* Subtle white border */
+  box-shadow: 4px 0px 30px rgba(0, 0, 0, 0.982); /* Soft shadow effect */
+  width: fit-content;
+  min-width: 25%;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 40px;
 }
 
 .user-profile {
   width: 100%;
   display: flex;
-  color: #161a2d;
+  color: white;
 }
 
 .user-profile h3 {
@@ -173,6 +183,7 @@ body {
   flex-direction: column;
 justify-content: center;
 align-items: center;
+border-right: white 0.025px solid;
 }
 
 .Logout-button{
@@ -194,7 +205,7 @@ align-items: center;
 }
 
 .Inner-Section{
-  width: 85%;
+  width: 85vw;
   background: #212121;
   color: white;
 }
@@ -203,7 +214,6 @@ align-items: center;
   display: flex;
   justify-content: end;
   padding: 10px;
-  border-bottom: solid white 0.025px;
   height: 10vh;
 }
 
@@ -215,7 +225,7 @@ align-items: center;
 
 @media only screen and (max-width: 1460px) {
   .sidebar{
-    width: 30%;
+    width: 30vw;
   }
 }
 
@@ -289,6 +299,20 @@ align-items: center;
   align-items: center;
 }
 
+.Logout-button a{
+  color: white;
+  list-style: none;
+  text-decoration: none;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Logout-button a span{
+  margin-right: 5px;
+  font-size: xx-large;
+}
 
 .dropdown-menu {
   list-style: none;
@@ -298,7 +322,7 @@ align-items: center;
 
 .locked a {
   opacity: 0.5;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 .locked:not(:first-child) a {
@@ -306,3 +330,18 @@ align-items: center;
   pointer-events: none;
 }
 
+
+
+
+
+
+
+
+.locked {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.unlocked {
+  pointer-events: auto;
+  opacity: 1;
+}

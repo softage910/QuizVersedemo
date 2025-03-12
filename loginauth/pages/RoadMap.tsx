@@ -279,6 +279,17 @@ export default function Dashboard() {
   const [userId, setUserId] = useState<string | null>(null);
   const days = Array.from({ length: 8 }, (_, i) => `day${i + 1}`);
 
+  const topicsPerDay: { [key: string]: number } = {
+    day1: 9,
+    day2: 9,
+    day3: 3,
+    day4: 7,
+    day5: 10,
+    day6: 2,
+    day7: 0,
+    day8: 6,
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -300,6 +311,7 @@ export default function Dashboard() {
 
         if (snapshot.exists()) {
           const data = snapshot.val();
+          console.log(userId);
           const updatedProgress: { [key: string]: number } = {};
           const unlocked: { [key: string]: boolean } = { day1: true };
 
@@ -312,7 +324,7 @@ export default function Dashboard() {
               moduleKeys.forEach((module) => {
                 const topics = Object.values(data[day][module] || {});
                 totalCompleted += topics.filter((t) => t === true).length;
-                totalTopics = 9;
+                totalTopics = topicsPerDay[day];
               });
 
               updatedProgress[day] = totalTopics > 0 ? Math.round((totalCompleted / totalTopics) * 100) : 0;

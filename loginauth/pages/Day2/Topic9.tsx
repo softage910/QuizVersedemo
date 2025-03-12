@@ -1144,7 +1144,7 @@ export default function NinethTopic() {
                     </tr>
                     <tr>
                         <td>87</td>
-                        <td>make a new folder comparsions in lol folder</td>
+                        <td>make a new folder comparisons in lol folder</td>
                         <td>Contacts app open in entire screen</td>
                         <td>System</td>
                         <td>File Operations</td>

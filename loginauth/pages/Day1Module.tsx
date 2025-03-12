@@ -675,7 +675,7 @@
 "use client";
 import "./Day1Module.css";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; // Import useRouter for redirection
+import { useRouter } from "next/navigation";
 import { database, auth } from "../src/app/firebase/firebaseconfig";
 import { ref, get, update } from "firebase/database";
 
@@ -690,10 +690,16 @@ import Topic8 from "./Day1/Topic8";
 import Topic9 from "./Day1/Topic9";
 
 export default function Day1Module() {
-  const router = useRouter(); // Initialize router
+  const router = useRouter();
   const [selectedTopic, setSelectedTopic] = useState<number>(1);
   const [completedTopics, setCompletedTopics] = useState<string[]>([]);
   const userId = auth.currentUser?.uid;
+
+  const handleTopicCompletion = (topicName: string) => {
+    setCompletedTopics(prevCompletedTopics => ({ ...prevCompletedTopics, [topicName]: true }));
+    // Call markTopicCompleted from Dashboard.tsx to update Firebase
+  };
+
 
   const topics = [
     { id: 1, key: "Topic1", component: <Topic1 /> },
@@ -709,7 +715,7 @@ export default function Day1Module() {
 
   useEffect(() => {
     if (!userId) return;
-    const userProgressRef = ref(database, `userProgress/${userId}/day1/module1`);
+    const userProgressRef = ref(database, `userProgress/${userId}/Day1/module1`);
 
     get(userProgressRef).then((snapshot) => {
       if (snapshot.exists()) {
@@ -725,7 +731,7 @@ export default function Day1Module() {
   const handleNextTopic = async () => {
     if (!selectedTopicKey || !userId) return;
 
-    const userProgressRef = ref(database, `userProgress/${userId}/day1/module1`);
+    const userProgressRef = ref(database, `userProgress/${userId}/Day1/module1`);
 
     if (!completedTopics.includes(selectedTopicKey)) {
       await update(userProgressRef, { [selectedTopicKey]: true });
@@ -746,8 +752,8 @@ export default function Day1Module() {
   const markTopicCompleted = async () => {
     if (!selectedTopicKey || !userId) return;
 
-    const userProgressRef = ref(database, `userProgress/${userId}/day1/module1`);
-    await update(userProgressRef, { [selectedTopicKey]: true });
+    const userProgressRef = ref(database, `users/${userId}/progress/Day1`);
+    await update(userProgressRef, { ["Module"]: true });
 
     setCompletedTopics([...completedTopics, selectedTopicKey]);
 
@@ -773,7 +779,7 @@ export default function Day1Module() {
 
           {selectedTopicIndex < topics.length - 1 ? (
             <button className="Read-Button-Next" onClick={handleNextTopic}>
-              Next Topic →
+              {selectedTopicIndex === 0 ? "Let's Get Started →" : "Next Topic →"}
             </button>
           ) : (
             <button className="Read-Button" onClick={markTopicCompleted}>
@@ -785,3 +791,6 @@ export default function Day1Module() {
     </div>
   );
 }
+
+
+
