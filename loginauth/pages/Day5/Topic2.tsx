@@ -33,7 +33,7 @@ export default function SecondTopic() {
                 </figure>
                 <br />
                 You can also search for specific recordings, either by keywords, or by putting in
-                the whole prompt, in the “search instructions text box
+                the whole prompt, in the &quot;search instructions text box&quot;
                 <br />
                 <figure className='img-510'>
                     <img src='../images/5.2.4.png'/>

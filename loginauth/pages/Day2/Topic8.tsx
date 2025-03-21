@@ -18,7 +18,7 @@ export default function EighthTopic() {
                     <strong>Start the Account Creation Process:</strong>
                     <ul className="ul">
                         <li>Select <strong>Apple ID</strong> and click <strong>Sign In</strong>.</li>
-                        <li>If you don’t have an account, choose <strong>Don’t Have an Account?</strong> and click <strong>Continue</strong>.</li>
+                        <li>If you don&apos;t have an account, choose <strong>Don&apos;t Have an Account?</strong> and click <strong>Continue</strong>.</li>
                         <li>Enter your first name, last name, date of birth, email address, and create a password.</li>
                         <li>Choose your country or region (your primary email will serve as your Apple ID).</li>
                     </ul>

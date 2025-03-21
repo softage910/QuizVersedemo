@@ -12,10 +12,13 @@ import Topic6 from "./Day2/Topic6";
 import Topic7 from "./Day2/Topic7";
 import Topic8 from "./Day2/Topic8";
 import Topic9 from "./Day2/Topic9";
+import NotificationMessage from "@/app/components/NotificationMessage";
 
 export default function Day2Module() {
   const [selectedTopic, setSelectedTopic] = useState<number>(1); // Start from Topic 1
   const [completedTopics, setCompletedTopics] = useState<string[]>([]);
+  const [CompletionMessage, setCompletionMessage] = useState<string | null>(null);
+
   const userId = auth.currentUser?.uid;
 
   const topics = [
@@ -75,6 +78,8 @@ export default function Day2Module() {
 
 
     setCompletedTopics([...completedTopics, selectedTopicKey]);
+
+    // setCompletionMessage("Let's Go! New Day unlocked...")
   };
 
   return (
@@ -104,6 +109,8 @@ export default function Day2Module() {
           )}
         </div>
       </div>
+      {/* {CompletionMessage && <NotificationMessage message={CompletionMessage} onClose={() => setCompletionMessage("")} color="success"/>} */}
+
     </div>
   );
 }

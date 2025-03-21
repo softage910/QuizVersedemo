@@ -272,6 +272,7 @@ import { useState, useEffect } from "react";
 import { database, auth } from "../src/app/firebase/firebaseconfig";
 import { ref, get } from "firebase/database";
 import { onAuthStateChanged } from "firebase/auth";
+import ProgressBar from "@/app/components/progressbar";
 
 export default function Dashboard() {
   const [progressData, setProgressData] = useState<{ [key: string]: number }>({});
@@ -351,7 +352,6 @@ export default function Dashboard() {
 
   return (
 <div className="Progress-Section">
-
   <div className="ProgressbarContent">
     <h1>
     Welcome to Softage Information Technology Limited Data Team!
@@ -362,7 +362,7 @@ export default function Dashboard() {
     <p>Start with Day 1, and progress further after completion of each section. We wish you good luck! We are excited to have you create data for us!</p>
   </div>
   <div className="ProgressGraph">
-  <div className="progress-container">
+  {/* <div className="progress-container">
        {days.map((day, index) => {
         const progress = progressData[day] || 0;
         const isUnlocked = unlockedDays[day] || false;
@@ -391,7 +391,10 @@ export default function Dashboard() {
         );
       })}
     </div>
-    <div className="Graph-Container"><p>Graph</p></div>
+    <div className="Graph-Container"><p>Graph</p></div> */}
+    <h2>Overview of the progress of your training:</h2>
+    <div className="ProgressBar-content">    <ProgressBar/>
+    </div>
   </div>
  
     </div>

@@ -8,11 +8,34 @@ export default function FirstTopic() {
             <br />
 
             <ol className='ol'>
-                <li>Download and install DuckTrack and set it up with OBS.</li>
+                <li>Download and install DuckTrack and set it up with OBS.
+                    <br />
+                    Visit the GitHub repository for DuckTrack:</li>
                 <br />
                 {/* <div className="TestPage-Logo">
                     <Image src=""/>
             </div> */}
+                <a href="https://github.com/TheDuckAI/DuckTrack">
+                    <button style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "12px 24px",
+                        backgroundColor: "white",
+                        color: "black",
+                        fontSize: "16px",
+                        textDecoration: "none",
+                        borderRadius: "30px",
+                        boxShadow: "5px 5px 15px rgba(0, 0, 0, 0.2)",
+                        transition: "all 0.3s ease-in-out",
+                        cursor: "pointer",
+
+                    }} className="git-but">
+                        GitHub Link
+                    </button>
+
+                </a>
+                <br />
                 <br />
 
                 <li>Make a copy of this sheet, and rename it with your name, like [first_name]_[last_name]
@@ -22,7 +45,7 @@ export default function FirstTopic() {
                 {/* <div className="TestPage-Logo">
                     <Image src=""/>
             </div> */}
-                <br />
+                
 
                 <li>Target for the day: 100 clean recordings.</li>
                 <br />

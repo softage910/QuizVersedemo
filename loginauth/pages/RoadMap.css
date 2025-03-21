@@ -1,6 +1,8 @@
 .Progress-Section{
   height: 80vh;
   overflow: scroll;
+  color: white;
+
 }
 
 .Xyz {
@@ -10,11 +12,12 @@
   align-items: center;
   padding: 10px;
   margin: 10px 10px;
-  background: rgba(23, 23, 23, 0.6); /* Semi-transparent background */
+  /* background: rgba(23, 23, 23, 0.6); */
   backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
   -webkit-backdrop-filter: blur(10px); /* For Safari */
   border: solid rgba(255, 255, 255, 0.2) 1px; /* Subtle white border */
-  box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.982);
+  box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.399);
+  background-color: rgba(255, 255, 255, 0.072);
 }
 
 .progressbar {
@@ -28,6 +31,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .progressbar::before {
@@ -35,7 +39,7 @@
   width: 90px; /* Smaller inner circle for narrow ring effect */
   height: 90px;
   position: absolute;
-  background: #303030; /* Match container background */
+  background-color: #2F3A5A;
   border-radius: 50%;
 }
 .progressbar .title {
@@ -125,19 +129,27 @@
 }
 
 .ProgressbarContent{
-  width: 75%;
+  width: 90%;
   margin: auto;
   text-align: center;
-  background-color: #303030;
   padding: 50px;
   border-radius: 20px;
+  /* background: linear-gradient(
+    to bottom right,
+    #273054,
+    #fe4845) */
+    background-color: #2F3A5A;
 }
 
 .ProgressGraph{
-  display: flex;
-  width: 90%;
+  width: 80%;
   margin: 30px auto auto auto;
   justify-content: space-between;
+  text-align: center;
+}
+
+.ProgressBar-content{
+  margin-top: 30px;
 }
 
 .progress-container {
@@ -147,8 +159,8 @@
   flex-wrap: wrap;
   align-items: center;
   padding: 50px;
-  background-color: #303030;
   border-radius: 20px;
+  background-color: #2F3A5A;
 }
 
 .Graph-Container{
@@ -158,7 +170,7 @@
   flex-wrap: wrap;
   align-items: center;
   padding: 50px;
-  background-color: #303030;
+  background-color: #2F3A5A;
   border-radius: 20px;
 
 }

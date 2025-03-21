@@ -33,7 +33,7 @@ export default function SeventhTopic() {
 
             <h3 className="h3">What does not work 🫣</h3>
             <ol className="ol">
-                <li><strong>Poor data quality:</strong> Biased data that doesn’t represent the full-spectrum of real-world scenarios, insufficient data, or mislabeled data leading to model confusion.</li>
+                <li><strong>Poor data quality:</strong> Biased data that doesn&apos;t represent the full-spectrum of real-world scenarios, insufficient data, or mislabeled data leading to model confusion.</li>
                 <li><strong>Improper data handling:</strong> Data leakage (allowing information from validation or test sets to influence training) and failure to protect sensitive information.</li>
                 <li><strong>Ignoring data context:</strong> Not considering the broader implications or sources of the data.</li>
                 <li><strong>Ineffective data strategies:</strong> Over-reliance on synthetic data, neglecting data diversity, and ignoring data drift.</li>

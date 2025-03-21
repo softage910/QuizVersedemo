@@ -474,6 +474,7 @@ import Link from 'next/link';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, set, get } from "firebase/database";
 import { useRouter } from "next/navigation"; // Import useRouter
+import NotificationMessage from "./NotificationMessage";
 
 
 
@@ -494,6 +495,8 @@ export default function SignInPage() {
   const [UserEmail, setUserEmail] = useState("");
   const [UserPassword, setUserPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
+  const [showNotification, setShowNotification] = useState(false);
+
 
   const [EmpCode, setEmpCode] = useState("");
 
@@ -506,7 +509,7 @@ export default function SignInPage() {
     
 
     if (enteredOtp === generatedOtp) {
-      const sessionExpireTime = new Date().getTime() + 60 * 60 * 1000;
+      const sessionExpireTime = new Date().getTime() + 24 * 60 * 60 * 1000;
       localStorage.setItem("sessionExpireTime", sessionExpireTime.toString());
 
       // Redirect to dashboard with user details
@@ -527,6 +530,8 @@ export default function SignInPage() {
   }
 
   const [loading, setLoading] = useState(false); // Loading state
+  const [loadingVerify, setLoadingVerify] = useState(false); // Loading state
+
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -567,7 +572,7 @@ export default function SignInPage() {
           }
         }
       } else {
-        setLoginMessage("Email Not Verified");
+        setLoginError("Email Not Verified");
       }
     } catch (err) {
       setLoginError("Invalid email or password. Please try again.");
@@ -580,11 +585,11 @@ export default function SignInPage() {
   
 
   const initializeUserProgress = {
-    "Day1": { "Module": true },
+    "Day1": { "Module": false },
     "Day2": { "Module": false, "Assessment": false },
     "Day3": { "Module": false, "Assessment": false },
     "Day4": { "Module": false, "Assessment 1": false, "Assessment 2": false, "Assessment 3": false },
-    "Day5": { "Module 1": false, "Module 2": false, "Module 3": false, "Assessment": false },
+    "Day5": { "Module 1": false, "Module 2": false, "Assessment": false },
     "Day6": { "Module": false },
     "Day7": { "Assessment 1": false },
     "Day8": { "Module": false },
@@ -594,6 +599,8 @@ export default function SignInPage() {
     e.preventDefault();
     setSignUpError(null);
     setSignUpMessage(null);
+    setLoadingVerify(true); // Start loading
+
   
     if (UserPassword !== ConfirmPassword) {
       setSignUpError("Passwords do not match.");
@@ -640,9 +647,15 @@ export default function SignInPage() {
         }
       }
     } catch (error) {
-      console.error("Signup error:", error);
       setSignUpError("Error signing up. Please try again.");
+    }finally{
+      setLoadingVerify(false); // Start loading
+
     }
+
+    setshowSigninField(true);
+    setshowSignupField(false);
+
   };
   
   
@@ -773,17 +786,10 @@ const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         <p>Don&apos;t have an account?</p>
         <Link className="Link" href="" onClick={toggle}>Sign-up</Link>
       </div>
-      {Loginmessage && <p className="mt-4 text-center text-green-500">{Loginmessage}</p>}
-      {Loginerror && <p className="mt-4 text-center text-red-500">{Loginerror}</p>}
     </>
   )}
 </form>
 )}
-
-
-
-
-
         {showSignupField && (<form onSubmit={handleSignUp} className="mt-6">
           <div className="login-heading">
             <h2>Sign Up</h2>
@@ -845,16 +851,27 @@ const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           <button
             type="submit"
             className="w-full mt-6 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition "
-          >
-            SIGNUP
+          >  {loadingVerify ? (
+            <>
+              <div className="flex items-center justify-center">
+      <svg className="animate-spin h-6 w-6 text-white-500" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 0116 0"></path>
+      </svg>
+      <span className="ml-2 text-white-600 font-semibold">Verifying.....</span>
+    </div>
+            </>
+          ) : (
+            "SIGNUP"
+          )}
           </button>
           <div className="togglebutton">
             <p>Already have an account?</p>
             <Link className="Link" href="" onClick={toggleback}>Sign-in</Link>
           </div>
 
-          {SignUpmessage && <p className="mt-4 text-center text-green-500">{SignUpmessage}</p>}
-          {SignUperror && <p className="mt-4 text-center text-red-500">{SignUperror}</p>}
+
+
         </form>)}
 
         {showOtpField && (
@@ -883,15 +900,18 @@ const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               Verify OTP
             </button>
           </div>
-          
-          
-
         )}
       </div>
+      {SignUpmessage && <NotificationMessage message={SignUpmessage} onClose={() => setSignUpMessage("")} color="success"  />}
+      {SignUperror && <NotificationMessage message={SignUperror} onClose={() => setSignUpError("")} color="error"/>}
+      {Loginerror && <NotificationMessage message={Loginerror} onClose={() => setLoginError("")} color="error"/>}
+      {Loginmessage && <NotificationMessage message={Loginmessage} onClose={() => setLoginMessage("")} color="success"/>}
+
+
+    
     </div>
   );
 }
 function dispatch(arg0: any) {
   throw new Error("Function not implemented.");
 }
-

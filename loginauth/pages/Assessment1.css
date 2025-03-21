@@ -186,7 +186,7 @@
 
 
 .Assessment-Table {
-    width: 50%;
+    width: 80%;
     border-collapse: collapse;
     margin: 20px 0;
   }
@@ -214,11 +214,17 @@ border: none;
 
   .AssessmentDetails{
     width: 50%;
-    padding: 20px;
-    height: 60vh;
+    height: 40vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: #2f3a5a;
+    border-radius: 10px;
+    align-items:center;
+  }
+
+  .AssessmentDetails:first-child{
+
   }
 
   .modal-overlay {
@@ -260,7 +266,7 @@ border: none;
   background-color: black;
   cursor: not-allowed;
   color: white;
-  border: solid white 0.25px;
+  border: solid rgba(255, 255, 255, 0.296) 0.25px;
 }
 
 

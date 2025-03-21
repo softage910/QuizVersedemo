@@ -22,7 +22,7 @@ export default function ThirdTopic() {
                 </li>
                 <li><strong>Generalization techniques</strong>
                     <ul className="ul">
-                        <li>Generate varied prompts to enhance the system’s robustness.</li>
+                        <li>Generate varied prompts to enhance the system&apos;s robustness.</li>
                         <li>Test the agent on different datasets to ensure broad applicability.</li>
                         <li>Combine multiple models or approaches for improved performance.</li>
                     </ul>
@@ -41,7 +41,7 @@ export default function ThirdTopic() {
                                 <li>Apply appropriate actions or algorithms to fulfill the request.</li>
                             </ol>
                         </li>
-                        <li><strong>Output</strong>: The agent generates responses or solutions tailored to the user’s input.</li>
+                        <li><strong>Output</strong>: The agent generates responses or solutions tailored to the user&apos;s input.</li>
                     </ul>
                 </li>
                 <li><strong>Expected outcomes</strong>

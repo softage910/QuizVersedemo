@@ -5,7 +5,7 @@ export default function SecondTopic() {
         <>
             <h2 className="h2">Why is data important for model training?</h2>
             <p>
-                AI model training relies on data as its foundational resource, determining everything from basic functionality to real-world performance. It directly influences how well (or poorly) a model performs. <strong>High-quality training data enables the models to recognize patterns, make accurate predictions, and generalize their knowledge to new situations. Poor quality or biased data can lead to inaccurate predictions, unpredictable behavior, and unfair outcomes.</strong> Here’s why data is important for model training:
+                AI model training relies on data as its foundational resource, determining everything from basic functionality to real-world performance. It directly influences how well (or poorly) a model performs. <strong>High-quality training data enables the models to recognize patterns, make accurate predictions, and generalize their knowledge to new situations. Poor quality or biased data can lead to inaccurate predictions, unpredictable behavior, and unfair outcomes.</strong> Here&apos;s why data is important for model training:
             </p><br />
             <ul className="ul">
                 <li><strong>Learning patterns and relationships</strong> - Machine learning models depend on data to identify underlying relationships and patterns. Without enough high-quality, relevant data, models cannot learn these relationships accurately.</li>
