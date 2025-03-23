@@ -70,8 +70,10 @@ export default function Day5Module1() {
       </div>
 
       <div className="MainContent">
-        {selectedTopicContent}
+      <div className="Text-Section">
 
+        {selectedTopicContent}
+</div>
         <div className="Toggle-Topic">
         {selectedTopicIndex > 0 && (
             <button className="Read-Button-Previous" onClick={handlePreviousTopic}>

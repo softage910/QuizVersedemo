@@ -27,6 +27,9 @@ const MultipleChoiceQuestion = ({ question, selectedOption, handleOptionChange }
     </div>
 );
 
+
+
+
 const TrueFalseQuestion = ({ selectedOption, handleOptionChange }: any) => (
     <div className="options-section">
         {["True", "False"].map((option, index) => (
@@ -390,7 +393,7 @@ const handleViolationExit = () => {
                  const userDetails = userSnapshot.val(); // Assuming it contains { name, empCode, email }
          
                  // Fetch responses from Firebase
-                 const responsesRef = ref(database, `responses/${userId}/day4/Assessment 2`);
+                 const responsesRef = ref(database, `responses/${userId}/day4/Assessment2`);
                  const snapshot = await get(responsesRef);
          
                  let formattedResponses: { question: string; answer: string }[] = [];

@@ -180,7 +180,7 @@ hr {
   padding: 50px;
   background:#2F3A5A;;
   border-radius: 30px;
-  overflow: scroll;
+  /* overflow: scroll; */
   height: 75vh;
   width: 90%;
   min-width: 90%;
@@ -190,7 +190,10 @@ hr {
   display: none;
 }
 
-
+.Text-Section{
+  height: 55vh;
+  overflow: scroll;
+}
 
 .ol1 {
   list-style-type: lower-alpha;
@@ -291,7 +294,6 @@ hr {
     /* below are the new properties that I added in the css */
     justify-content: right;
     margin-top: 30px;
-    
 }
 
 

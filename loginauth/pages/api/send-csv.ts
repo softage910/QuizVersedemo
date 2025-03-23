@@ -99,7 +99,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             // Email content with user details
             const mailOptions = {
                 from: "quiz.verse@softage.ai",
-                to: "ashish.joshi@softage.ai", // Change to your admin email
+                to: "vipul.singh@softage.ai", // Change to your admin email
                 subject: `Quiz Responses - (${EmpCode}) ${name} `,
                 text: `Hello Admin,
 

@@ -280,7 +280,7 @@ const handleViolationExit = () => {
             const userId = user.uid; // Get the actual user ID from Firebase Auth
 
 
-            set(ref(database, `responses/${userId}/day3/Assessment1/${currentQuestionIndex}`), matchedPairs)
+            set(ref(database, `responses/${userId}/day4/Assessment1/${currentQuestionIndex}`), matchedPairs)
                 .then(() => console.log("Matched pairs saved successfully!"))
                 .catch((error) => console.error("Error saving matched pairs:", error));
 
@@ -389,7 +389,7 @@ const handleViolationExit = () => {
              const userDetails = userSnapshot.val(); // Assuming it contains { name, empCode, email }
      
              // Fetch responses from Firebase
-             const responsesRef = ref(database, `responses/${userId}/day4/Assessment 1`);
+             const responsesRef = ref(database, `responses/${userId}/day4/Assessment1`);
              const snapshot = await get(responsesRef);
      
              let formattedResponses: { question: string; answer: string }[] = [];

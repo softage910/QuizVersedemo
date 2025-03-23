@@ -28,6 +28,7 @@ import Day5Module2 from "./Day5Module2";
 import { onAuthStateChanged } from "firebase/auth";
 import Day6Module from "./Day6Module";
 import NotificationMessage from "@/app/components/NotificationMessage";
+import AdminPage from "./Admin";
 
 
 type ModuleInfo = {
@@ -38,14 +39,13 @@ type ModuleInfo = {
 };
 
 export default function Dashboard() {
-  const [userDetails, setUserDetails] = useState<{ name: string; uid: string } | null>(null);
+  const [userDetails, setUserDetails] = useState<{ name: string; uid: string;role: string } | null>(null);
   const [selectedModule, setSelectedModule] = useState<string | null>(null);
   const [openDay, setOpenDay] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [CompletionMessage, setCompletionMessage] = useState<string | null>(null);
-
-
+  const [UserRole, setUserRole] = useState("User");
 
 
   const dayModules: { [key: string]: string[] } = {
@@ -75,11 +75,13 @@ export default function Dashboard() {
     "Day 6 - 📖 Module": { day: "Day 6", module: "📖 Module", customname: "Module",component: Day6Module },
     "Day 7 - 📝 Assessment 1": { day: "Day 7", module: "📝 Assessment 1", customname: "Assessment",component: SeventhAssessment },
     "Day 8 - 📖 Module": { day: "Day 8", module: "📖 Module", customname: "Module",component: Day8Module },
+    "Dashboard": { day: "", module: "Dashboard", customname: "Dashboard", component: RoadMap },
+    "Admin": { day: "", module: "Admin", customname: "Admin", component: AdminPage },
   };
 
   const [unlockedDays, setUnlockedDays] = useState(["Day 1"]); // Day 1 is always unlocked
 
-
+  
 
   useEffect(() => {
     const fetchProgress = async () => {
@@ -195,8 +197,8 @@ export default function Dashboard() {
                                 unlockedDays.push("Day 7");
 
 
-                                if(userData.Day7 && userData.Day7.Assessment){
-                                  const day7Ass = userData.Day7.Assessment;
+                                if(userData.Day7 && userData.Day7["Assessment 1"]){
+                                  const day7Ass = userData.Day7["Assessment 1"];
                                   const day7completed = Object.values(day7Ass).every(topic => topic === true);
 
                                   if(day7completed){
@@ -276,13 +278,20 @@ export default function Dashboard() {
     if (loading) {
       return <div>Loading...</div>;
     }
-
+  
+    if (selectedModule === "Admin" && userDetails?.role !== "ADMIN") {
+      return <div>Access Denied</div>;
+    }
+  
     if (selectedModule && moduleMap[selectedModule]) {
       const SelectedComponent = moduleMap[selectedModule].component;
       return <SelectedComponent />;
     }
+  
     return <RoadMap />;
   };
+  
+  
 
   return (
     <div className="Dashboard-Section">
@@ -294,11 +303,22 @@ export default function Dashboard() {
           <h4>
             <span>Main Menu</span>
           </h4>
+
           <li className={selectedModule === "Dashboard" ? "active" : ""}>
-            <a href="#" onClick={() => setSelectedModule("Dashboard")}>
-              <span className="material-symbols-outlined"> dashboard </span>Dashboard
-            </a>
-          </li>
+  <a href="#" onClick={() => setSelectedModuleHandler("Dashboard")}>
+    <span className="material-symbols-outlined">dashboard</span> Dashboard
+  </a>
+</li>
+
+{userDetails?.role === "ADMIN" && (
+  <li className={selectedModule === "Admin" ? "active" : ""}>
+    <a href="#" onClick={() => setSelectedModuleHandler("Admin")}>
+      <span className="material-symbols-outlined">admin_panel_settings</span> Admin
+    </a>
+  </li>
+)}
+
+
           <h4>
             <span>Training / Assessment</span>
           </h4>

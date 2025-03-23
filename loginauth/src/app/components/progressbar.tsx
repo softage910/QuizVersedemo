@@ -84,7 +84,7 @@ import {auth, database} from "../firebase/firebaseconfig";
 const ProgressBar = () => {
   const [progressData, setProgressData] = useState<Record<string, Record<string, boolean>> | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const totalTasks = 16;
+  const totalTasks = 15;
   const [currentDayTasks, setCurrentDayTasks] = useState<Record<string, boolean>>({});
   const [userDetails, setUserDetails] = useState<{ name: string; uid: string } | null>(null);
 

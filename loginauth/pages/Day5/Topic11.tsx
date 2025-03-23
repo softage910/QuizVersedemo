@@ -20,8 +20,8 @@ export default function FirTopic() {
                 creator, youll play a key role in shaping ACE into the best computer control
                 agent.
                 These guidelines are designed to help you understand our goals and
-                processes. We encourage you to read “Introduction to Fluxe and “Introduction
-                to Engine along with this guideline to understand the process thoroughly.
+                processes. We encourage you to read &quot;Introduction to Fluxe&quot; and &quot;Introduction
+                to Engine&quot; along with this guideline to understand the process thoroughly.
                 These guidelines are broken into 11 key sections, each addressing an essential
                 aspect of the recording process.
             </p>

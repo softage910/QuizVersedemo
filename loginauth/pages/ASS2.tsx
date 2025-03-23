@@ -340,81 +340,160 @@ const handleViolationExit = () => {
     const { hours, minutes, seconds } = formatTime(timeLeft);
 
 
-     const finishQuiz = async () => {
-         if (document.fullscreenElement) {
-             document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
-         }
+    //  const finishQuiz = async () => {
+    //      if (document.fullscreenElement) {
+    //          document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
+    //      }
      
-         const user = auth.currentUser;
-         if (!user) {
-             console.error("No authenticated user found!");
-             return;
-         }
+    //      const user = auth.currentUser;
+    //      if (!user) {
+    //          console.error("No authenticated user found!");
+    //          return;
+    //      }
 
 
      
-         const userId = user.uid;
-         const day = "Day3"; // Dynamically set this based on the quiz day
+    //      const userId = user.uid;
+    //      const day = "Day3"; // Dynamically set this based on the quiz day
 
-         router.push("/dashboard");
+    //      router.push("/dashboard");
 
      
-         try {
-             // Store quiz completion status in Firebase under the correct day
-             await set(ref(database, `users/${userId}/progress/${day}/Assessment`), true);
+    //      try {
+    //          // Store quiz completion status in Firebase under the correct day
+    //          await set(ref(database, `users/${userId}/progress/${day}/Assessment`), true);
      
-             // Fetch user details from Firebase
-             const userRef = ref(database, `users/${userId}`);
-             const userSnapshot = await get(userRef);
+    //          // Fetch user details from Firebase
+    //          const userRef = ref(database, `users/${userId}`);
+    //          const userSnapshot = await get(userRef);
      
-             if (!userSnapshot.exists()) {
-                 throw new Error("User details not found in Firebase");
-             }
+    //          if (!userSnapshot.exists()) {
+    //              throw new Error("User details not found in Firebase");
+    //          }
      
-             const userDetails = userSnapshot.val(); // Assuming it contains { name, empCode, email }
+    //          const userDetails = userSnapshot.val(); // Assuming it contains { name, empCode, email }
      
-             // Fetch responses from Firebase
-             const responsesRef = ref(database, `responses/${userId}/day3`);
-             const snapshot = await get(responsesRef);
+    //          // Fetch responses from Firebase
+    //          const responsesRef = ref(database, `responses/${userId}/day3`);
+    //          const snapshot = await get(responsesRef);
      
-             let formattedResponses: { question: string; answer: string }[] = [];
+    //          let formattedResponses: { question: string; answer: string }[] = [];
      
-             if (snapshot.exists()) {
-                 const data = snapshot.val();
-                 formattedResponses = Object.entries(data).map(([_, response]: any) => ({
-                     name: userDetails.name,
-                     email: userDetails.email,
-                     EmpCode: userDetails.uid,
-                     question: response.question,
-                     answer: response.selectedOption, // Only keeping question and answer
-                 }));
-             }
+    //          if (snapshot.exists()) {
+    //              const data = snapshot.val();
+    //              formattedResponses = Object.entries(data).map(([_, response]: any) => ({
+    //                  name: userDetails.name,
+    //                  email: userDetails.email,
+    //                  EmpCode: userDetails.uid,
+    //                  question: response.question,
+    //                  answer: response.selectedOption, // Only keeping question and answer
+    //              }));
+    //          }
      
-             // Combine user details with responses
-             const csvData = {
-                 name: userDetails.name,
-                 email: userDetails.email,
-                 EmpCode: userDetails.uid,
-                 Day: "Day3 - Prompting Mastery Assessment",
-                 responses: formattedResponses, // Only question and answer columns
-             };
+    //          // Combine user details with responses
+    //          const csvData = {
+    //              name: userDetails.name,
+    //              email: userDetails.email,
+    //              EmpCode: userDetails.uid,
+    //              Day: "Day3 - Prompting Mastery Assessment",
+    //              responses: formattedResponses, // Only question and answer columns
+    //          };
      
-             // Send CSV data to the admin
-             const response = await fetch("/api/send-csv", {
-                 method: "POST",
-                 headers: { "Content-Type": "application/json" },
-                 body: JSON.stringify(csvData),
-             });
+    //          // Send CSV data to the admin
+    //          const response = await fetch("/api/send-csv", {
+    //              method: "POST",
+    //              headers: { "Content-Type": "application/json" },
+    //              body: JSON.stringify(csvData),
+    //          });
      
-             if (!response.ok) throw new Error("Failed to send CSV");
+    //          if (!response.ok) throw new Error("Failed to send CSV");
      
      
-             // Redirect user to the dashboard
-         } catch (error) {
-             console.error("Error during quiz submission:", error);
-             alert("There was an error submitting the quiz. Please try again.");
-         }
-     };
+    //          // Redirect user to the dashboard
+    //      } catch (error) {
+    //          console.error("Error during quiz submission:", error);
+    //          alert("There was an error submitting the quiz. Please try again.");
+    //      }
+    //  };
+    const finishQuiz = async () => {
+        if (document.fullscreenElement) {
+            document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
+        }
+    
+        const user = auth.currentUser;
+        if (!user) {
+            console.error("No authenticated user found!");
+            return;
+        }
+    
+        const userId = user.uid;
+        const day = "Day3";
+    
+        router.push("/dashboard");
+    
+        try {
+            await set(ref(database, `users/${userId}/progress/${day}/Assessment`), true);
+    
+            const userRef = ref(database, `users/${userId}`);
+            const userSnapshot = await get(userRef);
+    
+            if (!userSnapshot.exists()) {
+                throw new Error("User details not found in Firebase");
+            }
+    
+            const userDetails = userSnapshot.val();
+    
+            const responsesRef = ref(database, `responses/${userId}/day3`);
+            const snapshot = await get(responsesRef);
+    
+            let formattedResponses: { question: string; answer: string }[] = [];
+    
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+    
+                for (const key in data) {
+                    const response = data[key];
+    
+                    // Match-the-following array case
+                    if (Array.isArray(response)) {
+                        const matchAnswer = response
+                            .map(pair => `${pair.left} → ${pair.right}`)
+                            .join(", ");
+                        formattedResponses.push({
+                            question: `Match the following (Q${key})`,
+                            answer: matchAnswer,
+                        });
+                    } else {
+                        // Handle normal MCQ or subjective
+                        formattedResponses.push({
+                            question: response.question || `Q${key}`,
+                            answer: response.selectedOption || response.answer || "",
+                        });
+                    }
+                }
+            }
+    
+            const csvData = {
+                name: userDetails.name,
+                email: userDetails.email,
+                EmpCode: userDetails.uid,
+                Day: "Day3 - Prompting Mastery Assessment",
+                responses: formattedResponses,
+            };
+    
+            const response = await fetch("/api/send-csv", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(csvData),
+            });
+    
+            if (!response.ok) throw new Error("Failed to send CSV");
+        } catch (error) {
+            console.error("Error during quiz submission:", error);
+            alert("There was an error submitting the quiz. Please try again.");
+        }
+    };
+    
     
 
 

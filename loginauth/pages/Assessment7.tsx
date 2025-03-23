@@ -39,7 +39,7 @@ export default function FirstAssessment() {
             if (!user) return;
 
             const userId = user.uid;
-            const statusRef = ref(database, `users/${userId}/progress/Day7/Assessment`);
+            const statusRef = ref(database, `users/${userId}/progress/Day7/Assessment 1`);
             const snapshot = await get(statusRef);
 
             if (snapshot.exists()) {

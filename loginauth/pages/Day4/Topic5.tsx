@@ -5,7 +5,7 @@ export default function FifthTopic() {
         <>
             <h2 className="h2"><strong>Suggested Reading:</strong></h2>
 
-            <h2 className="h2">Igniting Language Intelligence: The Hitchhiker's Guide From Chain-of Thought Reasoning to Language Agents</h2>
+            <h2 className="h2">Igniting Language Intelligence: The Hitchhiker&apos;s Guide From Chain-of Thought Reasoning to Language Agents</h2>
 
 
             <p>
@@ -29,7 +29,7 @@ export default function FifthTopic() {
             <p>
                 This paper introduces Gemini, a suite of advanced multimodal models that
                 seamlessly integrate text and visual information to tackle a diverse range of
-                tasks. Experimental evaluations showcase Gemini's robust performance and
+                tasks. Experimental evaluations showcase Gemini&apos;s robust performance and
                 versatility, marking a significant step forward in the development of capable
                 and flexible AI systems.
             </p><br />

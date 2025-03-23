@@ -378,7 +378,7 @@ const handleViolationExit = () => {
                      
                          try {
                              // Store quiz completion status in Firebase under the correct day
-                             await set(ref(database, `users/${userId}/progress/${day}/Assessment`), true);
+                             await set(ref(database, `users/${userId}/progress/${day}/Assessment 1`), true);
                      
                              // Fetch user details from Firebase
                              const userRef = ref(database, `users/${userId}`);
