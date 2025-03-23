@@ -24,7 +24,7 @@ export default function SecondTopic() {
                             </a>
                 </li>
 
-                <li>
+                {/* <li>
                 <a href="https://www.notion.so/GUI-Agent-Assessment-196a062d1cd280cf8899d86a5368b7aa?pvs=21" target="_blank">                                <button className='Watch-Button'>
                                     GUI Agent-Assessment
                                 </button>
@@ -37,7 +37,7 @@ export default function SecondTopic() {
                                 </button>
                             </a>
 
-                </li>
+                </li> */}
 
             </ol>
 

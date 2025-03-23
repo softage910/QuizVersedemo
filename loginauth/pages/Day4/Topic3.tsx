@@ -24,7 +24,7 @@ export default function ThirdTopic() {
                     </a>
                 </li>
 
-                <li>
+                {/* <li>
                     <a href="https://www.notion.so/WebArena-Assessment-196a062d1cd280b1b0acd8d3a2ad937c?pvs=21" target="_blank">                                <button className='Watch-Button'>
                         WebArena-Assessment
                     </button>
@@ -37,7 +37,7 @@ export default function ThirdTopic() {
                     </button>
                     </a>
 
-                </li>
+                </li> */}
 
             </ol>
 

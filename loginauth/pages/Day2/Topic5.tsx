@@ -31,7 +31,7 @@ export default function FifthTopic() {
                 <li>
                     <strong>Trackpad Gestures:</strong>
                     <ul className="ul">
-                        <li><strong>Enable “Tap to Click”:</strong> Under <strong>System Settings &gt; Trackpad</strong> for single-touch clicks.</li>
+                        <li><strong>Enable &quot;Tap to Click&quot;:</strong> Under <strong>System Settings &gt; Trackpad</strong> for single-touch clicks.</li>
                         <li><strong>Swipe up with three fingers:</strong> To enter Mission Control and see all open windows.</li>
                         <li><strong>Three-Finger swipe down:</strong> To see only the windows of the current app.</li>
                         <li><strong>Three-finger swipe left/right:</strong> To move between full-screen apps or desktops.</li>
@@ -42,7 +42,7 @@ export default function FifthTopic() {
                     <strong>Essential Keyboard Shortcuts:</strong>
                     <ul className="ul">
                         <li><strong>Option + Command + Space:</strong> Launch a new Finder search window.</li>
-                        <li><strong>Command + I:</strong> Open the “Get Info” panel for the selected file.</li>
+                        <li><strong>Command + I:</strong> Open the &quot;Get Info&quot; panel for the selected file.</li>
                         <li><strong>Space Bar:</strong> Activate Quick Look on the selected file.</li>
                         <li><strong>Command + W:</strong> Close the active window or tab.</li>
                         <li><strong>Command + 1, 2, 3, etc.:</strong> Jump directly to a specific browser tab.</li>

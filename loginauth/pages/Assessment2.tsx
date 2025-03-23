@@ -12,7 +12,6 @@ export default function FirstAssessment() {
     const [isPlaying, setIsPlaying] = useState(false);
     const [direction, setDirection] = useState("next"); // Track direction
     const [quizAttempted, setQuizAttempted] = useState(false);
-    const [AssessmentDay, setAssessmentDay] = useState("");
 
 
     const slides = [
@@ -35,30 +34,12 @@ export default function FirstAssessment() {
 
 
     useEffect(() => {
-
-        const url = window.location.href;
-        console.log("Current URL:", url); // Debugging
-
-        // Extract the part after '?' and before '#'
-        const queryPart = url.split("?")[1]?.split("#")[0];
-
-        console.log(queryPart);
-
-        if (queryPart && queryPart.startsWith("Assessment-")) {
-            console.log(queryPart.replace("Assessment-", ""));
-
-            setAssessmentDay(queryPart.replace("Assessment-", "")); // Extracts "Day2"
-        } else {
-            console.warn("Assessment day not found in URL"); // Debugging
-        }
-
-
         const fetchQuizStatus = async () => {
             const user = auth.currentUser;
             if (!user) return;
 
             const userId = user.uid;
-            const statusRef = ref(database, `users/${userId}/progress/Day2/Assessment`);
+            const statusRef = ref(database, `users/${userId}/progress/Day3/Assessment`);
             const snapshot = await get(statusRef);
 
             if (snapshot.exists()) {
@@ -72,7 +53,7 @@ export default function FirstAssessment() {
     const startQuiz = () => {
         if (!quizAttempted) {
             enterFullScreen();
-            router.push("/AssDemo"); // Redirects to assessment1.tsx page
+            router.push("/ASS2"); // Redirects to assessment1.tsx page
         }
     };
 
@@ -107,37 +88,36 @@ export default function FirstAssessment() {
         <div className="Main-Assessment">
             <div className="AssessmentDetails">
                 <div>
-                    <div>
-                        <p>Welcome to</p>
-                        <h2>MacOS Keyboard Shortcuts Quiz</h2>
-                    </div>
-                    <div>
-                        <table className="Assessment-Table">
-                            <thead>
-                                <tr>
-                                    <th>Number of Question</th>
-                                    <th>Duration</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>98</td>
-                                    <td>60 Minutes</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="start-container">
-                        <button
-                            className={`start-button ${quizAttempted ? "disabled" : ""}`}
-                            onClick={startQuiz}
-                            disabled={quizAttempted}>
-                            {quizAttempted ? "Attempted" : "Start Quiz"}
-                        </button>
-                    </div>
+                <div>
+                    <p>Welcome to</p>
+                    <h2>Prompting Mastery Quiz</h2>
                 </div>
+                <div>
+                    <table className="Assessment-Table">
+                        <thead>
+                            <tr>
+                                <th>Number of Question</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>11</td>
+                                <td>60 Minutes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div className="start-container">
+                    <button
+                        className={`start-button ${quizAttempted ? "disabled" : ""}`}
+                        onClick={startQuiz}
+                        disabled={quizAttempted}
+                    >
+                        {quizAttempted ? "Attempted" : "Start Quiz"}
+                    </button>  
+                    </div>               </div>
             </div>
-
 
             <div className="Assessment-Section">
                 <div className="Slideshow">

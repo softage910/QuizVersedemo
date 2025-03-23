@@ -19,7 +19,7 @@ export default function SecondTopic() {
                     </figure>
                     <ul className="ul">
                         <li>One constant menu item is the <strong>Apple menu</strong>. Consider the <strong>Apple menu</strong> as your system control center. From there, you can shut down, restart, force quit apps, or quickly open System Settings.</li>
-                        <li>Observe that the menu bar is divided into two sections. On the right, you’ll find battery status, Wi-Fi, and the date/time.</li>
+                        <li>Observe that the menu bar is divided into two sections. On the right, you&apos;ll find battery status, Wi-Fi, and the date/time.</li>
                     </ul>
                 </li>
                 <li>
@@ -47,7 +47,7 @@ export default function SecondTopic() {
                     <ul className="ul">
                         <li>Open <strong>Launchpad</strong> to view all installed apps. Drag any app from Launchpad to the Dock for easier access.</li>
                         <li>If you want to remove an item from the Dock, simply drag it out.</li>
-                        <li>By default, the Downloads folder appears on the Dock’s right side. Drag other documents or folders there for quick access; clicking a document opens it, and clicking a folder expands its contents above the Dock.</li>
+                        <li>By default, the Downloads folder appears on the Dock&apos;s right side. Drag other documents or folders there for quick access; clicking a document opens it, and clicking a folder expands its contents above the Dock.</li>
                         <li>Right-click a folder in the Dock to sort items or change the view (grid, fan, or list). Drag a document onto a pinned folder to move it.</li>
                         <li>To delete an app or document, drag it into the Trash. The Trash icon also serves as an ejector for external drives.</li>
                     </ul>

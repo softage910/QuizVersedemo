@@ -18,7 +18,7 @@ export default function SeventhTopic() {
 
             <h2 className="h2">Notification Center and Control Center</h2>
             <p>
-                The Notification Center on Macs combines features of Windows’ notification area and widgets. Access notifications and personalize widgets by swiping from the right edge of the trackpad or clicking the time in the top right corner. The Control Center offers quick access to settings like sound, brightness, and network connections.
+                The Notification Center on Macs combines features of Window&apos;s notification area and widgets. Access notifications and personalize widgets by swiping from the right edge of the trackpad or clicking the time in the top right corner. The Control Center offers quick access to settings like sound, brightness, and network connections.
             </p>
             <hr />
 

@@ -58,7 +58,7 @@ export default function Day5Module1() {
     if (!selectedTopicKey || !userId) return;
 
     const userProgressRef = ref(database, `users/${userId}/progress/Day5`);
-    await update(userProgressRef, { ["Module1"]: true });
+    await update(userProgressRef, { ["Module 1"]: true });
 
     setCompletedTopics([...completedTopics, selectedTopicKey]);
   };
@@ -70,8 +70,10 @@ export default function Day5Module1() {
       </div>
 
       <div className="MainContent">
-        {selectedTopicContent}
+      <div className="Text-Section">
 
+        {selectedTopicContent}
+</div>
         <div className="Toggle-Topic">
         {selectedTopicIndex > 0 && (
             <button className="Read-Button-Previous" onClick={handlePreviousTopic}>

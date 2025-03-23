@@ -8,6 +8,7 @@ import { auth, database } from "../src/app/firebase/firebaseconfig"; // Import F
 import Logo from "../public/Logo.png";
 import MatchTheFollowing from "@/app/components/Match";
 
+
 const MultipleChoiceQuestion = ({ question, selectedOption, handleOptionChange }: any) => (
     <div className="options-section">
         {question.options.map((option: string, index: number) => (
@@ -18,25 +19,7 @@ const MultipleChoiceQuestion = ({ question, selectedOption, handleOptionChange }
                     value={option}
                     checked={selectedOption === option}
                     onChange={() => handleOptionChange(option)}
-                    className="option-input" 
-                />
-                {option}
-            </label>
-        ))}
-    </div>
-);
-
-const MultipleSelectionQuestion = ({ question, selectedOptions, handleOptionChange }: any) => (
-    <div className="options-section">
-        {question.options.map((option: string, index: number) => (
-            <label key={index} className="option-label">
-                <input
-                    type="checkbox"
-                    name="question"
-                    value={option}
-                    checked={selectedOptions.includes(option)}
-                    onChange={() => handleOptionChange(option)}
-                    className="option-input" 
+                    className="option-input"
                 />
                 {option}
             </label>
@@ -74,13 +57,7 @@ const FillInTheBlankQuestion = ({ selectedOption, handleOptionChange }: any) => 
     </div>
 );
 
-interface UserResponse {
-    userId: string;
-    question: string;
-    selectedOption: string;
-    correctAnswer: string;
-    isCorrect: boolean;
-  }
+
 
 const OnlineTest = () => {
     const [questions, setQuestions] = useState<any[]>([]);
@@ -91,8 +68,6 @@ const OnlineTest = () => {
     const [timeLeft, setTimeLeft] = useState(3600);
     const [isPaused, setIsPaused] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const [responses, setResponses] = useState<UserResponse[]>([]);
-
     const router = useRouter();
     const [isOut, setIsOut] = useState(false);
 const [outTime, setOutTime] = useState(0);
@@ -102,15 +77,24 @@ const [isNextEnabled, setNextEnabled] = useState(false); // ✅ State to track N
 const [matchedPairs, setMatchedPairs] = useState<{ left: string; right: string }[]>([]); // ✅ Store matched data
 
 
+
+const matchQuestion = {
+    title: "Match the following",
+    left: ["Apple", "Banana", "Carrot"],
+    right: ["Fruit", "Vegetable", "Fruit"],
+};
+
 const [selectedPairs, setSelectedPairs] = useState<{ [key: string]: string }>({});
 
 const handleMatchChange = (updatedPairs: { [key: string]: string }) => {
     setSelectedPairs(updatedPairs);
 };
 
+    
+
 useEffect(() => {
     const fetchQuestions = async () => {
-        const questionsRef = ref(database, "AssessmentContent/day2/Assessment/questions");
+        const questionsRef = ref(database, "AssessmentContent/day3/Assessment/questions");
         const snapshot = await get(questionsRef);
     
         if (snapshot.exists()) {
@@ -133,7 +117,13 @@ useEffect(() => {
     };
     fetchQuestions();
 }, []);
+
+
+
+
+    
     const [violations, setViolations] = useState(0);
+
 
     // Handle Timer Pause/Resume
     useEffect(() => {
@@ -270,7 +260,7 @@ const handleViolationExit = () => {
             const userId = user.uid; // Get the actual user ID from Firebase Auth
 
             // Save to Firebase Realtime Database
-            set(ref(database, `responses/${userId}/day2/${currentQuestionIndex}`), {
+            set(ref(database, `responses/${userId}/day3/${currentQuestionIndex}`), {
                 selectedOption: selectedOption,
                 question: questions[currentQuestionIndex].question,
                 correctAnswer: questions[currentQuestionIndex].correctAnswer,
@@ -289,7 +279,8 @@ const handleViolationExit = () => {
             }
             const userId = user.uid; // Get the actual user ID from Firebase Auth
 
-            set(ref(database, `responses/${userId}/day2/${currentQuestionIndex}`), matchedPairs)
+
+            set(ref(database, `responses/${userId}/day3/${currentQuestionIndex}`), matchedPairs)
                 .then(() => console.log("Matched pairs saved successfully!"))
                 .catch((error) => console.error("Error saving matched pairs:", error));
 
@@ -349,121 +340,81 @@ const handleViolationExit = () => {
     const { hours, minutes, seconds } = formatTime(timeLeft);
 
 
-    // const finishQuiz = async () => {
-    //     if (document.fullscreenElement) {
-    //         document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
-    //     }
-    
-    //     const user = auth.currentUser; 
-    //     if (!user) {
-    //         console.error("No authenticated user found!");
-    //         return;
-    //     }
-    
-    //     const userId = user.uid;
-    
-    //     // Store quiz status under the correct day
-    //     set(ref(database, `users/${userId}/progress/Day2/Assessment`), true);
+    //  const finishQuiz = async () => {
+    //      if (document.fullscreenElement) {
+    //          document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
+    //      }
+     
+    //      const user = auth.currentUser;
+    //      if (!user) {
+    //          console.error("No authenticated user found!");
+    //          return;
+    //      }
 
 
-    //     const responsesRef = ref(database, "responses");
-    //   const snapshot = await get(responsesRef);
+     
+    //      const userId = user.uid;
+    //      const day = "Day3"; // Dynamically set this based on the quiz day
 
-    //   if (snapshot.exists()) {
-    //     const data: Record<string, Record<string, any>> = snapshot.val(); // Explicitly type as object
-    //     const formattedResponses: UserResponse[] = Object.entries(data).flatMap(
-    //       ([userId, userResponses]) =>
-    //         Object.entries(userResponses).map(([_, response]) => ({
-    //           userId,
-    //           question: response.question,
-    //           selectedOption: response.selectedOption,
-    //           correctAnswer: response.correctAnswer,
-    //           isCorrect: response.isCorrect,
-    //         }))
-    //     );
-    //     setResponses(formattedResponses);
-    //   }
-    
-    //     router.push("/dashboard"); 
-    // };
+    //      router.push("/dashboard");
 
-    
-
-
-    // const finishQuiz = async () => {
-    //     if (document.fullscreenElement) {
-    //         document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
-    //     }
-    
-    //     const user = auth.currentUser;
-    //     if (!user) {
-    //         console.error("No authenticated user found!");
-    //         return;
-    //     }
-    
-    //     const userId = user.uid;
-    //     const day = "Day2"; // Dynamically set this based on the quiz day
-
-    //     router.push("/dashboard");
-
-    
-    //     try {
-    //         // Store quiz completion status in Firebase under the correct day
-    //         await set(ref(database, `users/${userId}/progress/${day}/Assessment`), true);
-    
-    //         // Fetch user details from Firebase
-    //         const userRef = ref(database, `users/${userId}`);
-    //         const userSnapshot = await get(userRef);
-    
-    //         if (!userSnapshot.exists()) {
-    //             throw new Error("User details not found in Firebase");
-    //         }
-    
-    //         const userDetails = userSnapshot.val(); // Assuming it contains { name, empCode, email }
-    
-    //         // Fetch responses from Firebase
-    //         const responsesRef = ref(database, `responses/${userId}/day2`);
-    //         const snapshot = await get(responsesRef);
-    
-    //         let formattedResponses: { question: string; answer: string }[] = [];
-    
-    //         if (snapshot.exists()) {
-    //             const data = snapshot.val();
-    //             formattedResponses = Object.entries(data).map(([_, response]: any) => ({
-    //                 name: userDetails.name,
-    //                 email: userDetails.email,
-    //                 EmpCode: userDetails.uid,
-    //                 question: response.question,
-    //                 answer: response.selectedOption, // Only keeping question and answer
-    //             }));
-    //         }
-    
-    //         // Combine user details with responses
-    //         const csvData = {
-    //             name: userDetails.name,
-    //             email: userDetails.email,
-    //             EmpCode: userDetails.uid,
-    //             Day: "Day2 - Online Test – MacOS Fundamentals",
-    //             responses: formattedResponses, // Only question and answer columns
-    //         };
-    
-    //         // Send CSV data to the admin
-    //         const response = await fetch("/api/send-csv", {
-    //             method: "POST",
-    //             headers: { "Content-Type": "application/json" },
-    //             body: JSON.stringify(csvData),
-    //         });
-    
-    //         if (!response.ok) throw new Error("Failed to send CSV");
-        
-    //         // Redirect user to the dashboard
-    //     } catch (error) {
-    //         console.error("Error during quiz submission:", error);
-    //         alert("There was an error submitting the quiz. Please try again.");
-    //     }
-
-        
-    // };
+     
+    //      try {
+    //          // Store quiz completion status in Firebase under the correct day
+    //          await set(ref(database, `users/${userId}/progress/${day}/Assessment`), true);
+     
+    //          // Fetch user details from Firebase
+    //          const userRef = ref(database, `users/${userId}`);
+    //          const userSnapshot = await get(userRef);
+     
+    //          if (!userSnapshot.exists()) {
+    //              throw new Error("User details not found in Firebase");
+    //          }
+     
+    //          const userDetails = userSnapshot.val(); // Assuming it contains { name, empCode, email }
+     
+    //          // Fetch responses from Firebase
+    //          const responsesRef = ref(database, `responses/${userId}/day3`);
+    //          const snapshot = await get(responsesRef);
+     
+    //          let formattedResponses: { question: string; answer: string }[] = [];
+     
+    //          if (snapshot.exists()) {
+    //              const data = snapshot.val();
+    //              formattedResponses = Object.entries(data).map(([_, response]: any) => ({
+    //                  name: userDetails.name,
+    //                  email: userDetails.email,
+    //                  EmpCode: userDetails.uid,
+    //                  question: response.question,
+    //                  answer: response.selectedOption, // Only keeping question and answer
+    //              }));
+    //          }
+     
+    //          // Combine user details with responses
+    //          const csvData = {
+    //              name: userDetails.name,
+    //              email: userDetails.email,
+    //              EmpCode: userDetails.uid,
+    //              Day: "Day3 - Prompting Mastery Assessment",
+    //              responses: formattedResponses, // Only question and answer columns
+    //          };
+     
+    //          // Send CSV data to the admin
+    //          const response = await fetch("/api/send-csv", {
+    //              method: "POST",
+    //              headers: { "Content-Type": "application/json" },
+    //              body: JSON.stringify(csvData),
+    //          });
+     
+    //          if (!response.ok) throw new Error("Failed to send CSV");
+     
+     
+    //          // Redirect user to the dashboard
+    //      } catch (error) {
+    //          console.error("Error during quiz submission:", error);
+    //          alert("There was an error submitting the quiz. Please try again.");
+    //      }
+    //  };
     const finishQuiz = async () => {
         if (document.fullscreenElement) {
             document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
@@ -476,7 +427,7 @@ const handleViolationExit = () => {
         }
     
         const userId = user.uid;
-        const day = "Day2";
+        const day = "Day3";
     
         router.push("/dashboard");
     
@@ -492,7 +443,7 @@ const handleViolationExit = () => {
     
             const userDetails = userSnapshot.val();
     
-            const responsesRef = ref(database, `responses/${userId}/day2`);
+            const responsesRef = ref(database, `responses/${userId}/day3`);
             const snapshot = await get(responsesRef);
     
             let formattedResponses: { question: string; answer: string }[] = [];
@@ -526,7 +477,7 @@ const handleViolationExit = () => {
                 name: userDetails.name,
                 email: userDetails.email,
                 EmpCode: userDetails.uid,
-                Day: "Day2 - Online Test – MacOS Fundamentals",
+                Day: "Day3 - Prompting Mastery Assessment",
                 responses: formattedResponses,
             };
     
@@ -542,8 +493,6 @@ const handleViolationExit = () => {
             alert("There was an error submitting the quiz. Please try again.");
         }
     };
-    
-    
     
     
 
@@ -573,7 +522,7 @@ const handleViolationExit = () => {
                     <Image src={Logo} alt="Logo" width={250} height={50} />
                 </div>
                 <div>
-                    <h1 className="online-test-title">Online Test – MacOS Fundamentals</h1>
+                    <h1 className="online-test-title">Prompting Mastery Assessment</h1>
                 </div>
                 <div className="online-test-container">
                     {questions.length > 0 ? (
@@ -608,13 +557,6 @@ const handleViolationExit = () => {
                             // Pass this function
                             /> // Render MatchTheFollowing component
                             )}
-                                                        {questions[currentQuestionIndex]?.type === "msq" && (
-                                                            <MultipleSelectionQuestion
-                                                            question={questions[currentQuestionIndex]}
-                                                            selectedOption={selectedOption}
-                                                            handleOptionChange={handleOptionChange}
-                                                        />
-                                                        )}
 
 
                             {/* <div className="actions">

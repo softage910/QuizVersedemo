@@ -73,20 +73,20 @@ export default function SecondTopic() {
                     <tr>
                         <td>Action</td>
                         <td>Clearly define the task to be performed </td>
-                        <td>"Send a payment reminder email..."</td>
+                        <td>&quot;Send a payment reminder email...&quot;</td>
                     </tr>
                     <tr>
                         <td>Context</td>
                         <td>Provide relevant environmental or
                         situational information</td>
-                        <td>"...using HubSpot templates, targeting
-                        overdue invoices 30 days"</td>
+                        <td>&quot;...using HubSpot templates, targeting
+                        overdue invoices 30 days&quot;</td>
                     </tr>
                     <tr>
                         <td>Constraints</td>
                         <td>Specify any limitations or requirements</td>
-                        <td>"Exclude clients with pending disputes; flag
-                        accounts 60 days overdue"</td>
+                        <td>&quot;Exclude clients with pending disputes; flag
+                        accounts 60 days overdue&quot;</td>
                     </tr>
                    
                 </tbody>
@@ -98,40 +98,40 @@ export default function SecondTopic() {
             <ol className="ol">
                 <li><strong>Scheduling:</strong>
                     <ul className="ul">
-                        <li>Good: “schedule a team meeting for next tuesday at 2 pm on Zoom.</li>
-                        <li>Bad: “Set up a meeting on Zoom.</li>
+                        <li>Good: &quot;schedule a team meeting for next tuesday at 2 pm on Zoom.&quot;</li>
+                        <li>Bad: &quot;Set up a meeting on Zoom.&quot;</li>
                     </ul>
                 </li>
                 <li><strong>Reminders:</strong>
                     <ul className="ul">
-                        <li>“remind me to call mom tomorrow at 6 pm."</li>
-                        <li> “remind me about the call later."</li>
+                        <li>&quot;remind me to call mom tomorrow at 6 pm.&quot;</li>
+                        <li> &quot;remind me about the call later.&quot;</li>
 
                     </ul>
                 </li>
                 <li><strong>File Management</strong>
                     <ul className="ul">
-                        <li>Good: “move all pdf files from downloads folder to work documents folder."</li>
-                        <li>Bad: “organize all of my files."</li>
+                        <li>Good: &quot;move all pdf files from downloads folder to work documents folder.&quot;</li>
+                        <li>Bad: &quot;organize all of my files.&quot;</li>
 
                     </ul>
                 </li>
                 <li><strong>Emails:</strong>
                     <ul className="ul">
                         <li>
-                        Good: “send a thank you email to matthewjohn09@gmail.com for the dolphin project proposal."
+                        Good: &quot;send a thank you email to matthewjohn09@gmail.com for the dolphin project proposal.&quot;
                         </li>
                         <li>
-                        Bad: “email John about about the proposal."
+                        Bad: &quot;email John about about the proposal.&quot;
                         </li>
 
                     </ul>
                 </li>
                 <li><strong>Social Media:</strong>
                     <ul className="ul">
-                        <li>Good: "post the image 'DSC0047.jpg' on our facebook page at 3 pm with the caption 'New
-                        product alert!"</li>
-                        <li>Bad: "put the image on social media about the product."</li>
+                        <li>Good: post the image &quot;DSC0047.jpg&quot; on our facebook page at 3 pm with the caption &quot;New
+                        product alert!&quot;</li>
+                        <li>Bad: &quot;put the image on social media about the product.&quot;</li>
 
                     </ul>
                 </li>

@@ -11,14 +11,14 @@ export default function ThirdTopic() {
                     <ul className="ul">
                         <li>Use simple, natural and conversational prompts.</li>
                         <li>Use tool-specific jargons and syntax (e.g., @mention in Slack, #tags in Asana).</li>
-                        <li>Name files or folders exactly: "Q4_Report.docx not just" "the report".</li>
+                        <li>Name files or folders exactly: &quot;Q4_Report.docx not just&quot; &quot;the report&quot;.</li>
                     </ul>
                 </li>
                 <li><strong>Don't's:</strong>
                     <ul className="ul">
-                        <li>Use vague terms: ❌ “Handle files sometime today → ✅ “Move *.csv files to Backup folder by 5
-                            PM".</li>
-                        <li>Overload single prompts: Split "Schedule meeting AND draft report" into separate tasks.</li>
+                        <li>Use vague terms: ❌ &quot;Handle files sometime today&quot; → ✅ &quot;Move *.csv files to Backup folder by 5
+                            PM&quot;.</li>
+                        <li>Overload single prompts: Split &quot;Schedule meeting AND draft report&quot; into separate tasks.</li>
                         <li>Assuming the agent knows context without specifying.</li>
 
                     </ul>
@@ -70,9 +70,9 @@ export default function ThirdTopic() {
             <ol className="ol">
                 <li><strong>Contextual actions:</strong>
                     <ul className="ul">
-                        <li>Right-clicking on file shows options like "open", "rename", or "delete".</li>
-                        <li>Selecting text reveals options like "copy", "cut", or "format".</li>
-                        <li>Viewing a product displays actions like "add to cart" or "save for later".</li>
+                        <li>Right-clicking on file shows options like &quot;open&quot;, &quot;rename&quot;, or &quot;delete&quot;.</li>
+                        <li>Selecting text reveals options like &quot;copy&quot;, &quot;cut&quot;, or &quot;format&quot;.</li>
+                        <li>Viewing a product displays actions like &quot;add to cart&quot; or &quot;save for later&quot;.</li>
                     </ul>
                 </li>
                 <li><strong>Non-contextual actions:</strong>

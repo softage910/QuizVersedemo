@@ -1,4 +1,3 @@
-
 .Demo{
     display: flex;
     width: 100%;
@@ -13,11 +12,11 @@
     font-family: Arial, sans-serif;
     padding: 50px;
     font-size: x-large;
-    height: 60vh;
+    min-height: 60vh;
+    max-height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
   }
 
   .Test-Section{
@@ -186,7 +185,7 @@ flex-direction: column;
 }
 
 .grid-btn.active {
-    background-color: #007bff;
+    background-color: #007bff; 
     color: white;
     font-weight: bold;
 }
@@ -258,4 +257,12 @@ flex-direction: column;
   display: none; 
 }
 
+.fill-blank-section{
+  margin-bottom: 20px;
+}
 
+.fill-blank-section textarea{
+  width: 80vh; 
+  padding: 10px;
+  font-size: 1rem;
+}

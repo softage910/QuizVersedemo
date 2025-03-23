@@ -688,11 +688,13 @@ import Topic6 from "./Day1/Topic6";
 import Topic7 from "./Day1/Topic7";
 import Topic8 from "./Day1/Topic8";
 import Topic9 from "./Day1/Topic9";
+import NotificationMessage from "@/app/components/NotificationMessage";
 
 export default function Day1Module() {
   const router = useRouter();
   const [selectedTopic, setSelectedTopic] = useState<number>(1);
   const [completedTopics, setCompletedTopics] = useState<string[]>([]);
+  const [CompletionMessage, setCompletionMessage] = useState<string | null>(null);
   const userId = auth.currentUser?.uid;
 
   const handleTopicCompletion = (topicName: string) => {
@@ -757,8 +759,7 @@ export default function Day1Module() {
 
     setCompletedTopics([...completedTopics, selectedTopicKey]);
 
-    // Redirect to dashboard after marking completed
-    router.push("/dashboard");
+    // setCompletionMessage("Let's Go! New Day unlocked...")
   };
 
   return (
@@ -768,8 +769,10 @@ export default function Day1Module() {
       </div>
 
       <div className="MainContent">
+        <div className="Text-Section">
         {selectedTopicContent}
 
+        </div>
         <div className="Toggle-Topic">
           {selectedTopicIndex > 0 && (
             <button className="Read-Button-Previous" onClick={handlePreviousTopic}>
@@ -788,6 +791,7 @@ export default function Day1Module() {
           )}
         </div>
       </div>
+      {/* {CompletionMessage && <NotificationMessage message={CompletionMessage} onClose={() => setCompletionMessage("")} color="success"/>} */}
     </div>
   );
 }

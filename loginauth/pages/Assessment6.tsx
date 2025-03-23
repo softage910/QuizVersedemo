@@ -41,7 +41,7 @@ export default function FirstAssessment() {
 
         // Extract the part after '?' and before '#'
         const queryPart = url.split("?")[1]?.split("#")[0];
-
+        
         console.log(queryPart);
 
         if (queryPart && queryPart.startsWith("Assessment-")) {
@@ -58,7 +58,7 @@ export default function FirstAssessment() {
             if (!user) return;
 
             const userId = user.uid;
-            const statusRef = ref(database, `users/${userId}/progress/Day2/Assessment`);
+            const statusRef = ref(database, `users/${userId}/progress/Day5/Assessment`);
             const snapshot = await get(statusRef);
 
             if (snapshot.exists()) {
@@ -71,19 +71,19 @@ export default function FirstAssessment() {
 
     const startQuiz = () => {
         if (!quizAttempted) {
-            enterFullScreen();
-            router.push("/AssDemo"); // Redirects to assessment1.tsx page
+                enterFullScreen();
+                router.push("/ASS6"); // Redirects to assessment1.tsx page
         }
-    };
+            };
 
-
-    const enterFullScreen = () => {
-        const elem = document.documentElement;
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen().catch(err => console.error("Error enabling fullscreen:", err));
-        }
-    };
-
+        
+            const enterFullScreen = () => {
+                const elem = document.documentElement;
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen().catch(err => console.error("Error enabling fullscreen:", err));
+                }
+            };
+        
 
     const nextSlide = () => {
         setDirection("next");
@@ -107,60 +107,59 @@ export default function FirstAssessment() {
         <div className="Main-Assessment">
             <div className="AssessmentDetails">
                 <div>
-                    <div>
-                        <p>Welcome to</p>
-                        <h2>MacOS Keyboard Shortcuts Quiz</h2>
-                    </div>
-                    <div>
-                        <table className="Assessment-Table">
-                            <thead>
-                                <tr>
-                                    <th>Number of Question</th>
-                                    <th>Duration</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>98</td>
-                                    <td>60 Minutes</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="start-container">
-                        <button
-                            className={`start-button ${quizAttempted ? "disabled" : ""}`}
-                            onClick={startQuiz}
-                            disabled={quizAttempted}>
-                            {quizAttempted ? "Attempted" : "Start Quiz"}
-                        </button>
-                    </div>
-                </div>
-            </div>
-
+                 <div>
+                     <p>Welcome to</p>
+                     <h2>Guidelines Quiz</h2>
+                 </div>
+                 <div>
+                     <table className="Assessment-Table">
+                         <thead>
+                             <tr>
+                                 <th>Number of Question</th>
+                                <th>Duration</th>
+                             </tr>
+                         </thead>
+                        <tbody>
+                             <tr>
+                                <td>21</td>
+                                 <td>60 Minutes</td>
+                             </tr>
+                         </tbody>
+                    </table>
+                 </div>
+                 <div className="start-container">
+                 <button
+                className={`start-button ${quizAttempted ? "disabled" : ""}`}
+                onClick={startQuiz}
+                disabled={quizAttempted}
+            >
+                {quizAttempted ? "Attempted" : "Start Quiz"}
+            </button> 
+            </div>                </div>
+              </div>
 
             <div className="Assessment-Section">
                 <div className="Slideshow">
                     <button className="nav-button left" onClick={prevSlide}>❮</button>
-
+                    
                     <div className={`Slide ${direction === "next" ? "slide-in-right" : "slide-in-left"}`}>
                         <img src={slides[currentSlide].image} alt={slides[currentSlide].title} />
                         <h3>{slides[currentSlide].title}</h3>
                         <p>{slides[currentSlide].description}</p>
                     </div>
-
+                    
                     <button className="nav-button right" onClick={nextSlide}>❯</button>
                     <div className="controls">
-                        {slides.map((_, index) => (
-                            <span
-                                key={index}
-                                className={`dot ${index === currentSlide ? "active" : ""}`}
-                                onClick={() => setCurrentSlide(index)}
-                            ></span>
-                        ))}
-                    </div>
+                    {slides.map((_, index) => (
+                        <span 
+                            key={index} 
+                            className={`dot ${index === currentSlide ? "active" : ""}`} 
+                            onClick={() => setCurrentSlide(index)}
+                        ></span>
+                    ))}
                 </div>
-
+                </div>
+                
             </div>
         </div>
     );
