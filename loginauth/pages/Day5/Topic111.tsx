@@ -20,7 +20,7 @@ session.</li>
             <p>
             Thank you for contributing to ACEs development! If you have any questions or
 need clarification on these guidelines, dont hesitate to reach out. By following
-these principles, well build a robust dataset that helps ACE learn to navigate
+these principles, we&apos;ll build a robust dataset that helps ACE learn to navigate
 and execute tasks with precision.  
             </p>
 

@@ -14,7 +14,7 @@ recording to ensure accuracy.</li>
                     final steps.
                 </li>
                 <li>
-                    How To Flag : The flagging process is detailed in the “Introduction To Engine.pdf. We
+                    How To Flag : The flagging process is detailed in the &quot;Introduction To Engine.pdf&quot;. We
 recommend referring to this document for step-by-step instructions on
 properly flagging your recordings.
                 </li>

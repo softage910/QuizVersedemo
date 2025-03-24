@@ -66,6 +66,12 @@ interface Question {
     matchPairs?: { left: string; right: string }[]; // Only for Match the Following
 }
 
+interface ResponseData {
+    question: string;
+    selectedOption: string;
+}
+
+
 const OnlineTest = () => {
     const [questions, setQuestions] = useState<Question[]>([]); // Ignore TypeScript warnings
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -414,15 +420,20 @@ const handleViolationExit = () => {
                          let formattedResponses: { question: string; answer: string }[] = [];
                  
                          if (snapshot.exists()) {
-                             const data = snapshot.val();
-                             formattedResponses = Object.entries(data).map(([_, response]: any) => ({
-                                 name: userDetails.name,
-                                 email: userDetails.email,
-                                 EmpCode: userDetails.uid,
-                                 question: response.question,
-                                 answer: response.selectedOption, // Only keeping question and answer
-                             }));
-                         }
+                            const data = snapshot.val();
+                            
+                            formattedResponses = Object.entries(data).map(([_, response]) => {
+                                const typedResponse = response as ResponseData; // ✅ Explicitly cast `response`
+                                
+                                return {
+                                    name: userDetails.name,
+                                    email: userDetails.email,
+                                    EmpCode: userDetails.uid,
+                                    question: typedResponse.question,
+                                    answer: typedResponse.selectedOption,
+                                };
+                            });
+                        }
                  
                          // Combine user details with responses
                          const csvData = {
