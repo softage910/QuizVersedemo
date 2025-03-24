@@ -20,7 +20,7 @@ export default function FourTopic() {
                         <li>
                             Use different datasets or arrange your windows in various layouts. The
                             goal is to mimic real users environments. For instance, starting with a
-                            blank projects page or with only one project visible doesnt represent
+                            blank projects page or with only one project visible doesn&apos;t represent
                             someone who frequently uses the tool. Refer to Section 4 for more
                             details.
 
