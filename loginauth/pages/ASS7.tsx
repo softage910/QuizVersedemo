@@ -422,7 +422,7 @@ const handleViolationExit = () => {
                              if (snapshot.exists()) {
                                 const data = snapshot.val();
                                 
-                                formattedResponses = Object.entries(data).map(([_, response]) => {
+                                formattedResponses = Object.entries(data).map(([, response]) => {
                                     const typedResponse = response as ResponseData; // ✅ Explicitly cast `response`
                                     
                                     return {
