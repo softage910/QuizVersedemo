@@ -175,7 +175,7 @@ if (progressData) {
             backgroundColor: "#28a745",
           }}
         >
-          <div style={{color: '#f8b400'}}>{progressPercentage}%</div>
+          <div style={{color: '#f8b400'}}>{progressPercentage.toFixed(2)}%</div>
           <div className="triangle"></div>
           <div className="progress-value">
            <span className="glowing-text">{currentDay}</span>

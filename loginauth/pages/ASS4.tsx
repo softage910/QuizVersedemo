@@ -1,5 +1,5 @@
 "use client";
-import '../src/app/components/TestPage.css';
+import '../src/app/TestPage.css';
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
