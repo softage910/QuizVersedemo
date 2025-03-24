@@ -329,8 +329,10 @@ export default function Dashboard() {
                 totalCompleted += topics.filter((t) => t === true).length;
                 totalTopics = topicsPerDay[day];
               });
+              //-----changes are made over here-----//
+              // updatedProgress[day] = totalTopics > 0 ? Math.round((totalCompleted / totalTopics) * 100) : 0;
+              updatedProgress[day] = totalTopics > 0 ? Number(((totalCompleted / totalTopics) * 100).toFixed(2)) : 0;
 
-              updatedProgress[day] = totalTopics > 0 ? Math.round((totalCompleted / totalTopics) * 100) : 0;
 
               // Unlock the next day if all topics in the current day are completed
               if (totalCompleted === totalTopics && index < days.length - 1) {
@@ -360,7 +362,7 @@ export default function Dashboard() {
     </h1>
     <br/>
     <p>Greetings and welcome to the AI-Operations team at SoftAge Information Technology Limited! We are thrilled to have you join us. As a valuable member of our AI-Operations team, your primary focus will be creating data to train AI models.</p><br/>
-    <p>This guideline is designed to fine-tune your data-creation skills to align with our objectives and aspirations. Upon completion, you will be paired with a mentor who will further guide your journey with us. To begin with, let’s try and understand the basics of our data creation operations.</p><br/>
+    <p>This guideline is designed to fine-tune your data-creation skills to align with our objectives and aspirations. Upon completion, you will be paired with a mentor who will further guide your journey with us. To begin with, let&apos;s try and understand the basics of our data creation operations.</p><br/>
     <p>Start with Day 1, and progress further after completion of each section. We wish you good luck! We are excited to have you create data for us!</p>
   </div>
   <div className="ProgressGraph">

@@ -89,7 +89,7 @@ const ProgressBar = () => {
                   //     break;
                   //   }
                   // }
-                  for (const [day, tasks] of Object.entries(progressData)) {
+                  for (const [, tasks] of Object.entries(progressData)) {
                     if (
                       tasks &&
                       typeof tasks === "object" &&
