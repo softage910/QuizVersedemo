@@ -6,7 +6,6 @@ import { signOut } from "firebase/auth";
 import { auth } from "../src/app/firebase/firebaseconfig";
 import Image from "next/image";
 import Logo from "../public/Logo.png";
-import ComingSoon from "./ComingSoon";
 import Day1Module from "./Day1Module";
 import RoadMap from "./RoadMap";
 import Day2Module from "./Day2Module";
@@ -21,11 +20,9 @@ import ThirdAssessment from "./Assessment3";
 import FourthAssessment from "./Assessment4";
 import FifthAssessment from "./Assessment5";
 import Day5Module1 from "./Day5Module1";
-import { doc, getDoc } from "firebase/firestore";
 import { database } from "../src/app/firebase/firebaseconfig"; 
 import { equalTo, get, onValue, orderByChild, query, ref } from "firebase/database";
 import Day5Module2 from "./Day5Module2";
-import { onAuthStateChanged } from "firebase/auth";
 import Day6Module from "./Day6Module";
 import NotificationMessage from "@/app/components/NotificationMessage";
 import AdminPage from "./Admin";
@@ -45,7 +42,6 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [CompletionMessage, setCompletionMessage] = useState<string | null>(null);
-  const [UserRole, setUserRole] = useState("User");
 
 
   const dayModules: { [key: string]: string[] } = {
@@ -124,8 +120,8 @@ export default function Dashboard() {
 
 
 
-    const checkUnlockedDays = (userData: any) => {
-        let unlockedDays = ["Day 1"]; // Day 1 is always unlocked
+    const checkUnlockedDays = (userData: { Day1: { Module: any; }; Day2: { Module: any; Assessment: any; }; Day3: { Module: any; Assessment: any; }; Day4: { [x: string]: any; Module: any; }; Day5: { [x: string]: any; Assessment: any; }; Day6: { Module: any; }; Day7: { [x: string]: any; }; }) => {
+        const unlockedDays = ["Day 1"]; // Day 1 is always unlocked
       
         if (userData.Day1 && userData.Day1.Module) {
           const day1Module = userData.Day1.Module;
@@ -156,9 +152,6 @@ export default function Dashboard() {
                   if (day3Completed1 && day3Completed2) {
                     unlockedDays.push("Day 4");
 
-                    const b = "Assessment 1";
-                    const c = "Assessment 2";
-                    const d = "Assessment 3";
 
 
                     if (userData.Day4 && userData.Day4.Module && userData.Day4["Assessment 1"] && userData.Day4["Assessment 2"] && userData.Day4["Assessment 3"] ) {
@@ -228,7 +221,6 @@ export default function Dashboard() {
     const sessionExpireTime = localStorage.getItem("sessionExpireTime");
     const userData = localStorage.getItem("userDetails");
     const currentTime = new Date().getTime();
-    const AutoUser = localStorage.getItem("AutoUser");
 
     if (!sessionExpireTime || currentTime > Number(sessionExpireTime)) {
       handleLogout();
@@ -270,6 +262,7 @@ export default function Dashboard() {
       setSelectedModule(key);
       localStorage.setItem("selectedModule", key);
       router.push(`/dashboard?${encodeURIComponent(moduleMap[key].customname)}-${encodeURIComponent(moduleMap[key].day.replace(/\s+/g, ""))}`);
+      console.log(isOpen);
       setIsOpen(false);
     }
   };

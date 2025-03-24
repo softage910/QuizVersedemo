@@ -25,7 +25,7 @@ export default function SecondTopic() {
                 <strong>How can I ensure optimal/clean recordings?</strong>
                 <ul className='ul'>
                     <li>You can do an honest assessment of your recordings before submission, checking strictly if
-your recordings follow every parameter outlined in the "Data Creation Guidelines" document
+your recordings follow every parameter outlined in the &quot;Data Creation Guidelines&quot; document
 provided to you.</li>
 
                 </ul>

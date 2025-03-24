@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./Providers"; // Import the new Providers component
-import { store } from "../../redux/store";
 
 
 

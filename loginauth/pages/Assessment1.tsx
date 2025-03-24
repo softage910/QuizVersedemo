@@ -9,10 +9,10 @@ import { auth, database } from "../src/app/firebase/firebaseconfig";
 export default function FirstAssessment() {
     const router = useRouter();
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying] = useState(false);
     const [direction, setDirection] = useState("next"); // Track direction
     const [quizAttempted, setQuizAttempted] = useState(false);
-    const [AssessmentDay, setAssessmentDay] = useState("");
+    // const [AssessmentDay, setAssessmentDay] = useState("");
 
 
     const slides = [
@@ -36,21 +36,7 @@ export default function FirstAssessment() {
 
     useEffect(() => {
 
-        const url = window.location.href;
-        console.log("Current URL:", url); // Debugging
-
-        // Extract the part after '?' and before '#'
-        const queryPart = url.split("?")[1]?.split("#")[0];
-
-        console.log(queryPart);
-
-        if (queryPart && queryPart.startsWith("Assessment-")) {
-            console.log(queryPart.replace("Assessment-", ""));
-
-            setAssessmentDay(queryPart.replace("Assessment-", "")); // Extracts "Day2"
-        } else {
-            console.warn("Assessment day not found in URL"); // Debugging
-        }
+        
 
 
         const fetchQuizStatus = async () => {

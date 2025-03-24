@@ -7,7 +7,7 @@ export default function TenTopic() {
 
             <ol className='ol'>
                 <li>
-                    <strong>I can't find the tag relevant to my task. What do I do?</strong>
+                    <strong>I can&apos;t find the tag relevant to my task. What do I do?</strong>
                     <ul className='ul'>
                         <li>If you can't find a tag that matches your task, you can continue
                             recording and reach out to us to request the addition of the specific tag.

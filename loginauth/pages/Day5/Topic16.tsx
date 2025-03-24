@@ -7,18 +7,18 @@ export default function SixTopic() {
             <br />
             <ol className='ol'>
                 <li>
-                    Each tool you work with will be labeled with a tag in the format "tool-
-                    (tool_name)", and the tasks you perform will be tagged as "op-
-                    (tool_name)-(feature_name)". For example:
+                    Each tool you work with will be labeled with a tag in the format &quot;tool-
+                    (tool_name)&quot;, and the tasks you perform will be tagged as &quot;op-
+                    (tool_name)-(feature_name)&quot;. For example:
                     <br />
                     <br />
                     <ul className='ul'>
                         <li>
-                            If you're recording a task using the Background Removal Tool in Adobe
-                            Photoshop, the tags would be "tool-ps" and "op-ps-backgroundremoval".
+                            If you&apos;re recording a task using the Background Removal Tool in Adobe
+                            Photoshop, the tags would be &quot;tool-ps&quot; and &quot;op-ps-backgroundremoval&quot;.
                         </li>
                         <li>
-                            For a task like Formatting in Google Sheets, the tags would be "toolsheets" and "op-sheets-formatting".
+                            For a task like Formatting in Google Sheets, the tags would be &quot;toolsheets&quot; and &quot;op-sheets-formatting&quot;.
                         </li>
 
                     </ul>

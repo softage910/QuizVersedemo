@@ -8,90 +8,82 @@ import { auth, database } from "../src/app/firebase/firebaseconfig"; // Import F
 import Logo from "../public/Logo.png";
 import MatchTheFollowing from "@/app/components/Match";
 
-const MultipleChoiceQuestion = ({ question, selectedOption, handleOptionChange }: any) => (
-    <div className="options-section">
-        {question.options.map((option: string, index: number) => (
-            <label key={index} className="option-label">
-                <input
-                    type="radio"
-                    name="question"
-                    value={option}
-                    checked={selectedOption === option}
-                    onChange={() => handleOptionChange(option)}
-                    className="option-input" 
-                />
-                {option}
-            </label>
-        ))}
-    </div>
-);
+// const MultipleChoiceQuestion = ({ question, selectedOption, handleOptionChange }: any) => (
+//     <div className="options-section">
+//         {question.options.map((option: string, index: number) => (
+//             <label key={index} className="option-label">
+//                 <input
+//                     type="radio"
+//                     name="question"
+//                     value={option}
+//                     checked={selectedOption === option}
+//                     onChange={() => handleOptionChange(option)}
+//                     className="option-input" 
+//                 />
+//                 {option}
+//             </label>
+//         ))}
+//     </div>
+// );
 
-const MultipleSelectionQuestion = ({ question, selectedOptions, handleOptionChange }: any) => (
-    <div className="options-section">
-        {question.options.map((option: string, index: number) => (
-            <label key={index} className="option-label">
-                <input
-                    type="checkbox"
-                    name="question"
-                    value={option}
-                    checked={selectedOptions.includes(option)}
-                    onChange={() => handleOptionChange(option)}
-                    className="option-input" 
-                />
-                {option}
-            </label>
-        ))}
-    </div>
-);
+// const MultipleSelectionQuestion = ({ question, selectedOptions, handleOptionChange }: any) => (
+//     <div className="options-section">
+//         {question.options.map((option: string, index: number) => (
+//             <label key={index} className="option-label">
+//                 <input
+//                     type="checkbox"
+//                     name="question"
+//                     value={option}
+//                     checked={selectedOptions.includes(option)}
+//                     onChange={() => handleOptionChange(option)}
+//                     className="option-input" 
+//                 />
+//                 {option}
+//             </label>
+//         ))}
+//     </div>
+// );
 
-const TrueFalseQuestion = ({ selectedOption, handleOptionChange }: any) => (
-    <div className="options-section">
-        {["True", "False"].map((option, index) => (
-            <label key={index} className="option-label">
-                <input
-                    type="radio"
-                    name="question"
-                    value={option}
-                    checked={selectedOption === option}
-                    onChange={() => handleOptionChange(option)}
-                    className="option-input"
-                />
-                {option}
-            </label>
-        ))}
-    </div>
-);
+// const TrueFalseQuestion = ({ selectedOption, handleOptionChange }: any) => (
+//     <div className="options-section">
+//         {["True", "False"].map((option, index) => (
+//             <label key={index} className="option-label">
+//                 <input
+//                     type="radio"
+//                     name="question"
+//                     value={option}
+//                     checked={selectedOption === option}
+//                     onChange={() => handleOptionChange(option)}
+//                     className="option-input"
+//                 />
+//                 {option}
+//             </label>
+//         ))}
+//     </div>
+// );
 
-const FillInTheBlankQuestion = ({ selectedOption, handleOptionChange }: any) => (
-    <div className="fill-blank-section">
-<textarea
-    placeholder="Enter your answer"
-    value={selectedOption || ""}
-    onChange={(e) => handleOptionChange(e.target.value)}
-    className="fill-blank-input"
-    rows={4} // Adjust the number of rows as needed
-/>
-    </div>
-);
+// const FillInTheBlankQuestion = ({ selectedOption, handleOptionChange }: any) => (
+//     <div className="fill-blank-section">
+// <textarea
+//     placeholder="Enter your answer"
+//     value={selectedOption || ""}
+//     onChange={(e) => handleOptionChange(e.target.value)}
+//     className="fill-blank-input"
+//     rows={4} // Adjust the number of rows as needed
+// />
+//     </div>
+// );
 
-interface UserResponse {
-    userId: string;
-    question: string;
-    selectedOption: string;
-    correctAnswer: string;
-    isCorrect: boolean;
-  }
+
 
 const OnlineTest = () => {
-    const [questions, setQuestions] = useState<any[]>([]);
+    const [questions, setQuestions] = useState<any[]>([]); // Ignore TypeScript warnings
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
-    const [visitedQuestions, setVisitedQuestions] = useState<number[]>([]);
     const [questionStatus, setQuestionStatus] = useState<{ [key: number]: string }>({});
     const [timeLeft, setTimeLeft] = useState(3600);
     const [isPaused, setIsPaused] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const [responses, setResponses] = useState<UserResponse[]>([]);
 
     const router = useRouter();
     const [isOut, setIsOut] = useState(false);
@@ -102,11 +94,11 @@ const [isNextEnabled, setNextEnabled] = useState(false); // ✅ State to track N
 const [matchedPairs, setMatchedPairs] = useState<{ left: string; right: string }[]>([]); // ✅ Store matched data
 
 
-const [selectedPairs, setSelectedPairs] = useState<{ [key: string]: string }>({});
+// const [selectedPairs, setSelectedPairs] = useState<{ [key: string]: string }>({});
 
-const handleMatchChange = (updatedPairs: { [key: string]: string }) => {
-    setSelectedPairs(updatedPairs);
-};
+// const handleMatchChange = (updatedPairs: { [key: string]: string }) => {
+//     setSelectedPairs(updatedPairs);
+// };
 
 useEffect(() => {
     const fetchQuestions = async () => {
@@ -151,6 +143,8 @@ useEffect(() => {
 
 
     const startOutTimer = () => {
+        console.log(isOut,outTime);
+
         setIsOut(true);
         setOutTime(0);
         if (countdownTimer) clearInterval(countdownTimer); // Reset any existing timer
@@ -300,11 +294,11 @@ const handleViolationExit = () => {
         // Prevent proceeding without selection
     };
 
-    const handleQuestionClick = (index: number) => {
-        setVisitedQuestions((prev) => [...new Set([...prev, currentQuestionIndex])]); // Mark current question as visited
-        setCurrentQuestionIndex(index);
-        setSelectedOption(null);
-    };
+    // const handleQuestionClick = (index: number) => {
+    //     setVisitedQuestions((prev) => [...new Set([...prev, currentQuestionIndex])]); // Mark current question as visited
+    //     setCurrentQuestionIndex(index);
+    //     setSelectedOption(null);
+    // };
 
 
     const handleSkipQuestion = () => {
@@ -495,7 +489,7 @@ const handleViolationExit = () => {
             const responsesRef = ref(database, `responses/${userId}/day2`);
             const snapshot = await get(responsesRef);
     
-            let formattedResponses: { question: string; answer: string }[] = [];
+            const formattedResponses: { question: string; answer: string }[] = [];
     
             if (snapshot.exists()) {
                 const data = snapshot.val();
@@ -584,23 +578,65 @@ const handleViolationExit = () => {
                             </div>
 {/* Render Component Based on Question Type */}
 {questions[currentQuestionIndex]?.type === "mcq" && (
-                                <MultipleChoiceQuestion
-                                    question={questions[currentQuestionIndex]}
-                                    selectedOption={selectedOption}
-                                    handleOptionChange={handleOptionChange}
-                                />
+                                // <MultipleChoiceQuestion
+                                //     question={questions[currentQuestionIndex]}
+                                //     selectedOption={selectedOption}
+                                //     handleOptionChange={handleOptionChange}
+                                // />
+
+                                <div className="options-section">
+        {questions[currentQuestionIndex].options.map((option: string, index: number) => (
+            <label key={index} className="option-label">
+                <input
+                    type="radio"
+                    name="question"
+                    value={option}
+                    checked={selectedOption === option}
+                    onChange={() => handleOptionChange(option)}
+                    className="option-input"
+                />
+                {option}
+            </label>
+        ))}
+    </div>
                             )}
                             {questions[currentQuestionIndex]?.type === "TF" && (
-                                <TrueFalseQuestion
-                                    selectedOption={selectedOption}
-                                    handleOptionChange={handleOptionChange}
-                                />
+                                // <TrueFalseQuestion
+                                //     selectedOption={selectedOption}
+                                //     handleOptionChange={handleOptionChange}
+                                // />
+
+                                <div className="options-section">
+        {["True", "False"].map((option, index) => (
+            <label key={index} className="option-label">
+                <input
+                    type="radio"
+                    name="question"
+                    value={option}
+                    checked={selectedOption === option}
+                    onChange={() => handleOptionChange(option)}
+                    className="option-input"
+                />
+                {option}
+            </label>
+        ))}
+    </div>
                             )}
                             {questions[currentQuestionIndex]?.type === "fillblank" && (
-                                <FillInTheBlankQuestion
-                                    selectedOption={selectedOption}
-                                    handleOptionChange={handleOptionChange}
-                                />
+                                // <FillInTheBlankQuestion
+                                //     selectedOption={selectedOption}
+                                //     handleOptionChange={handleOptionChange}
+                                // />
+
+                                <div className="fill-blank-section">
+<textarea
+    placeholder="Enter your answer"
+    value={selectedOption || ""}
+    onChange={(e) => handleOptionChange(e.target.value)}
+    className="fill-blank-input"
+    rows={4} // Adjust the number of rows as needed
+/>
+    </div>
                             )}
                             {questions[currentQuestionIndex]?.type === "match" && (
                             <MatchTheFollowing question={questions[currentQuestionIndex]} setNextEnabled={setNextEnabled} onSaveMatch={setMatchedPairs}
@@ -608,13 +644,13 @@ const handleViolationExit = () => {
                             // Pass this function
                             /> // Render MatchTheFollowing component
                             )}
-                                                        {questions[currentQuestionIndex]?.type === "msq" && (
+                                                        {/* {questions[currentQuestionIndex]?.type === "msq" && (
                                                             <MultipleSelectionQuestion
                                                             question={questions[currentQuestionIndex]}
                                                             selectedOption={selectedOption}
                                                             handleOptionChange={handleOptionChange}
                                                         />
-                                                        )}
+                                                        )} */}
 
 
                             {/* <div className="actions">

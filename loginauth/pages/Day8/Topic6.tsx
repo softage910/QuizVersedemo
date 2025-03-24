@@ -9,7 +9,7 @@ export default function SixthTopic() {
                     <h2 className="h2">Learn The Fundamentals:</h2>
 
                     <p>
-                        Start with "Machine Learning" is Fun! to
+                        Start with &quot;Machine Learning&quot; is Fun! to
                         understand the core concepts in a beginner-friendly way.
                     </p>
 

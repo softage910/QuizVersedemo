@@ -8,13 +8,9 @@ import Topic12 from "./Day5/Topic12";
 import Topic13 from "./Day5/Topic13";
 import Topic14 from "./Day5/Topic14";
 import Topic15 from "./Day5/Topic15";
-import Topic16 from "./Day5/Topic16";
-import Topic17 from "./Day5/Topic17";
 import Topic18 from "./Day5/Topic18";
-import Topic19 from "./Day5/Topic19";
 import Topic110 from "./Day5/Topic110";
 import Topic111 from "./Day5/Topic111";
-import Topic112 from "./Day5/Topic112";
 
 
 

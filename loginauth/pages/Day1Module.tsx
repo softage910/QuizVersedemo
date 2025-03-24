@@ -675,7 +675,6 @@
 "use client";
 import "./Day1Module.css";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { database, auth } from "../src/app/firebase/firebaseconfig";
 import { ref, get, update } from "firebase/database";
 
@@ -688,19 +687,16 @@ import Topic6 from "./Day1/Topic6";
 import Topic7 from "./Day1/Topic7";
 import Topic8 from "./Day1/Topic8";
 import Topic9 from "./Day1/Topic9";
-import NotificationMessage from "@/app/components/NotificationMessage";
 
 export default function Day1Module() {
-  const router = useRouter();
   const [selectedTopic, setSelectedTopic] = useState<number>(1);
   const [completedTopics, setCompletedTopics] = useState<string[]>([]);
-  const [CompletionMessage, setCompletionMessage] = useState<string | null>(null);
   const userId = auth.currentUser?.uid;
 
-  const handleTopicCompletion = (topicName: string) => {
-    setCompletedTopics(prevCompletedTopics => ({ ...prevCompletedTopics, [topicName]: true }));
-    // Call markTopicCompleted from Dashboard.tsx to update Firebase
-  };
+  // const handleTopicCompletion = (topicName: string) => {
+  //   setCompletedTopics(prevCompletedTopics => ({ ...prevCompletedTopics, [topicName]: true }));
+  //   // Call markTopicCompleted from Dashboard.tsx to update Firebase
+  // };
 
 
   const topics = [
