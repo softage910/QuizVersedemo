@@ -280,6 +280,8 @@ export default function Dashboard() {
   const [userId, setUserId] = useState<string | null>(null);
   const days = Array.from({ length: 8 }, (_, i) => `day${i + 1}`);
 
+  console.log(progressData,unlockedDays);
+
   const topicsPerDay: { [key: string]: number } = {
     day1: 9,
     day2: 9,

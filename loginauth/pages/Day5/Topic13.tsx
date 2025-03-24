@@ -42,13 +42,13 @@ export default function ThirTopic() {
                             dropdown menu.
                         </li>
                         <li>
-                            Keyboard Shortcut Press the "C" key on your keyboard to archive the card
+                            Keyboard Shortcut Press the &quot;C&quot; key on your keyboard to archive the card
                             instantly.
                         </li>
 
                         <p>
                             Which method is more optimal?
-                            Using the keyboard shortcut ("C") is the more efficient way to archive a card.
+                            Using the keyboard shortcut (&quot;C&quot;) is the more efficient way to archive a card.
                             It reduces the number of clicks and speeds up your workflow, and ACE also
                             needs to learn that!
                         </p>
@@ -67,7 +67,7 @@ export default function ThirTopic() {
                 <li><strong>Screen Size and View Modes</strong>
                     <ul className='ul'>
                         <li>
-                        Resolutions Use the “default resolution setting while recording.
+                        Resolutions Use the &quot;default resolution&quot; setting while recording.
 Additionally, vary between windowed and full-screen modes occasionally
 to provide diverse data.
                         </li>

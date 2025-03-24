@@ -9,7 +9,7 @@ import { auth, database } from "../src/app/firebase/firebaseconfig";
 export default function FirstAssessment() {
     const router = useRouter();
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying] = useState(false);
     const [direction, setDirection] = useState("next"); // Track direction
     const [quizAttempted, setQuizAttempted] = useState(false);
 

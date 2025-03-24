@@ -22,8 +22,6 @@ const MatchTheFollowing: React.FC<MatchProps> = ({ question, setNextEnabled, onS
     const [selectedLeft, setSelectedLeft] = useState<number | null>(null);
     const [connections, setConnections] = useState<{ left: number; right: number }[]>([]);
     const [matchedPairs, setMatchedPairs] = useState<{ left: string; right: string }[]>([]); 
-
-
     const leftRefs = useRef<(HTMLDivElement | null)[]>([]);
     const rightRefs = useRef<(HTMLDivElement | null)[]>([]);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -62,6 +60,7 @@ const handleRightClick = (index: number) => {
 const resetSelections = () => {
     setConnections([]); 
     setSelectedLeft(null); 
+    console.log(matchedPairs);
     setMatchedPairs([]);
     onSaveMatch([]);
 };

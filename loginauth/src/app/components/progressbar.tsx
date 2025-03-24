@@ -79,7 +79,7 @@
 import React, { useEffect, useState } from "react";
 import { ref, onValue, query, orderByChild, equalTo, get } from "firebase/database";
 import "./progressbar.css";
-import {auth, database} from "../firebase/firebaseconfig";
+import { database} from "../firebase/firebaseconfig";
 
 const ProgressBar = () => {
   const [progressData, setProgressData] = useState<Record<string, Record<string, boolean>> | null>(null);
@@ -115,7 +115,7 @@ const ProgressBar = () => {
               if (snapshot.exists()) {
                 setProgressData(snapshot.val());
                         // Find the current day
-                        for (const [day, tasks] of Object.entries(snapshot.val())) {
+                        for (const [tasks] of Object.entries(snapshot.val())) {
                           if (Object.values(tasks).includes(false)) {
                             setCurrentDayTasks(tasks);
                             break;
@@ -185,7 +185,7 @@ const ProgressBar = () => {
 
 if (progressData) {
   const allDays = Object.keys(progressData);
-  let lastDay = allDays[allDays.length - 1]; // Get the last available day
+  const lastDay = allDays[allDays.length - 1]; // Get the last available day
 
   let foundIncomplete = false;
 

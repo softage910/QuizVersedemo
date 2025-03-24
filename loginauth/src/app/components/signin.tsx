@@ -495,7 +495,7 @@ export default function SignInPage() {
   const [UserEmail, setUserEmail] = useState("");
   const [UserPassword, setUserPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
-  const [showNotification, setShowNotification] = useState(false);
+  // const [showNotification, setShowNotification] = useState(false);
 
 
   const [EmpCode, setEmpCode] = useState("");
@@ -646,7 +646,7 @@ export default function SignInPage() {
           setSignUpMessage("A verification email has been sent. Please verify your email before logging in.");
         }
       }
-    } catch (error) {
+    } catch  {
       setSignUpError("Error signing up. Please try again.");
     }finally{
       setLoadingVerify(false); // Start loading
@@ -911,7 +911,4 @@ const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     
     </div>
   );
-}
-function dispatch(arg0: any) {
-  throw new Error("Function not implemented.");
 }
