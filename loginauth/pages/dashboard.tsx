@@ -35,6 +35,32 @@ type ModuleInfo = {
   customname: string;
 };
 
+interface TopicCompletion {
+  [key: string]: boolean;
+}
+
+interface DayData {
+  Module?: TopicCompletion;
+  Assessment?: TopicCompletion;
+  "Assessment 1"?: TopicCompletion;
+  "Assessment 2"?: TopicCompletion;
+  "Assessment 3"?: TopicCompletion;
+  "Module 1"?: TopicCompletion;
+  "Module 2"?: TopicCompletion;
+}
+
+interface UserData {
+  Day1?: DayData;
+  Day2?: DayData;
+  Day3?: DayData;
+  Day4?: DayData;
+  Day5?: DayData;
+  Day6?: DayData;
+  Day7?: DayData;
+  Day8?: DayData;
+}
+
+
 export default function Dashboard() {
   const [userDetails, setUserDetails] = useState<{ name: string; uid: string;role: string } | null>(null);
   const [selectedModule, setSelectedModule] = useState<string | null>(null);
@@ -120,7 +146,7 @@ export default function Dashboard() {
 
 
 
-    const checkUnlockedDays = (userData: { Day1: { Module: any; }; Day2: { Module: any; Assessment: any; }; Day3: { Module: any; Assessment: any; }; Day4: { [x: string]: any; Module: any; }; Day5: { [x: string]: any; Assessment: any; }; Day6: { Module: any; }; Day7: { [x: string]: any; }; }) => {
+    const checkUnlockedDays = (userData: UserData) => {
         const unlockedDays = ["Day 1"]; // Day 1 is always unlocked
       
         if (userData.Day1 && userData.Day1.Module) {

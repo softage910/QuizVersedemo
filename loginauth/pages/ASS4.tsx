@@ -60,10 +60,17 @@ import MatchTheFollowing from "@/app/components/Match";
 //     </div>
 // );
 
-
+interface Question {
+    pairs: never[];
+    question: string;
+    type: "mcq" | "TF" | "fillblank" | "match";
+    options?: string[]; // Optional, only for MCQ
+    correctAnswer?: string;
+    matchPairs?: { left: string; right: string }[]; // Only for Match the Following
+}
 
 const OnlineTest = () => {
-    const [questions, setQuestions] = useState<any[]>([]); // Ignore TypeScript warnings
+    const [questions, setQuestions] = useState<Question[]>([]); // Ignore TypeScript warnings
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     // const [visitedQuestions, setVisitedQuestions] = useState<number[]>([]);
@@ -103,19 +110,26 @@ useEffect(() => {
         if (snapshot.exists()) {
             const fetchedQuestionsObj = snapshot.val();
             
-            // Convert all question types into arrays
-            const multipleChoice = fetchedQuestionsObj.multipleChoice ? Object.values(fetchedQuestionsObj.multipleChoice) : [];
-            const fillInTheBlank = fetchedQuestionsObj.fillInTheBlank ? Object.values(fetchedQuestionsObj.fillInTheBlank) : [];
-            const trueFalse = fetchedQuestionsObj.trueFalse ? Object.values(fetchedQuestionsObj.trueFalse) : [];
-            const matchTheFollowing = fetchedQuestionsObj.matchTheFollowing ? Object.values(fetchedQuestionsObj.matchTheFollowing) : [];
+            const multipleChoice: Question[] = fetchedQuestionsObj.multipleChoice
+                    ? Object.values(fetchedQuestionsObj.multipleChoice)
+                    : [];
+                const fillInTheBlank: Question[] = fetchedQuestionsObj.fillInTheBlank
+                    ? Object.values(fetchedQuestionsObj.fillInTheBlank)
+                    : [];
+                const trueFalse: Question[] = fetchedQuestionsObj.trueFalse
+                    ? Object.values(fetchedQuestionsObj.trueFalse)
+                    : [];
+                const matchTheFollowing: Question[] = fetchedQuestionsObj.matchTheFollowing
+                    ? Object.values(fetchedQuestionsObj.matchTheFollowing)
+                    : [];
 
-            // Combine all question types
-            const allQuestions = [...multipleChoice, ...fillInTheBlank, ...trueFalse, ...matchTheFollowing];
+                // Combine all question types
+                const allQuestions: Question[] = [...multipleChoice, ...fillInTheBlank, ...trueFalse, ...matchTheFollowing];
 
-            // Shuffle all questions
-            const shuffledQuestions = allQuestions.sort(() => Math.random() - 0.5);
+                // Shuffle all questions
+                const shuffledQuestions: Question[] = allQuestions.sort(() => Math.random() - 0.5);
 
-            setQuestions(shuffledQuestions);
+                setQuestions(shuffledQuestions);
         }
     };
     fetchQuestions();
@@ -480,7 +494,7 @@ const handleViolationExit = () => {
                                 // />
 
                                 <div className="options-section">
-        {questions[currentQuestionIndex].options.map((option: string, index: number) => (
+        {questions[currentQuestionIndex]?.options?.map((option: string, index: number) => (
             <label key={index} className="option-label">
                 <input
                     type="radio"
