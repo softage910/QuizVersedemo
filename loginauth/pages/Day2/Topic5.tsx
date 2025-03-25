@@ -1,5 +1,6 @@
 import '../Day1Module.css';
-
+import four from '../../public/Images/2.5.png'
+import Image from 'next/image';
 
 
 export default function FifthTopic() {
@@ -22,7 +23,9 @@ export default function FifthTopic() {
                     </ul>
 
                     <figure className='img-21'>
-                        <img src="../images/2.5.png" alt="Spotlight Search Example" />
+                        {/* <img src="../images/2.5.png" alt="Spotlight Search Example" /> */}
+                        <Image src={four} width={0} height={0} alt="Spotlight Search Example"/>
+                       
                     </figure>
                     <blockquote>
                         💡 <strong>Spotlight Search is the most used feature on an average Mac. Start using Spotlight search for navigation and much more!</strong>

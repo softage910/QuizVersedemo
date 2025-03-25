@@ -1,4 +1,6 @@
 import '../Day1Module.css';
+import four from '../../public/Images/2.6.jpeg';
+import Image from 'next/image';
 
 export default function EighthTopic() {
     return (
@@ -10,7 +12,8 @@ export default function EighthTopic() {
             </p>
 
             <figure className='img-22'>
-                <img src="../images/2.6.jpeg" alt="Apple ID Setup Example" />
+                {/* <img src="../images/2.6.jpeg" alt="Apple ID Setup Example" /> */}
+                <Image src={four} width={0} height={0} alt="Apple ID Setup Example" />
             </figure>
             <ol className="ol">
                 <li><strong>Open System Settings:</strong> Click the Apple menu () in the top-left corner and select <strong>System Settings</strong>.</li>

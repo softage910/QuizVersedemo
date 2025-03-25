@@ -1,6 +1,9 @@
 import '../Day1Module.css';
+import one from '../../public/Images/2.3.png';
+import two from '../../public/Images/2.2.png';
+import three from '../../public/Images/2.0.png';
 
-
+import Image from 'next/image';
 
 export default function SecondTopic() {
     return (
@@ -15,7 +18,8 @@ export default function SecondTopic() {
                     </ul>
 
                     <figure className='img-21'>
-                        <img src="../images/2.0.png" alt="Menu Bar Example" />
+                        {/* <img src="../images/2.0.png" alt="Menu Bar Example" /> */}
+                        <Image src={three} width={0} height={0} alt="Menu Bar Example" />
                     </figure>
                     <ul className="ul">
                         <li>One constant menu item is the <strong>Apple menu</strong>. Consider the <strong>Apple menu</strong> as your system control center. From there, you can shut down, restart, force quit apps, or quickly open System Settings.</li>
@@ -29,7 +33,8 @@ export default function SecondTopic() {
                     </ul>
 
                     <figure className='img-22'>
-                        <img src="../images/2.2.png" alt="Control Center Example" />
+                        {/* <img src="../images/2.2.png" alt="Control Center Example" /> */}
+                        <Image src={two} width={0} height={0} alt="Control Center Example" />
                     </figure>
                     <ul className="ul">
                         <li>Click the date and time to open the Notification Center, which shows recent alerts and hosts widgets (e.g., weather, to-do lists, calendar events).</li>
@@ -42,7 +47,8 @@ export default function SecondTopic() {
                     </ul>
 
                     <figure className='img-21'>
-                        <img src="../images/2.3.png" alt="Dock Example" />
+                        {/* <img src="../images/2.3.png" alt="Dock Example" /> */}
+                        <Image src={one} width={0} height={0} alt="Dock Example" />
                     </figure>
                     <ul className="ul">
                         <li>Open <strong>Launchpad</strong> to view all installed apps. Drag any app from Launchpad to the Dock for easier access.</li>
