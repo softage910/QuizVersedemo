@@ -112,13 +112,14 @@ hr {
 .ul,
 .ol {
   margin: 0 0 0px 20px;
+  
 }
 
 .ul li,
 .ol li {
   margin-bottom: 10px;
 }
-
+/* 
 .Day1Table {
   width: 100%;
   border-collapse: collapse;
@@ -135,9 +136,77 @@ hr {
 .Day1Table td {
   padding: 8px;
   text-align: left;
+} */
+
+
+
+.Day1Table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
+  background-color: #1e293b; /* Soft dark background */
+  color: #f1f5f9; /* Light text */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.Day1Table th {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: left;
+  padding: 16px 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.Day1Table td {
+  background-color: #1e293b;
+  padding: 14px 20px;
+  font-size: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.Day1Table tr:nth-child(even) td {
+  background-color: #27334b;
+}
+
+.Day1Table tr:hover td {
+  background-color: #334155;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.Day1Table th:last-child,
+.Day1Table td:last-child {
+  border-right: none;
+}
+
+.Day1Table th:first-child {
+  border-top-left-radius: 12px;
+}
+
+.Day1Table th:last-child {
+  border-top-right-radius: 12px;
+}
+
+.Day1Table tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+
+.Day1Table tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
+}
+.Day1Table tr:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
 
+
+
+/* 
 .Day2Table {
     width: 100%;
     border-collapse: collapse;
@@ -154,7 +223,86 @@ hr {
   .Day2Table td {
     padding: 8px;
     text-align: center;
-  }
+  } */
+
+
+/* Enhanced Professional Table Styling for Day2Table */
+
+.Day2Table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
+  background-color: #1e293b;
+  color: #f1f5f9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.Day2Table th {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  padding: 16px 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.Day2Table td {
+  background-color: #1e293b;
+  padding: 14px 20px;
+  font-size: 15px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.Day2Table tr:nth-child(even) td {
+  background-color: #27334b;
+}
+
+.Day2Table tr:hover td {
+  background-color: #334155;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.Day2Table th:last-child,
+.Day2Table td:last-child {
+  border-right: none;
+}
+
+.Day2Table th:first-child {
+  border-top-left-radius: 12px;
+}
+
+.Day2Table th:last-child {
+  border-top-right-radius: 12px;
+}
+
+.Day2Table tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+
+.Day2Table tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
+}
+.Day2Table tr:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 .a {
   color: #007BFF;
@@ -170,6 +318,7 @@ hr {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .Header {
@@ -178,12 +327,11 @@ hr {
 
 .MainContent {
   padding: 50px;
-  background:#2F3A5A;;
+  background:#515e86;
   border-radius: 30px;
   /* overflow: scroll; */
   height: 75vh;
   width: 90%;
-  min-width: 90%;
 }
 
 .MainContent::-webkit-scrollbar {
@@ -220,7 +368,7 @@ hr {
     background: #303030;
 }
 
-.Read-Button{
+/* .Read-Button{
   text-align: center;
   padding: 10px;
   color: black;
@@ -230,9 +378,9 @@ hr {
   border-radius: 20px;
   margin: 0px 10px 0px 10px;
 
-  backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
-  -webkit-backdrop-filter: blur(10px); /* For Safari */
-  border: solid rgba(255, 255, 255, 0.2) 1px; /* Subtle white border */
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px);
+  border: solid rgba(255, 255, 255, 0.2) 1px; 
   box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.982);
 }
 
@@ -249,9 +397,9 @@ hr {
   cursor: pointer;
   margin: 0px 10px 0px 10px;
 
-  backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
-  -webkit-backdrop-filter: blur(10px); /* For Safari */
-  border: solid rgba(255, 255, 255, 0.2) 1px; /* Subtle white border */
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px); 
+  border: solid rgba(255, 255, 255, 0.2) 1px; 
   box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.982);
 }
 
@@ -274,9 +422,9 @@ hr {
   cursor: pointer;
   margin: 0px 10px 0px 10px;
 
-  backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
-  -webkit-backdrop-filter: blur(10px); /* For Safari */
-  border: solid rgba(255, 255, 255, 0.2) 1px; /* Subtle white border */
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px); 
+  border: solid rgba(255, 255, 255, 0.2) 1px; 
   box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.982);
 }
 
@@ -285,21 +433,121 @@ hr {
   background-color: black;
   transition: 0.25s;
 
+} 
+ */
+
+/* Read-Button Styles */
+
+.Read-Button {
+  text-align: center;
+  padding: 12px 20px;
+  color: #212121;
+  background-color: #ffffff;
+  border: none;
+  min-width: 160px;
+  border-radius: 25px;
+  margin: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.Read-Button::before {
+  content: '';
+  position: absolute;
+  background: linear-gradient(135deg, #4a90e2, #007bff);
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  z-index: -1;
+  transition: all 0.4s ease;
+  opacity: 0;
+  border-radius: 25px;
+}
+
+.Read-Button:hover::before {
+  left: 0;
+  opacity: 1;
+}
+
+.Read-Button:hover {
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 123, 255, 0.3);
+}
+
+/* Previous Button */
+.Read-Button-Previous {
+  text-align: center;
+  padding: 10px 20px;
+  color: white;
+  background-color: black;
+  border: none;
+  min-width: 150px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 10px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: solid rgba(255, 255, 255, 0.2) 1px;
+  box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.982);
+  transition: all 0.3s ease;
+}
+
+.Read-Button-Previous:hover {
+  color: black;
+  background-color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Next Button */
+.Read-Button-Next {
+  text-align: center;
+  padding: 10px 20px;
+  color: black;
+  background-color: white;
+  min-width: 150px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 10px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: solid rgba(255, 255, 255, 0.2) 1px;
+  box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.982);
+  transition: all 0.3s ease;
+}
+
+.Read-Button-Next:hover {
+  color: white;
+  background-color: black;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 
 
 .Toggle-Topic{
     display: flex;
-    /* below are the new properties that I added in the css */
     justify-content: right;
     margin-top: 30px;
 }
 
-
+/* 
 
 .Watch-Button{
-  background-color: white; 
+  background-color: rgb(255, 208, 0);
   color: black; 
   border: 1px solid black; 
   padding: 8px 16px; 
@@ -308,11 +556,41 @@ hr {
   font-size:small;
   border-radius: 20px;
   width: 150px;
+} */
+ /* .Watch-Button{
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: #007BFF;
+  margin: 20px 0px 20px 0px;
+  cursor: pointer;
+} */
+.Watch-Button {
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: #007BFF;
+  margin: 20px 0;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 15px;
 }
 
-.VideoFrame{
-  margin: 20px 0px 20px 0px;
+a{
+  text-decoration: none;
 }
+
+.Watch-Button:hover {
+  transform: translateY(-2px) scale(1.03); /* pop up and slightly enlarge */
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2); 
+}
+
+
 
 .VideoFrame iframe{
   border-radius: 20px;
@@ -322,7 +600,6 @@ hr {
 
 figure{
   display: flex;
-  justify-content: center;
   margin: 20px 0px 20px 0px;
 }
 
@@ -478,5 +755,4 @@ figure{
 
 .git-but:hover{
   background-color: rgb(114, 106, 106);
-
 }

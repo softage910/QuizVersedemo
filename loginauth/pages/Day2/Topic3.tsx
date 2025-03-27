@@ -1,5 +1,6 @@
 import '../Day1Module.css';
-
+import three from '../../public/Images/2.4.png'
+import Image from 'next/image';
 
 
 export default function ThirdTopic() {
@@ -10,9 +11,10 @@ export default function ThirdTopic() {
             <ol className="ol">
                 <li>
                     <strong>Understanding Window Controls:</strong>
-                    <figure className='img-22'>
+                    <figure>
 
-                        <img src="../images/2.4.png" alt="Window Controls Example" />
+                        {/* <img src="../images/2.4.png" alt="Window Controls Example" /> */}
+                        <Image src={three} width={300} height={0} alt="Window Controls Example" style={{borderRadius:'9px'}}/>
                     </figure>
                     <ul className="ul">
                         <li><strong>Red button:</strong> Closes the current window without quitting the app.</li>

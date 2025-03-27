@@ -1,4 +1,6 @@
 import '../Day1Module.css';
+import four from '../../public/Images/2.6.jpeg';
+import Image from 'next/image';
 
 export default function EighthTopic() {
     return (
@@ -9,8 +11,9 @@ export default function EighthTopic() {
                 Before starting work on the macOS system, you will need to create an Apple ID. Please follow the instructions below to set up your Apple ID before you begin using your macOS device for work purposes.
             </p>
 
-            <figure className='img-22'>
-                <img src="../images/2.6.jpeg" alt="Apple ID Setup Example" />
+            <figure>
+                {/* <img src="../images/2.6.jpeg" alt="Apple ID Setup Example" /> */}
+                <Image src={four} width={400} height={0} alt="Apple ID Setup Example" style={{borderRadius:'9px'}}/>
             </figure>
             <ol className="ol">
                 <li><strong>Open System Settings:</strong> Click the Apple menu () in the top-left corner and select <strong>System Settings</strong>.</li>

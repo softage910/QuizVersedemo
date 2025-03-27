@@ -1,4 +1,6 @@
 import '../Day1Module.css';
+import redirect from '../../public/Images/redirect.png';
+import Image from 'next/image';
 
 export default function FifthTopic() {
     return (
@@ -15,7 +17,7 @@ learning.
                 </p>
                 <br />
                 <a href="https://www.youtube.com/@aiadvantage/videos" target="_blank">                                <button className='Watch-Button'>
-                Reference Video
+                Reference Video <Image src={redirect} width={20} height={20} alt="Logo"/>
                 </button>
                 </a>
 
@@ -32,7 +34,7 @@ discussions of enterprise-level AI solutions.
                 </p>
                 <br />
                 <a href="https://x.com/karpathy" target="_blank">                                <button className='Watch-Button'>
-                Reference Video
+                Reference Video <Image src={redirect} width={20} height={20} alt="Logo"/>
                 </button>
                 </a>
 

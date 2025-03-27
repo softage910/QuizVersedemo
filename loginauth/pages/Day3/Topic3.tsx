@@ -1,4 +1,6 @@
 import '../Day1Module.css';
+import redirect from '../../public/Images/redirect.png';
+import Image from 'next/image';
 
 export default function ThirdTopic() {
     return (
@@ -20,7 +22,6 @@ export default function ThirdTopic() {
                             PM&quot;.</li>
                         <li>Overload single prompts: Split &quot;Schedule meeting AND draft report&quot; into separate tasks.</li>
                         <li>Assuming the agent knows context without specifying.</li>
-
                     </ul>
                 </li>
 
@@ -87,23 +88,27 @@ export default function ThirdTopic() {
             </ol>
             <br />
 
-            <h2 className="h2"><strong>Additional Reading Materials:</strong></h2>
+            <h2 className="h2"><strong>Additional Reference Videos: </strong></h2>
 
             <ol className="ol">
-   
+
 
                 <li>
-                <a href="https://drive.google.com/file/d/1qRY4-6-QoNCwBp3vhX60gZmC4xzZeWxY/view?usp=share_link" target="_blank">                                <button className='Watch-Button'>
-                                    Resource1
-                                </button>
-                            </a>
+                    <a href="https://drive.google.com/file/d/1qRY4-6-QoNCwBp3vhX60gZmC4xzZeWxY/view?usp=share_link" target="_blank">                                <button className='Watch-Button'>
+                        Access It Here <Image src={redirect} width={20} height={20} alt="Logo" />
+                    </button>
+
+                    </a>
                 </li>
 
+
                 <li>
-                <a href="https://drive.google.com/file/d/1qRY4-6-QoNCwBp3vhX60gZmC4xzZeWxY/view?usp=share_link" target="_blank">                                <button className='Watch-Button'>
-                                    Resource2
-                                </button>
-                            </a>
+                    <a href="https://drive.google.com/file/d/1qRY4-6-QoNCwBp3vhX60gZmC4xzZeWxY/view?usp=share_link" target="_blank">                                <button className='Watch-Button'>
+                        Access It Here <Image src={redirect} width={20} height={20} alt="Logo" />
+
+                    </button>
+
+                    </a>
 
                 </li>
 
@@ -111,7 +116,7 @@ export default function ThirdTopic() {
 
 
 
-            
+
 
 
 

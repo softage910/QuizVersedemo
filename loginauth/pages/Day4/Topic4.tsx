@@ -1,5 +1,6 @@
 import '../Day1Module.css';
-
+import redirect from '../../public/Images/redirect.png';
+import Image from 'next/image';
 export default function FourthTopic() {
     return (
         <>
@@ -21,7 +22,7 @@ export default function FourthTopic() {
 
                 <li>
                     <a href="https://arxiv.org/pdf/2403.07718" target="_blank">                                <button className='Watch-Button'>
-                        Research Paper
+                    Access It Here <Image src={redirect} width={20} height={20} alt="Logo"/>
                     </button>
                     </a>
                 </li>

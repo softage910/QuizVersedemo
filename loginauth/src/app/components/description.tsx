@@ -11,8 +11,10 @@ export default function DescriptionSection() {
         <Image src={Logo} alt="Logo" width={250} height={50} />
       </div>
       <div className="description-section">
+      <h1 className="Welcome-Heading">Welcome to the</h1>
         <div className="heading">
-          <h1>Welcome to the<br /><span></span> Team</h1>
+          {/* <h1 className="typingeffect">Welcome to the<br/><span>AI Operations</span>Team</h1> */}
+        <h1 className="typing">AI Operations Team</h1>
         </div>
         <div className="main-content">
           <ul>

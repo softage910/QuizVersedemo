@@ -63,7 +63,7 @@ export default function SeventhTopic() {
 
             <h2 className="h2">List of Basic CMD Shortcuts</h2>
             <p>
-                Refer to the official Apple Support page on <a href="https://support.apple.com/en-in/102650" target="_blank">Mac Keyboard Shortcuts</a> for a complete list. Practice these shortcuts to improve your workflow.
+                Refer to the official Apple Support page on <a href="https://support.apple.com/en-in/102650" target="_blank" style={{color:'#0096FF' , cursor:'pointer'}}>Mac Keyboard Shortcuts</a> for a complete list. Practice these shortcuts to improve your workflow.
             </p>
 
 

@@ -218,7 +218,8 @@ border: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #2f3a5a;
+    /* background-color: #2f3a5a; */
+    background:#515e86;
     border-radius: 10px;
     align-items:center;
   }

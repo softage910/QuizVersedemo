@@ -1,5 +1,6 @@
 import '../Day1Module.css';
-
+import four from '../../public/Images/2.5.png'
+import Image from 'next/image';
 
 
 export default function FifthTopic() {
@@ -21,8 +22,10 @@ export default function FifthTopic() {
                         <li>Spotlight can also perform calculations, convert units, and initiate web searches.</li>
                     </ul>
 
-                    <figure className='img-21'>
-                        <img src="../images/2.5.png" alt="Spotlight Search Example" />
+                    <figure>
+                        {/* <img src="../images/2.5.png" alt="Spotlight Search Example" /> */}
+                        <Image src={four} width={850} height={0} alt="Spotlight Search Example" style={{borderRadius:'9px'}}/>
+                       
                     </figure>
                     <blockquote>
                         💡 <strong>Spotlight Search is the most used feature on an average Mac. Start using Spotlight search for navigation and much more!</strong>

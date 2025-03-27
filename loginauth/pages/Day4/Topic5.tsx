@@ -1,5 +1,6 @@
 import '../Day1Module.css';
-
+import redirect from '../../public/Images/redirect.png';
+import Image from 'next/image';
 export default function FifthTopic() {
     return (
         <>
@@ -17,7 +18,7 @@ export default function FifthTopic() {
             </p><br />
             <br />
             <a href="https://arxiv.org/pdf/2311.11797" target="_blank">                                <button className='Watch-Button'>
-                Reading Material
+            Access It Here <Image src={redirect} width={20} height={20} alt="Logo"/>
             </button>
             </a>
 
@@ -35,7 +36,7 @@ export default function FifthTopic() {
             </p><br />
             <br />
             <a href="https://arxiv.org/pdf/2312.11805" target="_blank">                                <button className='Watch-Button'>
-                Reading Material
+                Access It Here <Image src={redirect} width={20} height={20} alt="Logo"/>
             </button>
             </a>
 

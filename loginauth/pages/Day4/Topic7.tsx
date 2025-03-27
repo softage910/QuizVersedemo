@@ -1,5 +1,6 @@
 import '../Day1Module.css';
-
+import redirect from '../../public/Images/redirect.png';
+import Image from 'next/image';
 export default function SeventhTopic() {
     return (
         <>
@@ -16,14 +17,14 @@ export default function SeventhTopic() {
             <br />
             <ol className="ol">
                 <li>   <a href="https://openai.com/index/introducing-operator/" target="_blank">                                <button className='Watch-Button'>
-                ReferenceMaterial
+                Access It Here <Image src={redirect} width={20} height={20} alt="Logo" />
                 </button>
                 </a></li>
                 <br />
                 <br />
                 <li>
                 <a href="https://www.youtube.com/watch?v=gYqs-wUKZsM" target="_blank">                                <button className='Watch-Button'>
-                    Reference Video1
+                    Access It Here <Image src={redirect} width={20} height={20} alt="Logo" />
                 </button>
                 </a>
                 </li>
@@ -31,7 +32,7 @@ export default function SeventhTopic() {
                 <br />
                 <li>
                 <a href="https://www.youtube.com/watch?v=CSE77wAdDLg" target="_blank">                                <button className='Watch-Button'>
-                Reference Video2
+                Access It Here <Image src={redirect} width={20} height={20} alt="Logo"/>
                 </button>
                 </a>
                 </li>

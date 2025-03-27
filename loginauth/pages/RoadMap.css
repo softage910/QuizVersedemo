@@ -138,7 +138,8 @@
     to bottom right,
     #273054,
     #fe4845) */
-    background-color: #2F3A5A;
+    /* background-color: #2F3A5A; */
+    background:#515e86;
 }
 
 .ProgressGraph{

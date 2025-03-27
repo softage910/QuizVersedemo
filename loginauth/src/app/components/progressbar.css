@@ -15,11 +15,12 @@
     align-items: center;
     justify-content: flex-end;
     padding-right: 10px;
-    background: linear-gradient(
+    /* background: linear-gradient(
     to bottom left,
     rgb(9, 45, 80),
     rgb(230, 34, 34)
-) !important;    height: 100%; /* Ensure it covers full height */
+) !important;     */
+height: 100%; /* Ensure it covers full height */
 }
 
 .progress .progress-value {
