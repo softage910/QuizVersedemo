@@ -1,4 +1,6 @@
 import '../Day1Module.css';
+import one from '../../public/Images/5.3.2.png';
+import Image from 'next/image';
 
 export default function FourTopic() {
     return (
@@ -42,7 +44,8 @@ ACE different possible starting points.
             </ol>
             <br />
             <figure className='img-5-3'>
-                            <img src='../images/5.3.2.png'/>
+                            {/* <img src='../images/5.3.2.png'/> */}
+                            <Image src={one} width={600} height={0} alt="Logo" style={{borderRadius:'9px'}}/>
                         </figure>
 
 

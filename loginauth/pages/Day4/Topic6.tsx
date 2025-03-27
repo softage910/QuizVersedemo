@@ -1,4 +1,6 @@
 import '../Day1Module.css';
+import redirect from '../../public/Images/redirect.png';
+import Image from 'next/image';
 
 export default function SixthTopic() {
     return (
@@ -18,7 +20,7 @@ export default function SixthTopic() {
             <ol className="ol">
                 <li>
                     <a href="https://www.anthropic.com/news/3-5-models-and-computer-use" target="_blank">                                <button className='Watch-Button'>
-                        Reference Material
+                        Access It Here <Image src={redirect} width={20} height={20} alt="Logo"/>
                     </button>
                     </a>
                     <br />
@@ -26,7 +28,7 @@ export default function SixthTopic() {
                 </li>
                 <li>
                     <a href="https://www.youtube.com/watch?v=ODaHJzOyVCQ" target="_blank">                                <button className='Watch-Button'>
-                        Reference Video
+                        Access It Here <Image src={redirect} width={20} height={20} alt="Logo"/>
                     </button>
                     </a>
                 </li>

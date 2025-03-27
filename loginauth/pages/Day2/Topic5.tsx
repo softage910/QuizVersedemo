@@ -22,9 +22,9 @@ export default function FifthTopic() {
                         <li>Spotlight can also perform calculations, convert units, and initiate web searches.</li>
                     </ul>
 
-                    <figure className='img-21'>
+                    <figure>
                         {/* <img src="../images/2.5.png" alt="Spotlight Search Example" /> */}
-                        <Image src={four} width={0} height={0} alt="Spotlight Search Example"/>
+                        <Image src={four} width={850} height={0} alt="Spotlight Search Example" style={{borderRadius:'9px'}}/>
                        
                     </figure>
                     <blockquote>

@@ -17,9 +17,9 @@ export default function SecondTopic() {
                         <li>On a Mac, there&apos;s a single menu bar at the top of the screen. As you switch apps, the menu items adapt to match the current application.</li>
                     </ul>
 
-                    <figure className='img-21'>
+                    <figure>
                         {/* <img src="../images/2.0.png" alt="Menu Bar Example" /> */}
-                        <Image src={three} width={0} height={0} alt="Menu Bar Example" />
+                        <Image src={three} width={1050} height={0} alt="Menu Bar Example" style={{borderRadius:'9px'}}/>
                     </figure>
                     <ul className="ul">
                         <li>One constant menu item is the <strong>Apple menu</strong>. Consider the <strong>Apple menu</strong> as your system control center. From there, you can shut down, restart, force quit apps, or quickly open System Settings.</li>
@@ -32,9 +32,9 @@ export default function SecondTopic() {
                         <li>Access quick settings—such as brightness, volume, headphone connections, or sound output—directly from the menu bar.</li>
                     </ul>
 
-                    <figure className='img-22'>
+                    <figure>
                         {/* <img src="../images/2.2.png" alt="Control Center Example" /> */}
-                        <Image src={two} width={0} height={0} alt="Control Center Example" />
+                        <Image src={two} width={400} height={0} alt="Control Center Example" style={{borderRadius:'9px'}}/>
                     </figure>
                     <ul className="ul">
                         <li>Click the date and time to open the Notification Center, which shows recent alerts and hosts widgets (e.g., weather, to-do lists, calendar events).</li>
@@ -46,9 +46,9 @@ export default function SecondTopic() {
                         <li>Use the Dock to pin frequently used apps, documents, and folders for quick access.</li>
                     </ul>
 
-                    <figure className='img-21'>
+                    <figure>
                         {/* <img src="../images/2.3.png" alt="Dock Example" /> */}
-                        <Image src={one} width={0} height={0} alt="Dock Example" />
+                        <Image src={one} width={1050} height={0} alt="Dock Example" style={{borderRadius:'9px'}}/>
                     </figure>
                     <ul className="ul">
                         <li>Open <strong>Launchpad</strong> to view all installed apps. Drag any app from Launchpad to the Dock for easier access.</li>

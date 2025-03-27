@@ -1,4 +1,6 @@
 import '../Day1Module.css';
+import redirect from '../../public/Images/redirect.png';
+import Image from 'next/image';
 
 export default function ThirdTopic() {
     return (
@@ -19,7 +21,7 @@ export default function ThirdTopic() {
 
                 <li>
                     <a href="https://arxiv.org/pdf/2307.13854" target="_blank">                                <button className='Watch-Button'>
-                        Research Paper
+                    Access It Here <Image src={redirect} width={20} height={20} alt="Logo"/>
                     </button>
                     </a>
                 </li>

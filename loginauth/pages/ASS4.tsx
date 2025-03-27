@@ -64,7 +64,7 @@ interface Question {
     pairs: never[];
     question: string;
     type: "mcq" | "TF" | "fillblank" | "match";
-    options?: string[]; // Optional, only for MCQ
+    options?: string[]; 
     correctAnswer?: string;
     matchPairs?: { left: string; right: string }[]; // Only for Match the Following
 }
@@ -79,44 +79,32 @@ const OnlineTest = () => {
     const [questions, setQuestions] = useState<Question[]>([]); // Ignore TypeScript warnings
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
-    // const [visitedQuestions, setVisitedQuestions] = useState<number[]>([]);
+
     const [questionStatus, setQuestionStatus] = useState<{ [key: number]: string }>({});
     const [timeLeft, setTimeLeft] = useState(3600);
     const [isPaused, setIsPaused] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const router = useRouter();
     const [isOut, setIsOut] = useState(false);
-const [outTime, setOutTime] = useState(0);
-const [countdownTimer, setCountdownTimer] = useState<NodeJS.Timeout | null>(null);
-const [showViolationModal, setShowViolationModal] = useState(false);
-const [isNextEnabled, setNextEnabled] = useState(false); // ✅ State to track Next button
-const [matchedPairs, setMatchedPairs] = useState<{ left: string; right: string }[]>([]); // ✅ Store matched data
+    const [outTime, setOutTime] = useState(0);
+    const [countdownTimer, setCountdownTimer] = useState<NodeJS.Timeout | null>(null);
+    const [showViolationModal, setShowViolationModal] = useState(false);
+    const [isNextEnabled, setNextEnabled] = useState(false); // ✅ State to track Next button
+    const [matchedPairs, setMatchedPairs] = useState<{ left: string; right: string }[]>([]); // ✅ Store matched data
 
 
 
-// const matchQuestion = {
-//     title: "Match the following",
-//     left: ["Apple", "Banana", "Carrot"],
-//     right: ["Fruit", "Vegetable", "Fruit"],
-// };
 
-// const [selectedPairs, setSelectedPairs] = useState<{ [key: string]: string }>({});
 
-// const handleMatchChange = (updatedPairs: { [key: string]: string }) => {
-//     setSelectedPairs(updatedPairs);
-// };
+    useEffect(() => {
+        const fetchQuestions = async () => {
+            const questionsRef = ref(database, "AssessmentContent/day4/Assessment2/questions");
+            const snapshot = await get(questionsRef);
 
-    
+            if (snapshot.exists()) {
+                const fetchedQuestionsObj = snapshot.val();
 
-useEffect(() => {
-    const fetchQuestions = async () => {
-        const questionsRef = ref(database, "AssessmentContent/day4/Assessment2/questions");
-        const snapshot = await get(questionsRef);
-    
-        if (snapshot.exists()) {
-            const fetchedQuestionsObj = snapshot.val();
-            
-            const multipleChoice: Question[] = fetchedQuestionsObj.multipleChoice
+                const multipleChoice: Question[] = fetchedQuestionsObj.multipleChoice
                     ? Object.values(fetchedQuestionsObj.multipleChoice)
                     : [];
                 const fillInTheBlank: Question[] = fetchedQuestionsObj.fillInTheBlank
@@ -136,15 +124,15 @@ useEffect(() => {
                 const shuffledQuestions: Question[] = allQuestions.sort(() => Math.random() - 0.5);
 
                 setQuestions(shuffledQuestions);
-        }
-    };
-    fetchQuestions();
-}, []);
+            }
+        };
+        fetchQuestions();
+    }, []);
 
 
 
 
-    
+
     const [violations, setViolations] = useState(0);
 
 
@@ -152,34 +140,34 @@ useEffect(() => {
     useEffect(() => {
         let timer: NodeJS.Timeout;
 
-    if (!isPaused && timeLeft > 0) {
-        timer = setInterval(() => {
-            setTimeLeft((prevTime) => prevTime - 1);
-        }, 1000);
-    }
+        if (!isPaused && timeLeft > 0) {
+            timer = setInterval(() => {
+                setTimeLeft((prevTime) => prevTime - 1);
+            }, 1000);
+        }
 
-    return () => clearInterval(timer); // Cleanup on unmount
+        return () => clearInterval(timer); // Cleanup on unmount
 
     }, [timeLeft, isPaused]);
 
 
     const startOutTimer = () => {
-        console.log(isOut,outTime);
+        console.log(isOut, outTime);
         setIsOut(true);
         setOutTime(0);
-        if (countdownTimer) clearInterval(countdownTimer); // Reset any existing timer
-    
+        if (countdownTimer) clearInterval(countdownTimer); 
+
         const timer = setInterval(() => {
             setOutTime((prev) => {
-                if (prev >= 9) { // After 10 seconds
+                if (prev >= 9) { 
                     clearInterval(timer);
-                    setShowViolationModal(true); // Show violation popup
+                    setShowViolationModal(true); 
                     return prev;
                 }
                 return prev + 1;
             });
         }, 1000);
-    
+
         setCountdownTimer(timer);
     };
 
@@ -190,15 +178,15 @@ useEffect(() => {
     };
 
 
-    
 
-    // Exit fullscreen and redirect
-const handleViolationExit = () => {
-    if (document.fullscreenElement) {
-        document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
-    }
-    router.push("/dashboard"); // Redirect
-};
+
+
+    const handleViolationExit = () => {
+        if (document.fullscreenElement) {
+            document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
+        }
+        router.push("/dashboard"); // Redirect
+    };
 
     const enterFullscreen = () => {
         if (document.documentElement.requestFullscreen) {
@@ -206,11 +194,11 @@ const handleViolationExit = () => {
                 console.error("Fullscreen request failed:", err);
             });
         }
-        setShowModal(false); 
+        setShowModal(false);
         setIsPaused(false); // Resume timer
         resetOutTimer(); // Reset 10s timer on re-enter
 
-        // Hide modal once fullscreen is activated
+        
     };
 
     const handleFullscreenExit = () => {
@@ -235,15 +223,15 @@ const handleViolationExit = () => {
             setViolations((prev) => prev + 1);
             setIsPaused(true); // Pause timer
 
-            setShowModal(true); // Show modal if tab is switched
-            startOutTimer(); // Start 10s timer
+            setShowModal(true); 
+            startOutTimer(); 
 
 
             if (violations >= 3) {
                 alert("Test is being submitted due to multiple tab switches.");
                 router.push("/dashboard");
             }
-        }else{
+        } else {
             resetOutTimer(); // Reset 10s timer on re-enter
 
         }
@@ -259,14 +247,14 @@ const handleViolationExit = () => {
         };
     }, [violations]);
 
-    
+
     // const handle
-    
+
 
     const handleOptionChange = (option: string) => {
         setSelectedOption(option);
     };
-    
+
     const handleNextQuestion = () => {
 
         setQuestionStatus((prev) => ({
@@ -281,9 +269,9 @@ const handleViolationExit = () => {
                 return;
             }
 
-            const userId = user.uid; // Get the actual user ID from Firebase Auth
+            const userId = user.uid; 
 
-            // Save to Firebase Realtime Database
+      
             set(ref(database, `responses/${userId}/day4/Assessment2/${currentQuestionIndex}`), {
                 selectedOption: selectedOption,
                 question: questions[currentQuestionIndex].question,
@@ -291,17 +279,17 @@ const handleViolationExit = () => {
                 isCorrect: selectedOption === questions[currentQuestionIndex].correctAnswer,
             });
 
-            // Move to the next question
+     
             setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
             setSelectedOption(null);
         } else if (isNextEnabled) {
             // Move to the next question
-            const user = auth.currentUser; // Get the current authenticated user
+            const user = auth.currentUser; 
             if (!user) {
                 console.error("No authenticated user found!");
                 return;
             }
-            const userId = user.uid; // Get the actual user ID from Firebase Auth
+            const userId = user.uid; 
 
 
             set(ref(database, `responses/${userId}/day3/Assessment2/${currentQuestionIndex}`), matchedPairs)
@@ -312,7 +300,7 @@ const handleViolationExit = () => {
             setNextEnabled(false);
         }
 
-        // Prevent proceeding without selection
+      
     };
 
     // const handleQuestionClick = (index: number) => {
@@ -368,118 +356,118 @@ const handleViolationExit = () => {
     //     if (document.fullscreenElement) {
     //         document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
     //     }
-    
+
     //     const user = auth.currentUser; 
     //     if (!user) {
     //         console.error("No authenticated user found!");
     //         return;
     //     }
-    
+
     //     const userId = user.uid;
-    
+
     //     // Store quiz status under the correct day
     //     set(ref(database, `users/${userId}/progress/Day4/Assessment2`), true);
-    
+
     //     router.push("/dashboard"); 
     // };
-    
-         const finishQuiz = async () => {
-             if (document.fullscreenElement) {
-                 document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
-             }
-         
-             const user = auth.currentUser;
-             if (!user) {
-                 console.error("No authenticated user found!");
-                 return;
-             }
-         
-             const userId = user.uid;
-             const day = "Day4"; // Dynamically set this based on the quiz day
-             router.push("/dashboard");
 
-         
-             try {
-                 // Store quiz completion status in Firebase under the correct day
-                 await set(ref(database, `users/${userId}/progress/${day}/Assessment 2`), true);
-         
-                 // Fetch user details from Firebase
-                 const userRef = ref(database, `users/${userId}`);
-                 const userSnapshot = await get(userRef);
-         
-                 if (!userSnapshot.exists()) {
-                     throw new Error("User details not found in Firebase");
-                 }
-         
-                 const userDetails = userSnapshot.val(); // Assuming it contains { name, empCode, email }
-         
-                 // Fetch responses from Firebase
-                 const responsesRef = ref(database, `responses/${userId}/day4/Assessment2`);
-                 const snapshot = await get(responsesRef);
-         
-                 let formattedResponses: { question: string; answer: string }[] = [];
-         
-                 if (snapshot.exists()) {
-                    const data = snapshot.val();
-                    
-                    formattedResponses = Object.entries(data).map(([, response]) => {
-                        const typedResponse = response as ResponseData; // ✅ Explicitly cast `response`
-                        
-                        return {
-                            name: userDetails.name,
-                            email: userDetails.email,
-                            EmpCode: userDetails.uid,
-                            question: typedResponse.question,
-                            answer: typedResponse.selectedOption,
-                        };
-                    });
-                }
-         
-                 // Combine user details with responses
-                 const csvData = {
-                     name: userDetails.name,
-                     email: userDetails.email,
-                     EmpCode: userDetails.uid,
-                     Day: "Day4 - Web Arena Assessment",
-                     responses: formattedResponses, // Only question and answer columns
-                 };
-         
-                 // Send CSV data to the admin
-                 const response = await fetch("/api/send-csv", {
-                     method: "POST",
-                     headers: { "Content-Type": "application/json" },
-                     body: JSON.stringify(csvData),
-                 });
-         
-                 if (!response.ok) throw new Error("Failed to send CSV");
-         
-         
-                 // Redirect user to the dashboard
-             } catch (error) {
-                 console.error("Error during quiz submission:", error);
-                 alert("There was an error submitting the quiz. Please try again.");
-             }
-         };
+    const finishQuiz = async () => {
+        if (document.fullscreenElement) {
+            document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
+        }
+
+        const user = auth.currentUser;
+        if (!user) {
+            console.error("No authenticated user found!");
+            return;
+        }
+
+        const userId = user.uid;
+        const day = "Day4"; // Dynamically set this based on the quiz day
+        router.push("/dashboard");
+
+
+        try {
+            // Store quiz completion status in Firebase under the correct day
+            await set(ref(database, `users/${userId}/progress/${day}/Assessment 2`), true);
+
+            // Fetch user details from Firebase
+            const userRef = ref(database, `users/${userId}`);
+            const userSnapshot = await get(userRef);
+
+            if (!userSnapshot.exists()) {
+                throw new Error("User details not found in Firebase");
+            }
+
+            const userDetails = userSnapshot.val(); // Assuming it contains { name, empCode, email }
+
+            // Fetch responses from Firebase
+            const responsesRef = ref(database, `responses/${userId}/day4/Assessment2`);
+            const snapshot = await get(responsesRef);
+
+            let formattedResponses: { question: string; answer: string }[] = [];
+
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+
+                formattedResponses = Object.entries(data).map(([, response]) => {
+                    const typedResponse = response as ResponseData; // ✅ Explicitly cast `response`
+
+                    return {
+                        name: userDetails.name,
+                        email: userDetails.email,
+                        EmpCode: userDetails.uid,
+                        question: typedResponse.question,
+                        answer: typedResponse.selectedOption,
+                    };
+                });
+            }
+
+            // Combine user details with responses
+            const csvData = {
+                name: userDetails.name,
+                email: userDetails.email,
+                EmpCode: userDetails.uid,
+                Day: "Day4 - Web Arena Assessment",
+                responses: formattedResponses, // Only question and answer columns
+            };
+
+            // Send CSV data to the admin
+            const response = await fetch("/api/send-csv", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(csvData),
+            });
+
+            if (!response.ok) throw new Error("Failed to send CSV");
+
+
+            // Redirect user to the dashboard
+        } catch (error) {
+            console.error("Error during quiz submission:", error);
+            alert("There was an error submitting the quiz. Please try again.");
+        }
+    };
 
 
     return (
-        <div className="Demo">
+        <div className="Demo" onContextMenu={(e) => e.preventDefault()}>
 
-{(showModal || showViolationModal) && (
-    <div className="modal-overlay">
-        <div className="modal">
-            <h2>{showViolationModal ? "Unwanted Activity Detected" : "Attention Required"}</h2>
-            <p>
-                {showViolationModal
-                    ? "You have violated the test conditions by leaving the screen for more than 10 seconds."
-                    : "You have switched tabs or exited fullscreen. Please return to continue the test."}
-            </p>
-            <button className="fullscreen-btn" onClick={showViolationModal ? handleViolationExit : enterFullscreen}>
-                {showViolationModal ? "Back to Dashboard" : "Re-enter Fullscreen"}
-            </button>
-        </div>
-    </div>
-)}
+            {(showModal || showViolationModal) && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <h2>{showViolationModal ? "Unwanted Activity Detected" : "Attention Required"}</h2>
+                        <p>
+                            {showViolationModal
+                                ? "You have violated the test conditions by leaving the screen for more than 10 seconds."
+                                : "You have switched tabs or exited fullscreen. Please return to continue the test."}
+                        </p>
+                        <button className="fullscreen-btn" onClick={showViolationModal ? handleViolationExit : enterFullscreen}>
+                            {showViolationModal ? "Back to Dashboard" : "Re-enter Fullscreen"}
+                        </button>
+                    </div>
+                </div>
+            )}
 
 
             <div className="Test-Section">
@@ -496,8 +484,8 @@ const handleViolationExit = () => {
                                 <h2 className="question-title">Question {currentQuestionIndex + 1}</h2>
                                 <p className="question-text">{questions[currentQuestionIndex]?.question}</p>
                             </div>
-{/* Render Component Based on Question Type */}
-{questions[currentQuestionIndex]?.type === "mcq" && (
+                            {/* Render Component Based on Question Type */}
+                            {questions[currentQuestionIndex]?.type === "mcq" && (
                                 // <MultipleChoiceQuestion
                                 //     question={questions[currentQuestionIndex]}
                                 //     selectedOption={selectedOption}
@@ -505,20 +493,20 @@ const handleViolationExit = () => {
                                 // />
 
                                 <div className="options-section">
-        {questions[currentQuestionIndex]?.options?.map((option: string, index: number) => (
-            <label key={index} className="option-label">
-                <input
-                    type="radio"
-                    name="question"
-                    value={option}
-                    checked={selectedOption === option}
-                    onChange={() => handleOptionChange(option)}
-                    className="option-input"
-                />
-                {option}
-            </label>
-        ))}
-    </div>
+                                    {questions[currentQuestionIndex]?.options?.map((option: string, index: number) => (
+                                        <label key={index} className="option-label">
+                                            <input
+                                                type="radio"
+                                                name="question"
+                                                value={option}
+                                                checked={selectedOption === option}
+                                                onChange={() => handleOptionChange(option)}
+                                                className="option-input"
+                                            />
+                                            {option}
+                                        </label>
+                                    ))}
+                                </div>
                             )}
                             {questions[currentQuestionIndex]?.type === "TF" && (
                                 // <TrueFalseQuestion
@@ -527,20 +515,20 @@ const handleViolationExit = () => {
                                 // />
 
                                 <div className="options-section">
-        {["True", "False"].map((option, index) => (
-            <label key={index} className="option-label">
-                <input
-                    type="radio"
-                    name="question"
-                    value={option}
-                    checked={selectedOption === option}
-                    onChange={() => handleOptionChange(option)}
-                    className="option-input"
-                />
-                {option}
-            </label>
-        ))}
-    </div>
+                                    {["True", "False"].map((option, index) => (
+                                        <label key={index} className="option-label">
+                                            <input
+                                                type="radio"
+                                                name="question"
+                                                value={option}
+                                                checked={selectedOption === option}
+                                                onChange={() => handleOptionChange(option)}
+                                                className="option-input"
+                                            />
+                                            {option}
+                                        </label>
+                                    ))}
+                                </div>
                             )}
                             {questions[currentQuestionIndex]?.type === "fillblank" && (
                                 // <FillInTheBlankQuestion
@@ -549,20 +537,20 @@ const handleViolationExit = () => {
                                 // />
 
                                 <div className="fill-blank-section">
-<textarea
-    placeholder="Enter your answer"
-    value={selectedOption || ""}
-    onChange={(e) => handleOptionChange(e.target.value)}
-    className="fill-blank-input"
-    rows={4} // Adjust the number of rows as needed
-/>
-    </div>
+                                    <textarea
+                                        placeholder="Enter your answer"
+                                        value={selectedOption || ""}
+                                        onChange={(e) => handleOptionChange(e.target.value)}
+                                        className="fill-blank-input"
+                                        rows={4} // Adjust the number of rows as needed
+                                    />
+                                </div>
                             )}
                             {questions[currentQuestionIndex]?.type === "match" && (
-                            <MatchTheFollowing question={questions[currentQuestionIndex]} setNextEnabled={setNextEnabled} onSaveMatch={setMatchedPairs}
+                                <MatchTheFollowing question={questions[currentQuestionIndex]} setNextEnabled={setNextEnabled} onSaveMatch={setMatchedPairs}
 
-                            // Pass this function
-                            /> // Render MatchTheFollowing component
+                                // Pass this function
+                                /> // Render MatchTheFollowing component
                             )}
 
 
@@ -579,32 +567,32 @@ const handleViolationExit = () => {
                                 </div>
                             </div> */}
 
-<div className="actions">
-    {currentQuestionIndex < questions.length - 1 ? (
-        <>
-            <button className="Skip-btn" onClick={handleSkipQuestion}>Skip</button>
-            <div className="nav-buttons">
-                <button
-                    className="nav-btn"
-                    onClick={handleNextQuestion}
-                    disabled={!isNextEnabled && !selectedOption} // Disable if no option is selected
-                >
-                    Next
-                </button>
-            </div>
-        </>
-    ) : (
-        <div className="nav-buttons">
-            <button
-                className="nav-btn"
-                onClick={finishQuiz} // Calls finishQuiz function
-                disabled={!isNextEnabled && !selectedOption} // Disable if no option is selected
-            >
-                Finish
-            </button>
-        </div>
-    )}
-</div>
+                            <div className="actions">
+                                {currentQuestionIndex < questions.length - 1 ? (
+                                    <>
+                                        <button className="Skip-btn" onClick={handleSkipQuestion}>Skip</button>
+                                        <div className="nav-buttons">
+                                            <button
+                                                className="nav-btn"
+                                                onClick={handleNextQuestion}
+                                                disabled={!isNextEnabled && !selectedOption} // Disable if no option is selected
+                                            >
+                                                Next
+                                            </button>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div className="nav-buttons">
+                                        <button
+                                            className="nav-btn"
+                                            onClick={finishQuiz} // Calls finishQuiz function
+                                            disabled={!isNextEnabled && !selectedOption} // Disable if no option is selected
+                                        >
+                                            Finish
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
 
                         </>
                     ) : (
@@ -638,14 +626,14 @@ const handleViolationExit = () => {
                             <button
                                 key={index}
                                 className={`grid-btn ${index === currentQuestionIndex
-                                        ? "active"
-                                        : questionStatus[index] === "attempted"
-                                            ? "attempted"
-                                            : questionStatus[index] === "skipped"
-                                                ? "skipped"
-                                                : ""
+                                    ? "active"
+                                    : questionStatus[index] === "attempted"
+                                        ? "attempted"
+                                        : questionStatus[index] === "skipped"
+                                            ? "skipped"
+                                            : ""
                                     }`}
-                                
+
                             >
                                 {index + 1}
                             </button>

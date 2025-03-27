@@ -1,4 +1,6 @@
 import '../Day1Module.css';
+import redirect from '../../public/Images/redirect.png';
+import Image from 'next/image';
 
 export default function ThirdTopic() {
     return (
@@ -15,7 +17,7 @@ the data field.
                 </p>
                 <br />
                 <a href="https://www.datacamp.com/blog" target="_blank">                                <button className='Watch-Button'>
-                Reference Material
+                Reference Material <Image src={redirect} width={20} height={20} alt="Logo"/>
                 </button>
                 </a>
 
@@ -32,7 +34,7 @@ AI. You can subscribe for free to get these updates in your inbox.
                 </p>
                 <br />
                 <a href="https://www.therundown.ai/" target="_blank">                                <button className='Watch-Button'>
-                Reference Material
+                Reference Material <Image src={redirect} width={20} height={20} alt="Logo"/>
                 </button>
                 </a>
 
@@ -46,7 +48,7 @@ informed about recent developments, product launches, and research in AI.
                 </p>
                 <br />
                 <a href="https://aibreakfast.beehiiv.com/" target="_blank">                                <button className='Watch-Button'>
-                Reference Material
+                Reference Material <Image src={redirect} width={20} height={20} alt="Logo"/>
                 </button>
                 </a>
 
