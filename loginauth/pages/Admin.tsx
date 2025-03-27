@@ -22,10 +22,10 @@ export default function AdminPage() {
   const [InviteMessage, setInviteMessage] = useState<string | null>(null);
 
 
-  useEffect(() => {
-    const user = localStorage.getItem("AutoUser");
+  // useEffect(() => {
+  //   const user = localStorage.getItem("AutoUser");
 
-  }, []);
+  // }, []);
 
   useEffect(() => {
     const usersRef = ref(database, "invitedUsers");

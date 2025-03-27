@@ -60,10 +60,10 @@ interface UserData {
   Day8?: DayData;
 }
 
-type User = {
-  type: string;
-  uid: string;
-};
+// type User = {
+//   type: string;
+//   uid: string;
+// };
 
 // type DayData = {
 //   Module?: Record<string, boolean>;

@@ -1,13 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ref, onValue, query, orderByChild, equalTo, get } from "firebase/database";
+import { ref, onValue, query, get } from "firebase/database";
 import "./progressbar.css";
 import { database } from "../firebase/firebaseconfig";
 
-type User = {
-  type: string;
-  uid: string;
-};
+// type User = {
+//   type: string;
+//   uid: string;
+// };
 
 const ProgressBar = () => {
   const [progressData, setProgressData] = useState<Record<string, Record<string, boolean>> | null>(null);
