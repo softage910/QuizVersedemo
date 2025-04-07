@@ -704,15 +704,15 @@ export default function Day1Module() {
 
 
   const topics = [
-    { id: 1, key: "Topic1", component: <Topic1 /> }
-    // { id: 2, key: "Topic2", component: <Topic2 /> },
-    // { id: 3, key: "Topic3", component: <Topic3 /> },
-    // { id: 4, key: "Topic4", component: <Topic4 /> },
-    // { id: 5, key: "Topic5", component: <Topic5 /> },
-    // { id: 6, key: "Topic6", component: <Topic6 /> },
-    // { id: 7, key: "Topic7", component: <Topic7 /> },
-    // { id: 8, key: "Topic8", component: <Topic8 /> },
-    // { id: 9, key: "Topic9", component: <Topic9 /> },
+    { id: 1, key: "Topic1", component: <Topic1 /> },
+    { id: 2, key: "Topic2", component: <Topic2 /> },
+    { id: 3, key: "Topic3", component: <Topic3 /> },
+    { id: 4, key: "Topic4", component: <Topic4 /> },
+    { id: 5, key: "Topic5", component: <Topic5 /> },
+    { id: 6, key: "Topic6", component: <Topic6 /> },
+    { id: 7, key: "Topic7", component: <Topic7 /> },
+    { id: 8, key: "Topic8", component: <Topic8 /> },
+    { id: 9, key: "Topic9", component: <Topic9 /> },
   ];
 
   useEffect(() => {
@@ -799,7 +799,7 @@ export default function Day1Module() {
   return (
     <div className="Day1-Main">
       <div className="Header">
-        {/* <h1 className="h1">Day 1: The Importance Of Data In Model Training</h1> */}
+        <h1 className="h1">Day 1: The Importance Of Data In Model Training</h1>
       </div>
 
       <div className="MainContent">

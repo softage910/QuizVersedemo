@@ -22,10 +22,10 @@ export default function AdminPage() {
   const [InviteMessage, setInviteMessage] = useState<string | null>(null);
 
 
-  useEffect(() => {
-    const user = localStorage.getItem("AutoUser");
+  // useEffect(() => {
+  //   const user = localStorage.getItem("AutoUser");
 
-  }, []);
+  // }, []);
 
   useEffect(() => {
     const usersRef = ref(database, "invitedUsers");
@@ -68,7 +68,7 @@ export default function AdminPage() {
     "Day5": { "Module 1": false, "Module 2": false, "Assessment": false },
     "Day6": { "Module": false },
     "Day7": { "Assessment 1": false },
-    "Day8": { "Module": false },
+    "Day8": { "Module": false }, 
   };
 
 
