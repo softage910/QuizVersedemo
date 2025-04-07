@@ -124,7 +124,7 @@ export default function Day2Module() {
   return (
     <div className="Day1-Main">
       <div className="Header">
-        <h1 className="h1">Day 2: Mac Os Fundamentals</h1>
+        {/* <h1 className="h1">Day 2: Mac Os Fundamentals</h1> */}
       </div>
 
       <div className="MainContent">
