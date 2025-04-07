@@ -26,9 +26,15 @@ export default function FirstAssessment() {
             description: "\"Don’t refresh the webpage during the assessment. This will lead to immediate submission of your responses.\""
         },
         {
-            image: "/images/notabswitching.png",
-            title: "No Tab Switching",
-            description: "Do not switch tabs during the quiz. If you leave the tab, your attempt may be invalidated."
+            image: "Images/notabswitching.png",
+            title: "No Screen Switching",
+            description: "Screen switching is not allowed during the quiz. If you switch tabs or windows more than 3 times, your attempt will be auto-submitted."
+        },
+        {
+            image: "Images/leave-screen.png", // replace with your actual image name
+            title: "Stay on Screen",
+            description:
+                "You must stay on the quiz screen at all times. If you're away from the screen for more than 10 seconds, your attempt will be automatically submitted.",
         }
     ];
 
@@ -96,7 +102,7 @@ export default function FirstAssessment() {
                      <table className="Assessment-Table">
                          <thead>
                              <tr>
-                                 <th>Number of Question</th>
+                                 <th>Number of Questions</th>
                                 <th>Duration</th>
                              </tr>
                          </thead>

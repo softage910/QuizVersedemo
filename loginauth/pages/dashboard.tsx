@@ -6,32 +6,26 @@ import { signOut } from "firebase/auth";
 import { auth } from "../src/app/firebase/firebaseconfig";
 import Image from "next/image";
 import Logo from "../public/Logo.png";
-// import Day1Module from "./Day1Module1";
+import Day1Module from "./Day1Module";
 import RoadMap from "./RoadMap";
-// import Day2Module from "./Day1Module2";
+import Day2Module from "./Day2Module";
 import Day3Module from "./Day3Module";
-// import Day4Module from "./Day4Module";
-// import Day8Module from "./Day8Module";
+import Day4Module from "./Day4Module";
+import Day8Module from "./Day8Module";
 import FirstAssessment from "./Assessment1";
-// import SecondAssessment1 from "./Assessment21";
-// import SecondAssessment2 from "./Assessment22";
-// import SeventhAssessment from "./Assessment7";
-// import SixthAssessment from "./Assessment6";
+import SecondAssessment from "./Assessment2";
+import SeventhAssessment from "./Assessment7";
+import SixthAssessment from "./Assessment6";
 import ThirdAssessment from "./Assessment3";
-// import FourthAssessment from "./Assessment4";
-// import FifthAssessment from "./Assessment5";
+import FourthAssessment from "./Assessment4";
+import FifthAssessment from "./Assessment5";
 import Day5Module1 from "./Day5Module1";
 import { database } from "../src/app/firebase/firebaseconfig"; 
 import { get, onValue, query, ref } from "firebase/database";
-// import Day5Module2 from "./Day5Module2";
-// import Day6Module from "./Day6Module";
+import Day5Module2 from "./Day5Module2";
+import Day6Module from "./Day6Module";
 import NotificationMessage from "@/app/components/NotificationMessage";
 import AdminPage from "./Admin";
-import Day1Module1 from "./Day1Module1";
-import Day1Module2 from "./Day1Module2";
-import Day22Module1 from "./Day22Module1";
-import Day22Module2 from "./Day22Module2";
-import Day22Module3 from "./Day22Module3";
 
 
 type ModuleInfo = {
@@ -66,10 +60,10 @@ interface UserData {
   Day8?: DayData;
 }
 
-type User = {
-  type: string;
-  uid: string;
-};
+// type User = {
+//   type: string;
+//   uid: string;
+// };
 
 // type DayData = {
 //   Module?: Record<string, boolean>;
@@ -92,39 +86,37 @@ export default function Dashboard() {
   const [userID, setUserID] = useState<string>("");
   const [UserType, setUserType] = useState<string>("");
   const [userAuto, setuserAuto] = useState<string>("");
+  const [UserName, setUserName] = useState<string | null>("");
+
 
 
   const dayModules: { [key: string]: string[] } = {
-    "Day 1": ["📖 Module 1","📖 Module 2","📝 Assessment"],
-    "Day 2": ["📖 Module 1", "📖 Module 2","📖 Module 3"],
-    "Day 3": ["📖 Module","📝 Assessment 1"]
-    // "Day 4": ["📖 Module", "📝 Assessment 1", "📝 Assessment 2", "📝 Assessment 3"],
-    // "Day 5": ["📖 Module 1", "📖 Module 2", "📝 Assessment"],
-    // "Day 6": ["📖 Module"],
-    // "Day 7": ["📝 Assessment 1"],
-    // "Day 8": ["📖 Module"],
+    "Day 1": ["📖 Module"],
+    "Day 2": ["📖 Module", "📝 Assessment"],
+    "Day 3": ["📖 Module", "📝 Assessment"],
+    "Day 4": ["📖 Module", "📝 Assessment 1", "📝 Assessment 2", "📝 Assessment 3"],
+    "Day 5": ["📖 Module 1", "📖 Module 2", "📝 Assessment"],
+    "Day 6": ["📖 Module"],
+    "Day 7": ["📝 Assessment 1"],
+    "Day 8": ["📖 Module"],
   };
 
   const moduleMap: { [key: string]: ModuleInfo } = {
-    "Day 1 - 📖 Module 1": { day: "Day 1", module: "📖 Module1", customname: "Module",component: Day1Module1 },
-    "Day 1 - 📖 Module 2": { day: "Day 1", module: "📖 Module2", customname: "Module",component: Day1Module2 },
-    "Day 1 - 📝 Assessment": { day: "Day 1", module: "📝 Assessment", customname: "Assessment",component: FirstAssessment },
-    "Day 2 - 📖 Module 1": { day: "Day 2", module: "📖 Module", customname: "Module", component: Day22Module1 },
-    "Day 2 - 📖 Module 2": { day: "Day 2", module: "📖 Module", customname: "Module", component: Day22Module2 },
-    "Day 2 - 📖 Module 3": { day: "Day 2", module: "📖 Module", customname: "Module", component: Day22Module3 },
-    // "Day 2 - 📝 Assessment": { day: "Day 2", module: "📝 Assessment", customname: "Assessment",component: FirstAssessment },
+    "Day 1 - 📖 Module": { day: "Day 1", module: "📖 Module", customname: "Module",component: Day1Module },
+    "Day 2 - 📖 Module": { day: "Day 2", module: "📖 Module", customname: "Module", component: Day2Module },
+    "Day 2 - 📝 Assessment": { day: "Day 2", module: "📝 Assessment", customname: "Assessment",component: FirstAssessment },
     "Day 3 - 📖 Module": { day: "Day 3", module: "📖 Module", customname: "Module",component: Day3Module },
-    "Day 3 - 📝 Assessment 1": { day: "Day 3", module: "📝 Assessment", customname: "Assessment",component:  ThirdAssessment },
-    // "Day 4 - 📖 Module": { day: "Day 4", module: "📖 Module", customname: "Module",component: Day4Module },
-    // "Day 4 - 📝 Assessment 1": { day: "Day 4", module: "📝 Assessment 1", customname: "Assessment1",component: ThirdAssessment },
-    // "Day 4 - 📝 Assessment 2": { day: "Day 4", module: "📝 Assessment 2", customname: "Assessment2",component: FourthAssessment },
-    // "Day 4 - 📝 Assessment 3": { day: "Day 4", module: "📝 Assessment 3", customname: "Assessment3",component: FifthAssessment },
-    // "Day 5 - 📖 Module 1": { day: "Day 5", module: "📖 Module 1", customname: "Module1",component: Day5Module1 },
-    // "Day 5 - 📖 Module 2": { day: "Day 5", module: "📖 Module 2", customname: "Module2",component: Day5Module2 },
-    // "Day 5 - 📝 Assessment": { day: "Day 5", module: "📝 Assessment", customname: "Assessment",component: SixthAssessment },
-    // "Day 6 - 📖 Module": { day: "Day 6", module: "📖 Module", customname: "Module",component: Day6Module },
-    // "Day 7 - 📝 Assessment 1": { day: "Day 7", module: "📝 Assessment 1", customname: "Assessment",component: SeventhAssessment },
-    // "Day 8 - 📖 Module": { day: "Day 8", module: "📖 Module", customname: "Module",component: Day8Module },
+    "Day 3 - 📝 Assessment": { day: "Day 3", module: "📝 Assessment", customname: "Assessment",component: SecondAssessment },
+    "Day 4 - 📖 Module": { day: "Day 4", module: "📖 Module", customname: "Module",component: Day4Module },
+    "Day 4 - 📝 Assessment 1": { day: "Day 4", module: "📝 Assessment 1", customname: "Assessment1",component: ThirdAssessment },
+    "Day 4 - 📝 Assessment 2": { day: "Day 4", module: "📝 Assessment 2", customname: "Assessment2",component: FourthAssessment },
+    "Day 4 - 📝 Assessment 3": { day: "Day 4", module: "📝 Assessment 3", customname: "Assessment3",component: FifthAssessment },
+    "Day 5 - 📖 Module 1": { day: "Day 5", module: "📖 Module 1", customname: "Module1",component: Day5Module1 },
+    "Day 5 - 📖 Module 2": { day: "Day 5", module: "📖 Module 2", customname: "Module2",component: Day5Module2 },
+    "Day 5 - 📝 Assessment": { day: "Day 5", module: "📝 Assessment", customname: "Assessment",component: SixthAssessment },
+    "Day 6 - 📖 Module": { day: "Day 6", module: "📖 Module", customname: "Module",component: Day6Module },
+    "Day 7 - 📝 Assessment 1": { day: "Day 7", module: "📝 Assessment 1", customname: "Assessment",component: SeventhAssessment },
+    "Day 8 - 📖 Module": { day: "Day 8", module: "📖 Module", customname: "Module",component: Day8Module },
     "Dashboard": { day: "", module: "Dashboard", customname: "Dashboard", component: RoadMap },
     "Admin": { day: "", module: "Admin", customname: "Admin", component: AdminPage },
   };
@@ -137,6 +129,13 @@ export default function Dashboard() {
     const invitedUsers = sessionStorage.getItem("invitedUsers");
     const UserType = sessionStorage.getItem("userType");
     const userAutoID = sessionStorage.getItem("invitedUsers");
+    const userName = sessionStorage.getItem("userName");
+
+    setUserName(userName);
+
+    console.log(UserName);
+
+
 console.log(userAutoID);
 
     const currentTime = new Date().getTime();
@@ -461,8 +460,9 @@ console.log(userAutoID);
           <div className="user-account">
             <div className="user-profile">
               <div className="user-detail">
-                             <h3>{userDetails?.name}</h3>
-                <span>{userDetails?.uid}</span></div>
+                             <h3>{UserName}</h3>
+                {/* <span>{userDetails?.uid}</span> */}
+                </div>
             
               <div className="Logout-button">
                 <a href="#" onClick={handleLogout}>
