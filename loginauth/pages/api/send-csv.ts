@@ -67,14 +67,15 @@ import nodemailer from "nodemailer";
 import { format } from "fast-csv";
 import { Readable } from "stream";
 
-// Configure the mail transport
+// Configure your email details
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: "quiz.verse@softage.ai",
-        pass: "snyt ropv qvnb gjvy", // consider using environment variables
+        pass: "snyt ropv qvnb gjvy",
     },
 });
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
@@ -82,12 +83,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
-        const { name, email, EmpCode, Day, responses } = req.body;
+        const { name, email,Day, responses } = req.body;
 
         if (!responses || responses.length === 0) {
             return res.status(400).json({ message: "No responses provided." });
         }
 
+        // Convert JSON responses to CSV format
         const csvStream = format({ headers: true });
         const csvData: string[] = [];
 
@@ -95,31 +97,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         csvStream.on("end", async () => {
             const csvString = csvData.join("");
 
-            const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
-
+            // Email content with user details
             const mailOptions = {
-                from: '"QuizVerse - SoftAge" <quiz.verse@softage.ai>',
-                to: "vipul.singh@softage.ai", // change to admin/HR email
-                subject: `📋 [${Day}] Quiz Submission | ${name}`,
-                text: `
-Hello Team,
+                from: "quiz.verse@softage.ai",
+                to: "vipul.singh@softage.ai", // Change to your admin email
+                subject: `Quiz Responses -  ${name} `,
+                text: `Hello Admin,
 
-A new quiz has been completed by a candidate. Please find the submission details and CSV report attached below.
+Attached is the detailed quiz responses report in CSV format. 
 
-📌 Candidate Details:
-- Name : ${name}
-- Email : ${email}
-- Assessment : ${Day}
-- Submitted : ${today}
-
-🧾 Please find the CSV response report attached.
-
-Best regards,  
-QuizVerse - SoftAge AI Onboarding System
-        `,
+                - Name: ${name}
+                - Email: ${email}
+                - Assessment title: ${Day}\n
+                Please find the CSV report attached.\n\nBest regards,\nQuiz System`,
                 attachments: [
                     {
-                        filename: `quiz_${name}_${today}.csv`,
+                        filename: `quiz_responses_${name}.csv`,
                         content: csvString,
                         contentType: "text/csv",
                     },
@@ -127,13 +120,14 @@ QuizVerse - SoftAge AI Onboarding System
             };
 
             await transporter.sendMail(mailOptions);
-            res.status(200).json({ message: "CSV email sent successfully." });
+            res.status(200).json({ message: "CSV sent successfully!" });
         });
 
-        // Write response data into the stream
+        // Write responses to CSV
         Readable.from(responses).pipe(csvStream);
-    } catch (error: any) {
-        console.error("❌ Failed to send CSV email:", error?.message || error);
-        res.status(500).json({ message: "Internal Server Error: Unable to send email." });
+    } catch (error) {
+        console.error("Error sending CSV:", error);
+        res.status(500).json({ message: "Failed to send CSV." });
     }
 }
+
