@@ -39,7 +39,7 @@ export default function FirstAssessment() {
             if (!user) return;
 
             const userId = user.uid;
-            const statusRef = ref(database, `users/${userId}/progress/Day3/Assessment 1`);
+            const statusRef = ref(database, `users/${userId}/progress/Day3/Assessment`);
             const snapshot = await get(statusRef);
 
             if (snapshot.exists()) {
@@ -52,19 +52,19 @@ export default function FirstAssessment() {
 
     const startQuiz = () => {
         if (!quizAttempted) {
-                enterFullScreen();
-                router.push("/ASS31"); // Redirects to assessment1.tsx page
+            enterFullScreen();
+            router.push("/ASS2"); // Redirects to assessment1.tsx page
         }
-            };
+    };
 
-        
-            const enterFullScreen = () => {
-                const elem = document.documentElement;
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen().catch(err => console.error("Error enabling fullscreen:", err));
-                }
-            };
-        
+
+    const enterFullScreen = () => {
+        const elem = document.documentElement;
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen().catch(err => console.error("Error enabling fullscreen:", err));
+        }
+    };
+
 
     const nextSlide = () => {
         setDirection("next");
@@ -88,60 +88,59 @@ export default function FirstAssessment() {
         <div className="Main-Assessment">
             <div className="AssessmentDetails">
                 <div>
-                 <div>
-                     <p>Final Assessment</p>
-                     <h2>This quiz will help you practice what you've learned about using AI agents,
-                     computer shortcuts, and tools like Claude 3.5. Just try your best!</h2>
-                 </div>
-                 <div>
-                     <table className="Assessment-Table">
-                         <thead>
-                             <tr>
-                                 <th>Number of Question</th>
+                <div>
+                    <p>Welcome to</p>
+                    <h2>Prompting Mastery Quiz</h2>
+                </div>
+                <div>
+                    <table className="Assessment-Table">
+                        <thead>
+                            <tr>
+                                <th>Number of Question</th>
                                 <th>Duration</th>
-                             </tr>
-                         </thead>
+                            </tr>
+                        </thead>
                         <tbody>
-                             <tr>
-                                <td>5</td>
-                                 <td>60 Minutes</td>
-                             </tr>
-                         </tbody>
+                            <tr>
+                                <td>11</td>
+                                <td>60 Minutes</td>
+                            </tr>
+                        </tbody>
                     </table>
-                 </div>
-                 <div className="start-container">
-                 <button
-                className={`start-button ${quizAttempted ? "disabled" : ""}`}
-                onClick={startQuiz}
-                disabled={quizAttempted}
-            >
-                {quizAttempted ? "Attempted" : "Start Quiz"}
-            </button>  
-            </div>               </div>
-              </div>
+                </div>
+                <div className="start-container">
+                    <button
+                        className={`start-button ${quizAttempted ? "disabled" : ""}`}
+                        onClick={startQuiz}
+                        disabled={quizAttempted}
+                    >
+                        {quizAttempted ? "Attempted" : "Start Quiz"}
+                    </button>  
+                    </div>               </div>
+            </div>
 
             <div className="Assessment-Section">
                 <div className="Slideshow">
                     <button className="nav-button left" onClick={prevSlide}>❮</button>
-                    
+
                     <div className={`Slide ${direction === "next" ? "slide-in-right" : "slide-in-left"}`}>
                         <img src={slides[currentSlide].image} alt={slides[currentSlide].title} />
                         <h3>{slides[currentSlide].title}</h3>
                         <p>{slides[currentSlide].description}</p>
                     </div>
-                    
+
                     <button className="nav-button right" onClick={nextSlide}>❯</button>
                     <div className="controls">
-                    {slides.map((_, index) => (
-                        <span 
-                            key={index} 
-                            className={`dot ${index === currentSlide ? "active" : ""}`} 
-                            onClick={() => setCurrentSlide(index)}
-                        ></span>
-                    ))}
+                        {slides.map((_, index) => (
+                            <span
+                                key={index}
+                                className={`dot ${index === currentSlide ? "active" : ""}`}
+                                onClick={() => setCurrentSlide(index)}
+                            ></span>
+                        ))}
+                    </div>
                 </div>
-                </div>
-                
+
             </div>
         </div>
     );
