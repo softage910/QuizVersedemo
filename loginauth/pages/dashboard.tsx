@@ -20,7 +20,7 @@ import FirstAssessment from "./Assessment1";
 import ThirdAssessment from "./Assessment3";
 // import FourthAssessment from "./Assessment4";
 // import FifthAssessment from "./Assessment5";
-import Day5Module1 from "./Day5Module1";
+// import Day5Module1 from "./Day5Module1";
 import { database } from "../src/app/firebase/firebaseconfig"; 
 import { get, onValue, query, ref } from "firebase/database";
 // import Day5Module2 from "./Day5Module2";
@@ -66,10 +66,10 @@ interface UserData {
   Day8?: DayData;
 }
 
-type User = {
-  type: string;
-  uid: string;
-};
+// type User = {
+//   type: string;
+//   uid: string;
+// };
 
 // type DayData = {
 //   Module?: Record<string, boolean>;

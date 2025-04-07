@@ -75,7 +75,7 @@ typos while typing.</p>
       </ul>
       <hr />
       <p style={{fontSize:'1.2rem'}}>
-      If you have questions, reach out to your project team or support contact. You're
+      If you have questions, reach out to your project team or support contact. You&apos;re
       doing important work, and every good recording counts! 🙌
       </p>
 

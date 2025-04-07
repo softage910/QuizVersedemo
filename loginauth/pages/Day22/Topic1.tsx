@@ -189,7 +189,7 @@ export default function FirstTopic() {
 advanced AI models. By mastering techniques like chain-of-thought, ReAct,
 few-shot, and structured chaining, practitioners can extract significantly more
 value, control, and insight from AI systems.
-Whether you're building tools, writing assistants, research analyzers, or
+Whether you&apos;re building tools, writing assistants, research analyzers, or
 creative generators, <strong>your prompts are your interface—and the better your
 interface, the better your results.</strong></p>
 

@@ -679,14 +679,14 @@ import { database, auth } from "../src/app/firebase/firebaseconfig";
 import { ref, get, update, query } from "firebase/database";
 
 import Topic1 from "./Day1/Topic1";
-import Topic2 from "./Day1/Topic2";
-import Topic3 from "./Day1/Topic3";
-import Topic4 from "./Day1/Topic4";
-import Topic5 from "./Day1/Topic5";
-import Topic6 from "./Day1/Topic6";
-import Topic7 from "./Day1/Topic7";
-import Topic8 from "./Day1/Topic8";
-import Topic9 from "./Day1/Topic9";
+// import Topic2 from "./Day1/Topic2";
+// import Topic3 from "./Day1/Topic3";
+// import Topic4 from "./Day1/Topic4";
+// import Topic5 from "./Day1/Topic5";
+// import Topic6 from "./Day1/Topic6";
+// import Topic7 from "./Day1/Topic7";
+// import Topic8 from "./Day1/Topic8";
+// import Topic9 from "./Day1/Topic9";
 import NotificationMessage from "@/app/components/NotificationMessage";
 
 export default function Day1Module() {

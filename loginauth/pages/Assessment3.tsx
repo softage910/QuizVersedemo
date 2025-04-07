@@ -90,7 +90,7 @@ export default function FirstAssessment() {
                 <div>
                  <div>
                      <p>Final Assessment</p>
-                     <h2>This quiz will help you practice what you've learned about using AI agents,
+                     <h2>This quiz will help you practice what you&apos;ve learned about using AI agents,
                      computer shortcuts, and tools like Claude 3.5. Just try your best!</h2>
                  </div>
                  <div>

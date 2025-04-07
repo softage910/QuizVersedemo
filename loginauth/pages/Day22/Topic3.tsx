@@ -66,7 +66,7 @@ export default function SecondTopic() {
             <hr />
             <p style={{fontSize:'1.3rem'}}>👀 Want to Read More?</p>
             <br />
-            <p>Here are two more papers if you're curious:</p>
+            <p>Here are two more papers if you&apos;re curious:</p>
             <br />
             <ul className='ul'>
                 <li>      <a href="https://arxiv.org/pdf/2311.11797" target="_blank">                                <button className='Watch-Button'>

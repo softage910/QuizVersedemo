@@ -23,7 +23,7 @@ export default function AdminPage() {
 
 
   useEffect(() => {
-    const user = localStorage.getItem("AutoUser");
+    // const user = localStorage.getItem("AutoUser");
 
   }, []);
 
