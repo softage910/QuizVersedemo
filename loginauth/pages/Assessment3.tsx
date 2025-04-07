@@ -26,15 +26,9 @@ export default function FirstAssessment() {
             description: "\"Don’t refresh the webpage during the assessment. This will lead to immediate submission of your responses.\""
         },
         {
-            image: "Images/notabswitching.png",
-            title: "No Screen Switching",
-            description: "Screen switching is not allowed during the quiz. If you switch tabs or windows more than 3 times, your attempt will be auto-submitted."
-        },
-        {
-            image: "Images/leave-screen.png", // replace with your actual image name
-            title: "Stay on Screen",
-            description:
-                "You must stay on the quiz screen at all times. If you're away from the screen for more than 10 seconds, your attempt will be automatically submitted.",
+            image: "/images/notabswitching.png",
+            title: "No Tab Switching",
+            description: "Do not switch tabs during the quiz. If you leave the tab, your attempt may be invalidated."
         }
     ];
 
@@ -45,7 +39,7 @@ export default function FirstAssessment() {
             if (!user) return;
 
             const userId = user.uid;
-            const statusRef = ref(database, `users/${userId}/progress/Day4/Assessment 1`);
+            const statusRef = ref(database, `users/${userId}/progress/Day3/Assessment 1`);
             const snapshot = await get(statusRef);
 
             if (snapshot.exists()) {
@@ -59,7 +53,7 @@ export default function FirstAssessment() {
     const startQuiz = () => {
         if (!quizAttempted) {
                 enterFullScreen();
-                router.push("/ASS3"); // Redirects to assessment1.tsx page
+                router.push("/ASS31"); // Redirects to assessment1.tsx page
         }
             };
 
@@ -95,14 +89,15 @@ export default function FirstAssessment() {
             <div className="AssessmentDetails">
                 <div>
                  <div>
-                     <p>Welcome to</p>
-                     <h2>The Dawn Of GUI Agent Quiz</h2>
+                     <p>Final Assessment</p>
+                     <h2>This quiz will help you practice what you've learned about using AI agents,
+                     computer shortcuts, and tools like Claude 3.5. Just try your best!</h2>
                  </div>
                  <div>
                      <table className="Assessment-Table">
                          <thead>
                              <tr>
-                                 <th>Number of Questions</th>
+                                 <th>Number of Question</th>
                                 <th>Duration</th>
                              </tr>
                          </thead>

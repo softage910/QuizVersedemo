@@ -76,14 +76,13 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
         return res.status(405).json({ message: "Method Not Allowed" });
     }
 
     try {
-        const { name, email,Day, responses } = req.body;
+        const { name, email, EmpCode,Day, responses } = req.body;
 
         if (!responses || responses.length === 0) {
             return res.status(400).json({ message: "No responses provided." });
@@ -101,18 +100,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const mailOptions = {
                 from: "quiz.verse@softage.ai",
                 to: "vipul.singh@softage.ai", // Change to your admin email
-                subject: `Quiz Responses -  ${name} `,
+                subject: `Quiz Responses - (${EmpCode}) ${name} `,
                 text: `Hello Admin,
 
 Attached is the detailed quiz responses report in CSV format. 
 
                 - Name: ${name}
                 - Email: ${email}
+                - Employee Code: ${EmpCode}
                 - Assessment title: ${Day}\n
                 Please find the CSV report attached.\n\nBest regards,\nQuiz System`,
                 attachments: [
                     {
-                        filename: `quiz_responses_${name}.csv`,
+                        filename: `quiz_responses_${EmpCode}.csv`,
                         content: csvString,
                         contentType: "text/csv",
                     },

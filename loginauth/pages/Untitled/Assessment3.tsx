@@ -26,15 +26,9 @@ export default function FirstAssessment() {
             description: "\"Don’t refresh the webpage during the assessment. This will lead to immediate submission of your responses.\""
         },
         {
-            image: "Images/notabswitching.png",
-            title: "No Screen Switching",
-            description: "Screen switching is not allowed during the quiz. If you switch tabs or windows more than 3 times, your attempt will be auto-submitted."
-        },
-        {
-            image: "Images/leave-screen.png", // replace with your actual image name
-            title: "Stay on Screen",
-            description:
-                "You must stay on the quiz screen at all times. If you're away from the screen for more than 10 seconds, your attempt will be automatically submitted.",
+            image: "/images/notabswitching.png",
+            title: "No Tab Switching",
+            description: "Do not switch tabs during the quiz. If you leave the tab, your attempt may be invalidated."
         }
     ];
 
@@ -45,7 +39,7 @@ export default function FirstAssessment() {
             if (!user) return;
 
             const userId = user.uid;
-            const statusRef = ref(database, `users/${userId}/progress/Day3/Assessment`);
+            const statusRef = ref(database, `users/${userId}/progress/Day3/Assessment 1`);
             const snapshot = await get(statusRef);
 
             if (snapshot.exists()) {
@@ -58,19 +52,19 @@ export default function FirstAssessment() {
 
     const startQuiz = () => {
         if (!quizAttempted) {
-            enterFullScreen();
-            router.push("/ASS2"); // Redirects to assessment1.tsx page
+                enterFullScreen();
+                router.push("/ASS31"); // Redirects to assessment1.tsx page
         }
-    };
+            };
 
-
-    const enterFullScreen = () => {
-        const elem = document.documentElement;
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen().catch(err => console.error("Error enabling fullscreen:", err));
-        }
-    };
-
+        
+            const enterFullScreen = () => {
+                const elem = document.documentElement;
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen().catch(err => console.error("Error enabling fullscreen:", err));
+                }
+            };
+        
 
     const nextSlide = () => {
         setDirection("next");
@@ -94,59 +88,60 @@ export default function FirstAssessment() {
         <div className="Main-Assessment">
             <div className="AssessmentDetails">
                 <div>
-                <div>
-                    <p>Welcome to</p>
-                    <h2>Prompting Mastery Quiz</h2>
-                </div>
-                <div>
-                    <table className="Assessment-Table">
-                        <thead>
-                            <tr>
-                                <th>Number of Question</th>
+                 <div>
+                     <p>Final Assessment</p>
+                     <h2>This quiz will help you practice what you've learned about using AI agents,
+                     computer shortcuts, and tools like Claude 3.5. Just try your best!</h2>
+                 </div>
+                 <div>
+                     <table className="Assessment-Table">
+                         <thead>
+                             <tr>
+                                 <th>Number of Question</th>
                                 <th>Duration</th>
-                            </tr>
-                        </thead>
+                             </tr>
+                         </thead>
                         <tbody>
-                            <tr>
-                                <td>11</td>
-                                <td>60 Minutes</td>
-                            </tr>
-                        </tbody>
+                             <tr>
+                                <td>5</td>
+                                 <td>60 Minutes</td>
+                             </tr>
+                         </tbody>
                     </table>
-                </div>
-                <div className="start-container">
-                    <button
-                        className={`start-button ${quizAttempted ? "disabled" : ""}`}
-                        onClick={startQuiz}
-                        disabled={quizAttempted}
-                    >
-                        {quizAttempted ? "Attempted" : "Start Quiz"}
-                    </button>  
-                    </div>               </div>
-            </div>
+                 </div>
+                 <div className="start-container">
+                 <button
+                className={`start-button ${quizAttempted ? "disabled" : ""}`}
+                onClick={startQuiz}
+                disabled={quizAttempted}
+            >
+                {quizAttempted ? "Attempted" : "Start Quiz"}
+            </button>  
+            </div>               </div>
+              </div>
 
             <div className="Assessment-Section">
                 <div className="Slideshow">
                     <button className="nav-button left" onClick={prevSlide}>❮</button>
-
+                    
                     <div className={`Slide ${direction === "next" ? "slide-in-right" : "slide-in-left"}`}>
                         <img src={slides[currentSlide].image} alt={slides[currentSlide].title} />
                         <h3>{slides[currentSlide].title}</h3>
                         <p>{slides[currentSlide].description}</p>
                     </div>
-
+                    
                     <button className="nav-button right" onClick={nextSlide}>❯</button>
                     <div className="controls">
-                        {slides.map((_, index) => (
-                            <span
-                                key={index}
-                                className={`dot ${index === currentSlide ? "active" : ""}`}
-                                onClick={() => setCurrentSlide(index)}
-                            ></span>
-                        ))}
-                    </div>
+                    {slides.map((_, index) => (
+                        <span 
+                            key={index} 
+                            className={`dot ${index === currentSlide ? "active" : ""}`} 
+                            onClick={() => setCurrentSlide(index)}
+                        ></span>
+                    ))}
                 </div>
-
+                </div>
+                
             </div>
         </div>
     );
