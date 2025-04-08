@@ -177,7 +177,7 @@ const ProgressBar = () => {
   let currentDay = "Day1"; // Default to Day1 if no data exists
 
   if (progressData) {
-    const allDays = Object.keys(progressData);
+    // const allDays = Object.keys(progressData);
     // const lastDay = allDays[allDays.length - 1]; // Get the last available day
 
     let foundIncomplete = false;
