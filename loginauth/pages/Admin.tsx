@@ -21,8 +21,10 @@ export default function AdminPage() {
   // const router = useRouter();
   const [InviteMessage, setInviteMessage] = useState<string | null>(null);
 
+
   useEffect(() => {
     // const user = localStorage.getItem("AutoUser");
+
   }, []);
 
   useEffect(() => {
@@ -59,18 +61,14 @@ export default function AdminPage() {
   };
 
   const initializeUserProgress = {
-    // "Day1": { "Module": false },
-    // "Day2": { "Module": false, "Assessment": false },
-    // "Day3": { "Module": false, "Assessment": false },
-    // "Day4": { "Module": false, "Assessment 1": false, "Assessment 2": false, "Assessment 3": false },
-    "Day1": {"Module 1": false,"Module 2": false,"Assessment": false},
-    "Day2": {"Module 1": false, "Module 2": false,"Module 3": false},
-    "Day3": {"Assessment 1": false,"Assessment 2": false},
-    "Additional Reading Materials": {"Material": true}
-    // "Day5": { "Module 1": false, "Module 2": false, "Assessment": false },
-    // "Day6": { "Module": false },
-    // "Day7": { "Assessment 1": false },
-    // "Day8": { "Module": false },
+    "Day1": { "Module": false },
+    "Day2": { "Module": false, "Assessment": false },
+    "Day3": { "Module": false, "Assessment": false },
+    "Day4": { "Module": false, "Assessment 1": false, "Assessment 2": false, "Assessment 3": false },
+    "Day5": { "Module 1": false, "Module 2": false, "Assessment": false },
+    "Day6": { "Module": false },
+    "Day7": { "Assessment 1": false },
+    "Day8": { "Module": false },
   };
 
 
@@ -167,6 +165,7 @@ export default function AdminPage() {
                 <th>Joining Date</th>
                 <th>Type</th>
                 <th>Action</th>
+
               </tr>
             </thead>
             <tbody>

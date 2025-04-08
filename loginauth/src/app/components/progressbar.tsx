@@ -1,13 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ref, onValue, query, orderByChild, equalTo, get } from "firebase/database";
+import { ref, onValue, query,  get } from "firebase/database";
 import "./progressbar.css";
 import { database } from "../firebase/firebaseconfig";
 
-type User = {
-  type: string;
-  uid: string;
-};
+// type User = {
+//   type: string;
+//   uid: string;
+// };
 
 const ProgressBar = () => {
   const [progressData, setProgressData] = useState<Record<string, Record<string, boolean>> | null>(null);
@@ -165,7 +165,7 @@ const ProgressBar = () => {
   //   : 0;
 
   const completedTasks = sortedProgressEntries.reduce(
-    (count, [_, day]) =>
+    (count, [, day]) =>
       count + Object.values(day).filter((task) => task === true).length,
     0
   );
@@ -178,7 +178,7 @@ const ProgressBar = () => {
 
   if (progressData) {
     const allDays = Object.keys(progressData);
-    const lastDay = allDays[allDays.length - 1]; // Get the last available day
+    // const lastDay = allDays[allDays.length - 1]; // Get the last available day
 
     let foundIncomplete = false;
 

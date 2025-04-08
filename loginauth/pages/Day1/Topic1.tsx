@@ -171,7 +171,7 @@ can&apos;t learn or do anything useful.
 
             <h2 className="h2">Some Helpful Terms</h2>
             <br />
-            <ul className='ul'>
+            <ul>
                 <li><strong>Training:</strong> Teaching the AI using examples</li>
                 <br />
                 <li><strong>Prompt:</strong> A message or question we give the AI</li>
