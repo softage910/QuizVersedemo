@@ -1,22 +1,21 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ref, onValue, query, get } from "firebase/database";
+import { ref, onValue, query, orderByChild, equalTo, get } from "firebase/database";
 import "./progressbar.css";
 import { database } from "../firebase/firebaseconfig";
 
-// type User = {
-//   type: string;
-//   uid: string;
-// };
+type User = {
+  type: string;
+  uid: string;
+};
 
 const ProgressBar = () => {
   const [progressData, setProgressData] = useState<Record<string, Record<string, boolean>> | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const totalTasks = 15;
+  const totalTasks = 8;
   const [currentDayTasks, setCurrentDayTasks] = useState<Record<string, boolean>>({});
   const [userDetails, setUserDetails] = useState<{ name: string; uid: string } | null>(null);
   const [userID, setUserID] = useState<string>("");
-
 
   useEffect(() => {
     const userData = localStorage.getItem("userDetails");
@@ -96,8 +95,12 @@ const ProgressBar = () => {
 
                 if (progressData) { // ✅ Ensure it's not null
                   setProgressData(progressData);
-
-       
+                  // for (const [day, tasks] of Object.entries(progressData)) {
+                  //   if (typeof tasks === "object" && Object.values(tasks).includes(false)) {
+                  //     setCurrentDayTasks(tasks as Record<string, boolean>); 
+                  //     break;
+                  //   }
+                  // }
                   for (const [, tasks] of Object.entries(progressData)) {
                     if (
                       tasks &&
@@ -130,6 +133,19 @@ const ProgressBar = () => {
   }, [userDetails]);
 
 
+  // Define custom sorting logic
+  const sortedProgressEntries = progressData
+  ? Object.entries(progressData)
+      .filter(([key]) => key.startsWith("Day")) // ⬅️ Only include "Day" keys
+      .sort(([a], [b]) => {
+        const dayNumberA = parseInt(a.match(/\d+/)?.[0] || "0", 10);
+        const dayNumberB = parseInt(b.match(/\d+/)?.[0] || "0", 10);
+        return dayNumberA - dayNumberB;
+      })
+  : [];
+
+
+
 
   if (isLoading) {
     return (
@@ -141,13 +157,21 @@ const ProgressBar = () => {
   }
 
   // Calculate completed tasks
-  const completedTasks = progressData
-    ? Object.values(progressData).reduce(
-      (count, day) => count + Object.values(day).filter((task) => task === true).length,
-      0
-    )
-    : 0;
+  // const completedTasks = progressData
+  //   ? Object.values(progressData).reduce(
+  //     (count, day) => count + Object.values(day).filter((task) => task === true).length,
+  //     0
+  //   )
+  //   : 0;
 
+  const completedTasks = sortedProgressEntries.reduce(
+    (count, [_, day]) =>
+      count + Object.values(day).filter((task) => task === true).length,
+    0
+  );
+  
+
+  // Calculate progress percentage
   const progressPercentage = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
 
   let currentDay = "Day1"; // Default to Day1 if no data exists
@@ -158,18 +182,31 @@ const ProgressBar = () => {
 
     let foundIncomplete = false;
 
-    for (const [day, tasks] of Object.entries(progressData)) {
+    // for (const [day, tasks] of Object.entries(progressData)) {
+    //   if (Object.values(tasks).includes(false)) {
+    //     currentDay = `${day}`;
+    //     foundIncomplete = true;
+    //     break;
+    //   }
+    // }
+
+    const formatDay = (dayKey: string) => {
+      return dayKey.replace(/Day(\d+)/, 'Day $1');
+    };
+    
+    for (const [day, tasks] of sortedProgressEntries) {
       if (Object.values(tasks).includes(false)) {
-        currentDay = `${day}`;
+        currentDay = formatDay(day); // 👈 Add space between Day and number
         foundIncomplete = true;
         break;
       }
     }
-
-    // If all tasks are completed, show the last topic
-    if (!foundIncomplete) {
-      currentDay = `${lastDay}`;
+    
+    if (!foundIncomplete && sortedProgressEntries.length > 0) {
+      const lastDay = sortedProgressEntries[sortedProgressEntries.length - 1][0];
+      currentDay = formatDay(lastDay); // 👈 Also format last day if all are completed
     }
+    
   }
 
   return (
@@ -193,16 +230,24 @@ const ProgressBar = () => {
 
       <div className="task-cards">
         {Object.entries(currentDayTasks)
-          .sort(([taskA], [taskB]) => {
-            if (taskA === "Module") return -1; // Keep "Module" first
-            if (taskB === "Module") return 1;
+.sort(([taskA], [taskB]) => {
+  const isModuleA = taskA.toLowerCase().startsWith("module");
+  const isModuleB = taskB.toLowerCase().startsWith("module");
 
-            // Extract numeric parts from "Assessment" names for proper sorting
-            const numA = parseInt(taskA.match(/\d+/)?.[0] || "0", 10);
-            const numB = parseInt(taskB.match(/\d+/)?.[0] || "0", 10);
+  const isAssessmentA = taskA.toLowerCase().startsWith("assessment");
+  const isAssessmentB = taskB.toLowerCase().startsWith("assessment");
 
-            return numA - numB; // Sort assessments numerically (1 → 2 → 3)
-          })
+  // Group modules first
+  if (isModuleA && !isModuleB) return -1;
+  if (!isModuleA && isModuleB) return 1;
+
+  // If both are modules or both are assessments, sort by number
+  const numA = parseInt(taskA.match(/\d+/)?.[0] || (isAssessmentA ? "99" : "0"), 10);
+  const numB = parseInt(taskB.match(/\d+/)?.[0] || (isAssessmentB ? "99" : "0"), 10);
+
+  return numA - numB;
+})
+
           .map(([taskName, isCompleted], index) => (
             <div
               key={taskName}

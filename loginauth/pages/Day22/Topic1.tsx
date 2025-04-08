@@ -165,7 +165,7 @@ export default function FirstTopic() {
         <br />
         <p>Prompting is an iterative process. To debug a prompt:</p>
         <br />
-        <ul>
+        <ul className='ul'>
             <li>Compare good and bad outputs.</li>
             <li>Isolate variables by changing one part at a time.</li>
             <li>Try simplifying overly complex inputs.</li>
