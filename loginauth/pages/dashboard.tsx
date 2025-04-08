@@ -32,7 +32,6 @@ import Day1Module2 from "./Day1Module2";
 import Day22Module1 from "./Day22Module1";
 import Day22Module2 from "./Day22Module2";
 import Day22Module3 from "./Day22Module3";
-import Addread from "./Addread";
 
 
 type ModuleInfo = {
@@ -54,8 +53,6 @@ interface DayData {
   "Assessment 3"?: TopicCompletion;
   "Module 1"?: TopicCompletion;
   "Module 2"?: TopicCompletion;
-  "Module 3"?: TopicCompletion;
-
 }
 
 interface UserData {
@@ -100,8 +97,7 @@ export default function Dashboard() {
   const dayModules: { [key: string]: string[] } = {
     "Day 1": ["📖 Module 1","📖 Module 2","📝 Assessment"],
     "Day 2": ["📖 Module 1", "📖 Module 2","📖 Module 3"],
-    "Day 3": ["📝 Assessment 1","📝 Assessment 2"],
-    "Additional Reading Materials": ["📖 Material"]
+    "Day 3": ["📖 Module","📝 Assessment 1"]
     // "Day 4": ["📖 Module", "📝 Assessment 1", "📝 Assessment 2", "📝 Assessment 3"],
     // "Day 5": ["📖 Module 1", "📖 Module 2", "📝 Assessment"],
     // "Day 6": ["📖 Module"],
@@ -117,9 +113,8 @@ export default function Dashboard() {
     "Day 2 - 📖 Module 2": { day: "Day 2", module: "📖 Module", customname: "Module", component: Day22Module2 },
     "Day 2 - 📖 Module 3": { day: "Day 2", module: "📖 Module", customname: "Module", component: Day22Module3 },
     // "Day 2 - 📝 Assessment": { day: "Day 2", module: "📝 Assessment", customname: "Assessment",component: FirstAssessment },
+    "Day 3 - 📖 Module": { day: "Day 3", module: "📖 Module", customname: "Module",component: Day3Module },
     "Day 3 - 📝 Assessment 1": { day: "Day 3", module: "📝 Assessment", customname: "Assessment",component:  ThirdAssessment },
-    "Day 3 - 📝 Assessment 2": { day: "Day 3", module: "📝 Assessment 2", customname: "Module",component: Day3Module },
-    "Additional Reading Materials - 📖 Material": { day: "Additional Reading Materials", module: "📖 Material", customname: "Module",component: Addread },
     // "Day 4 - 📖 Module": { day: "Day 4", module: "📖 Module", customname: "Module",component: Day4Module },
     // "Day 4 - 📝 Assessment 1": { day: "Day 4", module: "📝 Assessment 1", customname: "Assessment1",component: ThirdAssessment },
     // "Day 4 - 📝 Assessment 2": { day: "Day 4", module: "📝 Assessment 2", customname: "Assessment2",component: FourthAssessment },
@@ -134,7 +129,7 @@ export default function Dashboard() {
     "Admin": { day: "", module: "Admin", customname: "Admin", component: AdminPage },
   };
 
-  const [unlockedDays, setUnlockedDays] = useState(["Day 1","Additional Reading Materials"]); // Day 1 is always unlocked
+  const [unlockedDays, setUnlockedDays] = useState(["Day 1"]); // Day 1 is always unlocked
 
   useEffect(() => {
     const sessionExpireTime = localStorage.getItem("sessionExpireTime");
@@ -219,101 +214,96 @@ console.log(userAutoID);
 
 
     const checkUnlockedDays = (userData: UserData) => {
-        const unlockedDays = ["Day 1","Additional Reading Materials"]; // Day 1 is always unlocked
+        const unlockedDays = ["Day 1"]; // Day 1 is always unlocked
       
-        if (userData.Day1 && userData.Day1["Module 1"] && userData.Day1["Module 2"] && userData.Day1.Assessment) {
-          const day1Module = userData.Day1["Module 1"];
-          const day2Module = userData.Day1["Module 2"];
-          const Assessment = userData.Day1.Assessment;
+        if (userData.Day1 && userData.Day1.Module) {
+          const day1Module = userData.Day1.Module;
           const day1Completed = Object.values(day1Module).every(topic => topic === true);
-          const day2Completed = Object.values(day2Module).every(topic => topic === true);
-          const AssessmentCompleted = Object.values(Assessment).every(topic => topic === true);
       
-          if (day1Completed && day2Completed && AssessmentCompleted) {
+          if (day1Completed) {
             unlockedDays.push("Day 2");
 
-            if (userData.Day2 && userData.Day2["Module 1"] && userData.Day2["Module 2"] && userData.Day2["Module 3"]) {
-              const day2Module1 = userData.Day2["Module 1"];
-              const day2Module2 = userData.Day2["Module 2"];
-              const day2Module3 = userData.Day2["Module 3"];
-              const day2Completed1 = Object.values(day2Module1).every(topic => topic === true);
-              const day2Completed2 = Object.values(day2Module2).every(topic => topic === true);
-              const day2Completed3 = Object.values(day2Module3).every(topic => topic === true);
+            if (userData.Day2 && userData.Day2.Module && userData.Day2.Assessment) {
+              const day2Module = userData.Day2.Module;
+              const day2Assessment = userData.Day2.Assessment;
+              const day2Completed1 = Object.values(day2Module).every(topic => topic === true);
+              const day2Completed2 = Object.values(day2Assessment).every(topic => topic === true);
 
       
-              if (day2Completed1 && day2Completed2 && day2Completed3) {
+              if (day2Completed1 && day2Completed2) {
                 unlockedDays.push("Day 3");
 
 
       
-                // if (userData.Day3 && userData.Day3["Assessment 1"] && userData.Day3["Assessment 2"]) {
-                //   const day3Assessment1 = userData.Day3["Assessment 1"];
-                //   const day3Assessment2 = userData.Day3["Assessment 2"];
-                //   const day3Completed1 = Object.values(day3Assessment1).every(topic => topic === true);
-                //   const day3Completed2 = Object.values(day3Assessment2).every(topic => topic === true);
+                if (userData.Day3 && userData.Day3.Module && userData.Day3.Assessment) {
+                  const day3Module = userData.Day3.Module;
+                  const day3Assessment = userData.Day3.Assessment;
+                  const day3Completed1 = Object.values(day3Module).every(topic => topic === true);
+                  const day3Completed2 = Object.values(day3Assessment).every(topic => topic === true);
 
-                //   if (day3Completed1 && day3Completed2) {
-                //     unlockedDays.push("Additional Reading Materials");
+      
+                  if (day3Completed1 && day3Completed2) {
+                    unlockedDays.push("Day 4");
 
 
 
 
-                //     if (userData.Day4 && userData.Day4.Module && userData.Day4["Assessment 1"] && userData.Day4["Assessment 2"] && userData.Day4["Assessment 3"] ) {
-                //       const day4Module = userData.Day4.Module;
-                //       const day4Completed1 = Object.values(day4Module).every(topic => topic === true);
-                //       const day4Ass1 = userData.Day4["Assessment 1"];
-                //   const day4Completed2 = Object.values(day4Ass1).every(topic => topic === true);
-                //   const day4Ass2 = userData.Day4["Assessment 2"];
-                //   const day4Completed3 = Object.values(day4Ass2).every(topic => topic === true);
-                //   const day4Ass3 = userData.Day4["Assessment 3"];
-                //   const day4Completed4 = Object.values(day4Ass3).every(topic => topic === true);
+                    if (userData.Day4 && userData.Day4.Module && userData.Day4["Assessment 1"] && userData.Day4["Assessment 2"] && userData.Day4["Assessment 3"] ) {
+                      const day4Module = userData.Day4.Module;
+                      const day4Completed1 = Object.values(day4Module).every(topic => topic === true);
+                      const day4Ass1 = userData.Day4["Assessment 1"];
+                  const day4Completed2 = Object.values(day4Ass1).every(topic => topic === true);
+                  const day4Ass2 = userData.Day4["Assessment 2"];
+                  const day4Completed3 = Object.values(day4Ass2).every(topic => topic === true);
+                  const day4Ass3 = userData.Day4["Assessment 3"];
+                  const day4Completed4 = Object.values(day4Ass3).every(topic => topic === true);
                 
       
-                //       if (day4Completed1 && day4Completed2 && day4Completed3 && day4Completed4 ) {
-                //         unlockedDays.push("Day 5");
+                      if (day4Completed1 && day4Completed2 && day4Completed3 && day4Completed4 ) {
+                        unlockedDays.push("Day 5");
 
       
-                //         if (userData.Day5 && userData.Day5["Module 1"] && userData.Day5["Module 2"] && userData.Day5.Assessment) {
-                //           const day5Module1 = userData.Day5["Module 1"];
-                //           const day5Module2 = userData.Day5["Module 2"];
-                //           const day5Ass = userData.Day5.Assessment;
-                //           const day5Completed1 = Object.values(day5Module1).every(topic => topic === true);
-                //           const day5Completed2 = Object.values(day5Module2).every(topic => topic === true);
-                //           const day5Completed3 = Object.values(day5Ass).every(topic => topic === true);
+                        if (userData.Day5 && userData.Day5["Module 1"] && userData.Day5["Module 2"] && userData.Day5.Assessment) {
+                          const day5Module1 = userData.Day5["Module 1"];
+                          const day5Module2 = userData.Day5["Module 2"];
+                          const day5Ass = userData.Day5.Assessment;
+                          const day5Completed1 = Object.values(day5Module1).every(topic => topic === true);
+                          const day5Completed2 = Object.values(day5Module2).every(topic => topic === true);
+                          const day5Completed3 = Object.values(day5Ass).every(topic => topic === true);
 
       
-                //           if (day5Completed1 && day5Completed2 && day5Completed3) {
+                          if (day5Completed1 && day5Completed2 && day5Completed3) {
 
-                //             unlockedDays.push("Day 6");
+                            unlockedDays.push("Day 6");
 
 
       
-                //             if (userData.Day6 && userData.Day6.Module) {
-                //               const day6Module = userData.Day6.Module;
-                //               const day6Completed = Object.values(day6Module).every(topic => topic === true);
+                            if (userData.Day6 && userData.Day6.Module) {
+                              const day6Module = userData.Day6.Module;
+                              const day6Completed = Object.values(day6Module).every(topic => topic === true);
       
-                //               if (day6Completed) {
-                //                 unlockedDays.push("Day 7");
+                              if (day6Completed) {
+                                unlockedDays.push("Day 7");
 
 
-                //                 if(userData.Day7 && userData.Day7["Assessment 1"]){
-                //                   const day7Ass = userData.Day7["Assessment 1"];
-                //                   const day7completed = Object.values(day7Ass).every(topic => topic === true);
+                                if(userData.Day7 && userData.Day7["Assessment 1"]){
+                                  const day7Ass = userData.Day7["Assessment 1"];
+                                  const day7completed = Object.values(day7Ass).every(topic => topic === true);
 
-                //                   if(day7completed){
+                                  if(day7completed){
 
-                //                     unlockedDays.push("Day 8");
+                                    unlockedDays.push("Day 8");
 
-                //                   }
-                //                 }
-                //               }
-                //             }
-                //           }
-                //         }
-                //       }
-                //     }
-                //   }
-                // }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }

@@ -469,9 +469,9 @@
 "use client";
 import React, { useState } from "react";
 import { auth, database, googleProvider } from "../firebase/firebaseconfig";
-import { signInWithEmailAndPassword, sendEmailVerification, signInWithPopup } from "firebase/auth";
-import Link from 'next/link';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {  signInWithPopup } from "firebase/auth";
+// import Link from 'next/link';
+// import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, set, get } from "firebase/database";
 import { useRouter } from "next/navigation"; // Import useRouter
 import NotificationMessage from "./NotificationMessage";

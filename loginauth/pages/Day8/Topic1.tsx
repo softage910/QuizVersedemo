@@ -34,13 +34,11 @@ export default function FirstTopic() {
 
                 </li>
             </ul>
-            <hr />
+            <br />
             <h2 className="h2"><strong> News & Updates </strong></h2>
             <ol className="ol">
                 <li>
-                {/* <h2 className="h2">Data Camp Blog</h2> */}
-                <p style={{fontSize:'1.3rem'}}>Data Camp Blog</p>
-                <br />
+                <h2 className="h2">Data Camp Blog</h2>
                 
                 <p>
                 DataCamps official blog covers data science, machine learning, AI trends,
@@ -57,9 +55,7 @@ the data field.
         
                 
                 <li>
-                {/* <h2 className="h2">The Rundown</h2> */}
-                <p style={{fontSize:'1.3rem'}}>The Rundown</p>
-                <br />
+                <h2 className="h2">The Rundown</h2>
                 
                 <p>
                 A newsletter and site that provides quick, digestible updates on AI news.
@@ -74,9 +70,7 @@ AI. You can subscribe for free to get these updates in your inbox.
 
                 </li>
                 <li>
-                {/* <h2 className="h2">AI Breakfast</h2> */}
-                <p style={{fontSize:'1.3rem'}}>AI Breakfast</p>
-                <br />
+                <h2 className="h2">AI Breakfast</h2>
                 <p>
                 Another newsletter option (hosted on Beehiiv) that curates the latest AI
 news and insights. Its designed to be a quick morning read to keep you
@@ -90,16 +84,15 @@ informed about recent developments, product launches, and research in AI.
 
                 </li>
             </ol>
-            <hr />
+            <br />
             <h2 className="h2"><strong> Twitter (X) Accounts to Follow</strong></h2>
             <ol className="ol">
                 <li>
-                {/* <h2 className="h2">Matt Shumer</h2> */}
-                <p style={{fontSize:'1.3rem'}}>Matt Shumer</p>
-                <br />
+                <h2 className="h2">Matt Shumer</h2>
+                
                 <p>
-                He regularly tweets about AI tools, tips, and startup insights. If you&apos;re
-looking for the newest AI releases or interesting applications, he&apos;s a good
+                He regularly tweets about AI tools, tips, and startup insights. If youre
+looking for the newest AI releases or interesting applications, hes a good
 follow.
                 </p>
                 
@@ -112,9 +105,8 @@ follow.
         
                 
                 <li>
-                {/* <h2 className="h2">Andrej Karpathy</h2> */}
-                <p style={{fontSize:'1.3rem'}}>Andrej Karpathy</p>
-                <br />
+                <h2 className="h2">Andrej Karpathy</h2>
+                
                 <p>
                 A well-known figure in AI, formerly Director of AI at Tesla and currently at
 OpenAI. He shares insights on deep learning, research, and the future of AI.
@@ -128,15 +120,12 @@ OpenAI. He shares insights on deep learning, research, and the future of AI.
                 </li>
                 
             </ol>
-            <hr />
+            <br />
             <h2 className="h2"><strong> YouTube Channels</strong></h2>
             <ol className="ol">
                 <li>
-                {/* <h2 className="h2">AI Advantage</h2> */}
-                <p style={{fontSize:'1.3rem'}}>AI Advantage</p>
-                <br />
+                <h2 className="h2">AI Advantage</h2>
                 
-
                 <p>
                 A YouTube channel focusing on AI tutorials, demonstrations of AI tools, and
 breakdowns of how AI technologies work. Good if you enjoy video-based
@@ -152,13 +141,11 @@ learning.
         
                 
                 <li>
-                {/* <h2 className="h2">IBM Technology</h2> */}
-                <p style={{fontSize:'1.3rem'}}>IBM Technology</p>
-                <br />
+                <h2 className="h2">IBM Technology</h2>
                 
                 <p>
                 IBMs official tech channel. They have videos on AI, cloud computing,
-quantum computing, and more. You&apos;ll find interviews, demos, and
+quantum computing, and more. Youll find interviews, demos, and
 discussions of enterprise-level AI solutions.
                 </p>
                 
@@ -170,14 +157,11 @@ discussions of enterprise-level AI solutions.
                 </li>
                 
             </ol>
-            <hr />
-
+            <br />
             <h2 className="h2"><strong> How to Use Them</strong></h2>
             <ol className="ol">
                 <li>
-                    {/* <h2 className="h2">Learn The Fundamentals:</h2> */}
-                    <p style={{fontSize:'1.3rem'}}>Learn The Fundamentals:</p>
-                    
+                    <h2 className="h2">Learn The Fundamentals:</h2>
 
                     <p>
                         Start with &quot;Machine Learning&quot; is Fun! to
@@ -189,8 +173,7 @@ discussions of enterprise-level AI solutions.
 
 
                 <li>
-                    {/* <h2 className="h2">Stay Updated:</h2> */}
-                    <p style={{fontSize:'1.3rem'}}>Stay Updated:</p>
+                    <h2 className="h2">Stay Updated:</h2>
 
                     <p>
                         Subscribe to newsletters like The Rundown and AI Breakfast,
@@ -203,8 +186,7 @@ discussions of enterprise-level AI solutions.
 
 
                 <li>
-                    {/* <h2 className="h2">Engage on social media:</h2> */}
-                    <p style={{fontSize:'1.3rem'}}>Engage on social media:</p>
+                    <h2 className="h2">Engage on social media:</h2>
 
                     <p>
                         Follow Matt Shumer and Andrej Karpathy on
@@ -216,8 +198,7 @@ discussions of enterprise-level AI solutions.
 
 
                 <li>
-                    {/* <h2 className="h2">Watch demos and tutorials:</h2> */}
-                    <p className='1.3rem'>Watch demos and tutorials:</p>
+                    <h2 className="h2">Watch demos and tutorials:</h2>
 
                     <p>
                         Use AI Advantage and IBM Technology on

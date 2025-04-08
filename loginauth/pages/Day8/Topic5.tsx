@@ -9,7 +9,6 @@ export default function FifthTopic() {
             <ol className="ol">
                 <li>
                 <h2 className="h2">AI Advantage</h2>
-                {/* <p>AI Advantage</p> */}
                 
                 <p>
                 A YouTube channel focusing on AI tutorials, demonstrations of AI tools, and
