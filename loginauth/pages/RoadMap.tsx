@@ -396,7 +396,7 @@ export default function Dashboard() {
       })}
     </div>
     <div className="Graph-Container"><p>Graph</p></div> */}
-    <h2>Overview of the progress of your training:</h2>
+    <h2>Overview of the progress of your training :</h2>
     <div className="ProgressBar-content">    <ProgressBar/>
     </div>
   </div>

@@ -8,25 +8,32 @@ import { auth, database } from "../src/app/firebase/firebaseconfig"; // Import F
 import Logo from "../public/Logo.png";
 import MatchTheFollowing from "@/app/components/Match";
 
+
+
+
 interface Question {
     pairs: never[];
     question: string;
     type: "mcq" | "TF" | "fillblank" | "match";
     options?: string[]; // Optional, only for MCQ
     correctAnswer?: string;
-    matchPairs?: { left: string; right: string }[]; // Only for Match the Following
+    matchPairs?: { left: string; right: string }[]; 
 }
 
+interface ResponseData {
+    question: string;
+    selectedOption: string;
+}
 
 const OnlineTest = () => {
     const [questions, setQuestions] = useState<Question[]>([]); // Ignore TypeScript warnings
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
+    // const [visitedQuestions, setVisitedQuestions] = useState<number[]>([]);
     const [questionStatus, setQuestionStatus] = useState<{ [key: number]: string }>({});
     const [timeLeft, setTimeLeft] = useState(3600);
     const [isPaused, setIsPaused] = useState(false);
     const [showModal, setShowModal] = useState(false);
-
     const router = useRouter();
     const [isOut, setIsOut] = useState(false);
     const [outTime, setOutTime] = useState(0);
@@ -35,15 +42,18 @@ const OnlineTest = () => {
     const [isNextEnabled, setNextEnabled] = useState(false); // ✅ State to track Next button
     const [matchedPairs, setMatchedPairs] = useState<{ left: string; right: string }[]>([]); // ✅ Store matched data
 
+
+
+
+
     useEffect(() => {
         const fetchQuestions = async () => {
-            const questionsRef = ref(database, "AssessmentContent/day2/Assessment/questions");
+            const questionsRef = ref(database, "AssessmentContent/day3/Assessment/questions");
             const snapshot = await get(questionsRef);
 
             if (snapshot.exists()) {
                 const fetchedQuestionsObj = snapshot.val();
 
-                // Convert all question types into arrays
                 // Convert all question types into arrays
                 const multipleChoice: Question[] = fetchedQuestionsObj.multipleChoice
                     ? Object.values(fetchedQuestionsObj.multipleChoice)
@@ -58,10 +68,10 @@ const OnlineTest = () => {
                     ? Object.values(fetchedQuestionsObj.matchTheFollowing)
                     : [];
 
-                // Combine all question types
+    
                 const allQuestions: Question[] = [...multipleChoice, ...fillInTheBlank, ...trueFalse, ...matchTheFollowing];
 
-                // Shuffle all questions
+        
                 const shuffledQuestions: Question[] = allQuestions.sort(() => Math.random() - 0.5);
 
                 setQuestions(shuffledQuestions);
@@ -69,7 +79,13 @@ const OnlineTest = () => {
         };
         fetchQuestions();
     }, []);
+
+
+
+
+
     const [violations, setViolations] = useState(0);
+
 
     // Handle Timer Pause/Resume
     useEffect(() => {
@@ -88,9 +104,9 @@ const OnlineTest = () => {
 
     const startOutTimer = () => {
         console.log(isOut, outTime);
-
         setIsOut(true);
         setOutTime(0);
+
         if (countdownTimer) clearInterval(countdownTimer); // Reset any existing timer
 
         const timer = setInterval(() => {
@@ -191,6 +207,54 @@ const OnlineTest = () => {
         setSelectedOption(option);
     };
 
+    // const handleNextQuestion = () => {
+
+    //     setQuestionStatus((prev) => ({
+    //         ...prev,
+    //         [currentQuestionIndex]: selectedOption ? "attempted" : "skipped",
+    //     }));
+
+    //     if (selectedOption) {
+    //         const user = auth.currentUser; // Get the current authenticated user
+    //         if (!user) {
+    //             console.error("No authenticated user found!");
+    //             return;
+    //         }
+
+    //         const userId = user.uid; // Get the actual user ID from Firebase Auth
+
+    //         // Save to Firebase Realtime Database
+    //         set(ref(database, `responses/${}/day4/Assessment1/${currentQuestionIndex}`), {
+    //             selectedOption: selectedOption,
+    //             question: questions[currentQuestionIndex].question,
+    //             correctAnswer: questions[currentQuestionIndex].correctAnswer,
+    //             isCorrect: selectedOption === questions[currentQuestionIndex].correctAnswer,
+    //         });
+
+    //         // Move to the next question
+    //         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    //         setSelectedOption(null);
+    //     } else if (isNextEnabled) {
+    //         // Move to the next question
+    //         const user = auth.currentUser; // Get the current authenticated user
+    //         if (!user) {
+    //             console.error("No authenticated user found!");
+    //             return;
+    //         }
+    //         const userId = user.uid; // Get the actual user ID from Firebase Auth
+
+
+    //         set(ref(database, `responses/${userId}/day4/Assessment1/${currentQuestionIndex}`), matchedPairs)
+    //             .then(() => console.log("Matched pairs saved successfully!"))
+    //             .catch((error) => console.error("Error saving matched pairs:", error));
+
+    //         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    //         setNextEnabled(false);
+    //     }
+
+    //     // Prevent proceeding without selection
+    // };
+
     const handleNextQuestion = async () => {
 
         setQuestionStatus((prev) => ({
@@ -219,7 +283,7 @@ const OnlineTest = () => {
 
             
         
-                  set(ref(database, `responses/${autoGeneratedId}/day1/${currentQuestionIndex}`), {
+                  set(ref(database, `responses/${autoGeneratedId}/day3/${currentQuestionIndex}`), {
                     selectedOption: selectedOption,
                     question: questions[currentQuestionIndex].question,
                     correctAnswer: questions[currentQuestionIndex].correctAnswer,
@@ -239,7 +303,7 @@ const OnlineTest = () => {
             }
             // const userId = user.uid; // Get the actual user ID from Firebase Auth
 
-            set(ref(database, `responses/${autoGeneratedId}/day1/${currentQuestionIndex}`), matchedPairs)
+            set(ref(database, `responses/${autoGeneratedId}/day3/${currentQuestionIndex}`), matchedPairs)
                 .then(() => console.log("Matched pairs saved successfully!"))
                 .catch((error) => console.error("Error saving matched pairs:", error));
 
@@ -257,6 +321,7 @@ const OnlineTest = () => {
     };
 
 
+
     const handleSkipQuestion = () => {
         setQuestionStatus((prev) => ({
             ...prev,
@@ -268,6 +333,7 @@ const OnlineTest = () => {
             setSelectedOption(null);
         }
     };
+
 
 
     const formatTime = (seconds: number) => {
@@ -286,6 +352,102 @@ const OnlineTest = () => {
     const { hours, minutes, seconds } = formatTime(timeLeft);
 
 
+    // const finishQuiz = () => {
+    //     if (document.fullscreenElement) {
+    //         document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
+    //     }
+
+    //     const user = auth.currentUser; 
+    //     if (!user) {
+    //         console.error("No authenticated user found!");
+    //         return;
+    //     }
+
+    //     const userId = user.uid;
+
+    //     // Store quiz status under the correct day
+    //     set(ref(database, `users/${userId}/progress/Day4/Assessment1`), true);
+
+    //     router.push("/dashboard"); 
+    // };
+
+    // const finishQuiz = async () => {
+    //     if (document.fullscreenElement) {
+    //         document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
+    //     }
+
+    //     const user = auth.currentUser;
+    //     if (!user) {
+    //         console.error("No authenticated user found!");
+    //         return;
+    //     }
+
+    //     const userId = user.uid;
+    //     const day = "Day4"; // Dynamically set this based on the quiz day
+    //     router.push("/dashboard");
+
+    //     try {
+    //         // Store quiz completion status in Firebase under the correct day
+    //         await set(ref(database, `users/${userId}/progress/${day}/Assessment 1`), true);
+
+    //         // Fetch user details from Firebase
+    //         const userRef = ref(database, `users/${userId}`);
+    //         const userSnapshot = await get(userRef);
+
+    //         if (!userSnapshot.exists()) {
+    //             throw new Error("User details not found in Firebase");
+    //         }
+
+    //         const userDetails = userSnapshot.val(); // Assuming it contains { name, empCode, email }
+
+    //         // Fetch responses from Firebase
+    //         const responsesRef = ref(database, `responses/${userId}/day4/Assessment1`);
+    //         const snapshot = await get(responsesRef);
+
+    //         let formattedResponses: { question: string; answer: string }[] = [];
+    //         if (snapshot.exists()) {
+    //             const data = snapshot.val();
+
+    //             formattedResponses = Object.entries(data).map(([, response]) => {
+    //                 const typedResponse = response as ResponseData; // ✅ Explicitly cast `response`
+
+    //                 return {
+    //                     name: userDetails.name,
+    //                     email: userDetails.email,
+    //                     EmpCode: userDetails.uid,
+    //                     question: typedResponse.question,
+    //                     answer: typedResponse.selectedOption,
+    //                 };
+    //             });
+    //         }
+
+    //         // Combine user details with responses
+    //         const csvData = {
+    //             name: userDetails.name,
+    //             email: userDetails.email,
+    //             EmpCode: userDetails.uid,
+    //             Day: "Day4 - The Dawn Of GUI Agent Assessment",
+    //             responses: formattedResponses, // Only question and answer columns
+    //         };
+
+    //         // Send CSV data to the admin
+    //         const response = await fetch("/api/send-csv", {
+    //             method: "POST",
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify(csvData),
+    //         });
+
+    //         if (!response.ok) throw new Error("Failed to send CSV");
+
+
+    //         // Redirect user to the dashboard
+    //     } catch (error) {
+    //         console.error("Error during quiz submission:", error);
+    //         alert("There was an error submitting the quiz. Please try again.");
+    //     }
+    // };
+
+
     const finishQuiz = async () => {
         if (document.fullscreenElement) {
             document.exitFullscreen().catch(err => console.error("Error exiting fullscreen:", err));
@@ -301,7 +463,7 @@ const OnlineTest = () => {
         const UserEmail = sessionStorage.getItem("userEmail");
 
         const userId = user.uid;
-        const day = "Day1";
+        const day = "Day3";
 
         router.push("/dashboard");
 
@@ -323,7 +485,7 @@ const OnlineTest = () => {
                         // Save to Firebase Realtime Database
 
 
-                        await set(ref(database, `invitedUsers/${autoGeneratedId}/progress/${day}/Assessment`), true);
+                        await set(ref(database, `invitedUsers/${autoGeneratedId}/progress/${day}/Assessment 1`), true);
 
                         const userRef = ref(database, `invitedUsers/${autoGeneratedId}`);
                         const userSnapshot = await get(userRef);
@@ -334,7 +496,7 @@ const OnlineTest = () => {
 
                         const userDetails = userSnapshot.val();
 
-                        const responsesRef = ref(database, `responses/${autoGeneratedId}/day1`);
+                        const responsesRef = ref(database, `responses/${autoGeneratedId}/day3`);
                         const snapshot = await get(responsesRef);
 
                         const formattedResponses: { question: string; answer: string }[] = [];
@@ -368,7 +530,7 @@ const OnlineTest = () => {
                             name: userDetails.name,
                             email: userDetails.email,
                             EmpCode: userDetails.uid,
-                            Day: "Day1 - Online Test – MacOS Fundamentals",
+                            Day: "Day3 - Final Assessment",
                             responses: formattedResponses,
                         };
 
@@ -388,7 +550,7 @@ const OnlineTest = () => {
                         }
                         // const userId = user.uid; // Get the actual user ID from Firebase Auth
 
-                        set(ref(database, `responses/${autoGeneratedId}/day1/${currentQuestionIndex}`), matchedPairs)
+                        set(ref(database, `responses/${autoGeneratedId}/day3/${currentQuestionIndex}`), matchedPairs)
                             .then(() => console.log("Matched pairs saved successfully!"))
                             .catch((error) => console.error("Error saving matched pairs:", error));
 
@@ -473,11 +635,6 @@ const OnlineTest = () => {
 
     };
 
-
-
-
-
-
     return (
         <div className="Demo" onContextMenu={(e) => e.preventDefault()}>
 
@@ -503,7 +660,7 @@ const OnlineTest = () => {
                     <Image src={Logo} alt="Logo" width={250} height={50} />
                 </div>
                 <div>
-                    <h1 className="online-test-title">Online Test – MacOS Fundamentals</h1>
+                    <h1 className="online-test-title">Final Assessment</h1>
                 </div>
                 <div className="online-test-container">
                     {questions.length > 0 ? (
@@ -575,17 +732,25 @@ const OnlineTest = () => {
                                 </div>
                             )}
                             {questions[currentQuestionIndex]?.type === "match" && (
-                                <MatchTheFollowing
-                                    question={{
-                                        ...questions[currentQuestionIndex],
-                                        pairs: questions[currentQuestionIndex]?.pairs || [] // Provide an empty array if undefined
-                                    }}
-                                    setNextEnabled={setNextEnabled}
-                                    onSaveMatch={setMatchedPairs}
-                                />
+                                <MatchTheFollowing question={questions[currentQuestionIndex]} setNextEnabled={setNextEnabled} onSaveMatch={setMatchedPairs}
+
+                                // Pass this function
+                                /> // Render MatchTheFollowing component
                             )}
 
 
+                            {/* <div className="actions">
+                                <button className="Skip-btn" onClick={handleSkipQuestion}>Skip</button>
+                                <div className="nav-buttons">
+                                    <button
+                                        className="nav-btn"
+                                        onClick={handleNextQuestion}
+                                        disabled={!isNextEnabled && !selectedOption} // Disable if no option is selected
+                                    >
+                                        Next
+                                    </button>
+                                </div>
+                            </div> */}
 
                             <div className="actions">
                                 {currentQuestionIndex < questions.length - 1 ? (
