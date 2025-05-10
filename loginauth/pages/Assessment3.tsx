@@ -4,7 +4,7 @@ import "./Assessment1.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ref, get, query } from "firebase/database";
-import { auth, database } from "../src/app/firebase/firebaseconfig";
+import { database } from "../src/app/firebase/firebaseconfig";
 
 export default function FirstAssessment() {
     const router = useRouter();

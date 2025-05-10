@@ -300,7 +300,7 @@ const OnlineTest = () => {
         const invitedUsers = sessionStorage.getItem("invitedUsers");
         const UserEmail = sessionStorage.getItem("userEmail");
 
-        const userId = user.uid;
+        // const userId = user.uid;
         const day = "Day1";
 
         router.push("/dashboard");

@@ -20,10 +20,10 @@ interface Question {
     matchPairs?: { left: string; right: string }[]; 
 }
 
-interface ResponseData {
-    question: string;
-    selectedOption: string;
-}
+// interface ResponseData {
+//     question: string;
+//     selectedOption: string;
+// }
 
 const OnlineTest = () => {
     const [questions, setQuestions] = useState<Question[]>([]); // Ignore TypeScript warnings
@@ -462,7 +462,7 @@ const OnlineTest = () => {
         const invitedUsers = sessionStorage.getItem("invitedUsers");
         const UserEmail = sessionStorage.getItem("userEmail");
 
-        const userId = user.uid;
+        // const userId = user.uid;
         const day = "Day3";
 
         router.push("/dashboard");
